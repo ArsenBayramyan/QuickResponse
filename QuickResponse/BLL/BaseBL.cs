@@ -11,9 +11,10 @@ namespace QuickResponse.BLL
     {
         protected UnitOfWorkRepository UnitOfWorkRepository { get; private set; }
         protected IMapper Mapper { get; private set; }
-        public BaseBL(UnitOfWorkRepository unitOfWorkRepository)
+        public BaseBL(UnitOfWorkRepository unitOfWorkRepository,IMapper mapper)
         {
             this.UnitOfWorkRepository = unitOfWorkRepository;
+            this.Mapper = mapper;
         }
 
     }

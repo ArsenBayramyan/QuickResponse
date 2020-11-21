@@ -26,7 +26,7 @@ namespace QuickResponse.Data.Repositories
         {
             var user = this._userManager.FindByIdAsync(id).Result;
             user.IsDeleted = true;
-            return Update(user); ;
+            return Update(user); 
         }
 
         public User GetByID(string id)
