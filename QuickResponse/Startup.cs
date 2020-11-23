@@ -28,7 +28,7 @@ namespace QuickResponse
             services.AddDbContext<AppIdentityDBContext>(options =>
                options.UseSqlServer(responsesConString));
             services.AddIdentity<User, IdentityRole>()
-                 .AddEntityFrameworkStores<AppIdentityDBContext>().AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<AppIdentityDBContext>().AddDefaultTokenProviders();
             services.AddTransient<IRepository<User>, UserRepository>();
             services.AddTransient<IRepository<Post>, PostRepository>();
             services.AddTransient<IUnitOfWOrkRepositroy,UnitOfWorkRepository>();
@@ -41,7 +41,6 @@ namespace QuickResponse
             app.UseStatusCodePages();
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
-            
             /*app.UseMvc(routes =>
             {
                 routes.MapRoute(

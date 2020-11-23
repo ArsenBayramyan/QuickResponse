@@ -20,10 +20,10 @@ namespace QuickResponse.Controllers
             this._uow = (UnitOfWorkRepository)unitOfWOrkRepositroy;
             this._mapper = mapper;
         }
-        public ViewResult List(int page = 1)
+        public ViewResult PostsList(int page = 1)
         => View(new PostsList
         {
-            Posts = _uow.PostRepository.List()
+            Posts = (IEnumerable<Models.Post>)_uow.PostRepository.List()
                       .OrderBy(p => p.PostID)
                       .Skip((page - 1) * PageSize)
                       .Take(PageSize),

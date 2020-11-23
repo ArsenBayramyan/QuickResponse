@@ -21,6 +21,8 @@ namespace QuickResponse.Models.ViewModels
         public string City { get; set; }
         public string Address { get; set; }
         [Required]
+        public string Phone { get; set; }
+        [Required]
         [UIHint("email")]
         public string Email { get; set; }
         [Required]

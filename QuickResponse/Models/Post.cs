@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace QuickResponse.Data.Models
+namespace QuickResponse.Models
 {
-    [Table("Posts")]
     public class Post
     {
         public int PostID { get; set; }

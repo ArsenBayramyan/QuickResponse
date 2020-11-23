@@ -35,6 +35,9 @@ namespace QuickResponse.BLL
             return success;
         }
 
+        public IEnumerable<User> UsersList() => UnitOfWorkRepository.UserRepository.List();
+        
+
         /*public bool DeleteAccount(string id)
           {
               return this.UnitOfWorkRepository.UserRepository.DeleteById(id);
