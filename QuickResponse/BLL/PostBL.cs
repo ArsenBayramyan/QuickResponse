@@ -26,9 +26,9 @@ namespace QuickResponse.BLL
             List<User> users = new List<User>();
             foreach (var p in posts)
             {
-                users.Add(UnitOfWorkRepository.UserRepository.GetByID(p.UserId.ToString()));
+                users.Add(UnitOfWorkRepository.UserRepository.GetByID(p.UserId));
             }
-            var user = UnitOfWorkRepository.UserRepository.GetByID((post.UserId).ToString());
+            var user = UnitOfWorkRepository.UserRepository.GetByID(post.UserId);
             var senderEmail = new MailAddress(user.Email, user.FirstName);
             List<MailAddress> receiverEmails = new List<MailAddress>();
             foreach (var email in users)

@@ -1,0 +1,12 @@
+﻿@model PostsList
+
+@foreach (var p in Model.Posts)
+{
+    <div>
+        <h3>@p.PostName</h3>
+        <h4> @p.Category</h4>
+         @p.Body
+
+    </div>
+}
+<div page-model="@Model.PagingInfo" page-action="PostsList"></div>

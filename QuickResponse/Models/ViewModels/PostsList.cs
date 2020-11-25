@@ -8,7 +8,7 @@ namespace QuickResponse.Models.ViewModels
 {
     public class PostsList
     {
-        public IEnumerable<Post> Posts { get; set; }
+        public IEnumerable<Data.Models.Post> Posts { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
 }

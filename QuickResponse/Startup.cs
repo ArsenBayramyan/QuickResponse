@@ -33,6 +33,7 @@ namespace QuickResponse
             services.AddTransient<IRepository<Post>, PostRepository>();
             services.AddTransient<IUnitOfWOrkRepositroy,UnitOfWorkRepository>();
             services.AddAutoMapper(typeof(Startup));
+            services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,12 +42,14 @@ namespace QuickResponse
             app.UseStatusCodePages();
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
-            /*app.UseMvc(routes =>
+            app.UseMvc(routes =>
             {
                 routes.MapRoute(
                    name: "default",
-                   template: "{controller=Home}/{action=Index}/{id?}");
-            });*/
+                   template: "{controller=Home}/{action=PostsList}/{id?}");
+            });
+
+
         }
     }
 }

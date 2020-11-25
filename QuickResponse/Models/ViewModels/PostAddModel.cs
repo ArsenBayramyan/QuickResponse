@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickResponse.Models.ViewModels
 {
@@ -10,9 +7,16 @@ namespace QuickResponse.Models.ViewModels
     {
         [Required]
         public string PostName { get; set; }
+
+        [Required]
         public string Category { get; set; }
+
+        [Required]
         public string PostType { get; set; }
+
+        [Required]
         public string Body { get; set; }
+
         public DateTime? PostDate { get; set; }
     }
 }

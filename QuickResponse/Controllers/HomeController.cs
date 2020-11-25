@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using QuickResponse.Core.Interfaces;
+using QuickResponse.Data.Models;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
 using System;
@@ -23,7 +24,7 @@ namespace QuickResponse.Controllers
         public ViewResult PostsList(int page = 1)
         => View(new PostsList
         {
-            Posts = (IEnumerable<Models.Post>)_uow.PostRepository.List()
+            Posts =   _uow.PostRepository.List()
                       .OrderBy(p => p.PostID)
                       .Skip((page - 1) * PageSize)
                       .Take(PageSize),
