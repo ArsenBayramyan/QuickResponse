@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Data.Models
 {
-    [Table("Users")]
-    public class User:IdentityUser
+    public class User:IdentityUser<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

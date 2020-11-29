@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuickResponse.Data.Models
+namespace QuickResponse.Models
 {
     public class Product
     {

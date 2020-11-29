@@ -5,11 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuickResponse.Data.Models
 {
-    [Table("Posts")]
     public class Post
     {
         [Key]
-        public string Id { get; set; }
+        public string PostId { get; set; }
         public string PostName { get; set; }
         public string PostType { get; set; }
         public string Body { get; set; }
@@ -17,5 +16,6 @@ namespace QuickResponse.Data.Models
         public bool? IsDeleted { get; set; }
         public string UserId { get; set; }
         public string ProductId { get; set; }
+        public Product Product { get; set; }
     }
 }

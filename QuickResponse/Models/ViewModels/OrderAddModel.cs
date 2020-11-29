@@ -7,9 +7,8 @@ namespace QuickResponse.Models.ViewModels
 {
     public class OrderAddModel
     {
-        public string PostNameFrom { get; set; }
-        public string PostNameTo { get; set; }
-        public string PostCategory { get; set; }
-        public bool Success { get; set; }
+        public int UserTo { get; set; }
+        public int ProductId { get; set; }
+        public int ProductCount { get; set; }
     }
 }
