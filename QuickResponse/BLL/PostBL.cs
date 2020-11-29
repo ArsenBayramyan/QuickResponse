@@ -16,7 +16,6 @@ namespace QuickResponse.BLL
         public bool AddPost(PostAddModel postAdd)
         {
             var post = this.Mapper.Map<PostAddModel, Post>(postAdd);
-            SendPostMessage(post);
             return this.UnitOfWorkRepository.PostRepository.Save(post);
         }
 

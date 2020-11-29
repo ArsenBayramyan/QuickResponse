@@ -8,6 +8,7 @@ namespace QuickResponse.Data.Contexts
     {
         public AppIdentityDBContext(DbContextOptions<AppIdentityDBContext> options) : base(options) { }
         public DbSet<Post> Posts { get; set; }
-        
+        public DbSet<Order> Orders { get; set; }
+
     }
 }

@@ -17,7 +17,7 @@ namespace QuickResponse.Controllers
     {
         private UnitOfWorkRepository _uow;
         private IMapper _mapper;
-        public int PageSize = 4;
+        
         public PostController(IUnitOfWOrkRepositroy unitOfWOrkRepositroy, IMapper mapper)
         {
             this._uow = (UnitOfWorkRepository)unitOfWOrkRepositroy;

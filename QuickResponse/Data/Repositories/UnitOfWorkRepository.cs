@@ -9,16 +9,18 @@ namespace QuickResponse.Data.Repositories
     {
         private UserRepository _userRepository;
         private PostRepository _postRepository;
+        private OrderRepository _orderReposiotry;
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
         
         public UnitOfWorkRepository(UserManager<User> userManager, AppIdentityDBContext context,
             SignInManager<User> signInManager)
         {
-            _userRepository = new UserRepository(userManager);
-            _postRepository = new PostRepository(context);
-            _signInManager = signInManager;
-            _userManager = userManager;
+            this._userRepository = new UserRepository(userManager);
+            this._postRepository = new PostRepository(context);
+            this._orderReposiotry = new OrderRepository(context);
+            this._signInManager = signInManager;
+            this._userManager = userManager;
         }
 
         public UserRepository UserRepository => _userRepository;
