@@ -7,7 +7,7 @@ namespace QuickResponse.Models
 {
     public class ProductType
     {
-        public int Id { get; set; }
+        public int ProductTypeId { get; set; }
         public string ProductTypeName { get; set; }
         public string Dimensionality { get; set; }
     }

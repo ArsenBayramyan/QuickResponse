@@ -24,14 +24,14 @@ namespace QuickResponse.Data.Repositories
             return false;
         }
 
-        public bool DeleteById(string id)
+        public bool DeleteById(int id)
         {
             GetByID(id).IsDeleted = true;
             this._context.SaveChanges();
             return false;
         }
 
-        public Post GetByID(string id)
+        public Post GetByID(int id)
         {
             return _context.Find<Post>(id);
         }

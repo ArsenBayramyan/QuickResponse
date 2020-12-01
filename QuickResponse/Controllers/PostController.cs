@@ -3,13 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using QuickResponse.BLL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
-using QuickResponse.Models;
 using QuickResponse.Models.ViewModels;
 using QuickResponse.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickResponse.Controllers
 {
@@ -39,8 +34,24 @@ namespace QuickResponse.Controllers
             return RedirectToAction("");
         }
 
+        [HttpGet]
+        public IActionResult UserPostList(int userId)
+        {
+            var postBL = new PostBL(_uow, _mapper);
+            postBL.UserPostList(userId);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult PostListFilter(int postId)
+        {
+            var postBL = new PostBL(_uow, _mapper);
+            postBL.PostListFilter(postId);
+            return View();
+        }
+
         [HttpPost]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             if (_uow.PostRepository.DeleteById(id))
             {

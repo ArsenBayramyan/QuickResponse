@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using QuickResponse.Data.Models;
 using QuickResponse.Data.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickResponse.BLL
 {
