@@ -9,11 +9,11 @@ namespace QuickResponse.BLL
 {
     public abstract class BaseBL
     {
-        protected UnitOfWorkRepository UnitOfWorkRepository { get; private set; }
+        protected UnitOfWorkRepository UOW { get; private set; }
         protected IMapper Mapper { get; private set; }
         public BaseBL(UnitOfWorkRepository unitOfWorkRepository,IMapper mapper)
         {
-            this.UnitOfWorkRepository = unitOfWorkRepository;
+            this.UOW = unitOfWorkRepository;
             this.Mapper = mapper;
         }
 

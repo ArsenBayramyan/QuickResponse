@@ -25,7 +25,7 @@ namespace QuickResponse.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPost(PostAddModel postAdd)
+        public IActionResult AddPost(PostCreateModel postAdd)
         {
             var validator = new PostAddValidator();
             if (validator.Validate(postAdd).IsValid)

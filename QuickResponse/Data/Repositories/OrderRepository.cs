@@ -36,7 +36,7 @@ namespace QuickResponse.Data.Repositories
 
         public bool Update(Order entity)
         {
-            entity.Success = true;
+            
             this._context.Update(entity);
             return true;
         }

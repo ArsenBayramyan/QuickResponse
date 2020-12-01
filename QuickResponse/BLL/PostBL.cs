@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using QuickResponse.Data.Models;
+using QuickResponse;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
+using QuickResponse.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -13,9 +14,16 @@ namespace QuickResponse.BLL
     {
         public PostBL(UnitOfWorkRepository unitOfWorkRepository, IMapper mapper) : base(unitOfWorkRepository, mapper) { }
 
-        public bool AddPost(PostAddModel postAdd)
+        public bool AddPost(PostCreateModel postCreate)
         {
-            var post = this.Mapper.Map<PostAddModel, Post>(postAdd);
+            if (postCreate.ProductType.Id == 0)
+            {
+                var productType = new QuickResponse.Data.Models.ProductType();
+                this.UOW.ProductTypeRepository.Save(productType);//   this.Mapper.Map<ProductType,Data.Models.ProductType>();
+                postCreate.ProductType.Id = productType.Id;
+            }
+            var post = this.Mapper.Map<PostCreateModel, Post>(postcreate);
+
             return this.UnitOfWorkRepository.PostRepository.Save(post);
         }
 
@@ -37,9 +45,9 @@ namespace QuickResponse.BLL
             }
             var password = $"";
             var subject = $"{post.PostName}";
-            var message = $"Full Name - {user.FirstName} {user.LastName}\n" + 
+            var message = $"Full Name - {user.FirstName} {user.LastName}\n" +
                           $"Phone - {user.PhoneNumber}\n" +
-                          $"Email - {user.Email}\n" + 
+                          $"Email - {user.Email}\n" +
                           $"Post Name - {post.PostName}\n" +
                           $"Post Description - {post.Body}";
             var smtp = new SmtpClient

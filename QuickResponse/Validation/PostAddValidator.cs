@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Validation
 {
-    public class PostAddValidator:AbstractValidator<PostAddModel>
+    public class PostAddValidator:AbstractValidator<PostCreateModel>
     {
         public PostAddValidator()
         {
