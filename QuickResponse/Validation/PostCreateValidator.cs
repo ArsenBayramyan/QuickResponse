@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Validation
 {
-    public class PostAddValidator:AbstractValidator<PostCreateModel>
+    public class PostCreateValidator:AbstractValidator<PostCreateModel>
     {
-        public PostAddValidator()
+        public PostCreateValidator()
         {
             this.RuleFor(p => p.PostName)
                 .Cascade(CascadeMode.Stop)
@@ -19,9 +19,13 @@ namespace QuickResponse.Validation
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Post's body should be not empty.")
                 .Length(10, 100);
-            this.RuleFor(p => p.Category)
+            this.RuleFor(p => p.ProductType.ProductTypeName)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Category should be not empty.")
+                .NotEmpty().WithMessage("Product type name should be not empty.")
+                .Length(2, 20);
+            this.RuleFor(p => p.ProductType.Dimensionality)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("Dimensionality of product should be not empty.")
                 .Length(2, 20);
             this.RuleFor(p => p.PostType)
                 .Cascade(CascadeMode.Stop)

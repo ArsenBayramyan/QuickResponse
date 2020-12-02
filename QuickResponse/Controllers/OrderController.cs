@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using QuickResponse.BLL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
+using QuickResponse.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,19 @@ namespace QuickResponse.Controllers
             this._mapper = mapper;
         }
 
-        public IActionResult AddOrder(OrderAddModel order)
+        [HttpPost]
+        public IActionResult AddOrder(OrderCreateModel orderCreate)
         {
-
-            return RedirectToAction("");
+            var validator = new OrderCreateValidator();
+            if (validator.Validate(orderCreate).IsValid)
+            {
+                var orderBL = new OrderBL(_uow, _mapper);
+                if (orderBL.AddOrder(orderCreate))
+                {
+                    return RedirectToAction("");
+                }
+            }
+            return RedirectToAction("AddOrder");
         }
     }
 }

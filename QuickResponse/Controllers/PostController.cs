@@ -22,7 +22,7 @@ namespace QuickResponse.Controllers
         [HttpPost]
         public IActionResult AddPost(PostCreateModel postAdd)
         {
-            var validator = new PostAddValidator();
+            var validator = new PostCreateValidator();
             if (validator.Validate(postAdd).IsValid)
             {
                 var postBL = new PostBL(_uow, _mapper);
@@ -31,7 +31,7 @@ namespace QuickResponse.Controllers
                     return RedirectToAction("");
                 }
             }
-            return RedirectToAction("");
+            return RedirectToAction("AddPost");
         }
 
         [HttpGet]

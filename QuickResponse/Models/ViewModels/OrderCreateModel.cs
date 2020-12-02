@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Models.ViewModels
 {
-    public class OrderAddModel
+    public class OrderCreateModel
     {
         public int UserTo { get; set; }
         public int ProductId { get; set; }

@@ -22,14 +22,14 @@ namespace QuickResponse.Data.Repositories
             return this._userManager.DeleteAsync(entity).Result.Succeeded;
         }
 
-        public bool DeleteById(string id)
+        public bool DeleteById(int id)
         {
             var user = this._userManager.FindByIdAsync(id).Result;
             user.IsDeleted = true;
             return Update(user); 
         }
 
-        public User GetByID(string id)
+        public User GetByID(int id)
         {
             var user = this._userManager.FindByIdAsync(id).Result;
             return user;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using QuickResponse.Data.Models;
 using QuickResponse.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace QuickResponse.Core.Profiles
         public PostProfile()
         {
             var t = new PostCreateModel();
-            this.CreateMap<PostCreateModel, Data.Models.Post>()
+            this.CreateMap<PostCreateModel,Post>()
                 .ForMember(p => p.PostName, src => src.MapFrom(i =>i.PostName))
                 .ForMember(p => p.PostType, src => src.MapFrom(i => i.PostType))
                 .ForMember(p=>p.PostDate,src=>src.MapFrom(i=>i.PostDate))
