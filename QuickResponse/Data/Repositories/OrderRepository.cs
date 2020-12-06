@@ -17,7 +17,7 @@ namespace QuickResponse.Data.Repositories
             this._context = context;
         }
 
-        public Order GetByID(string id)
+        public Order GetByID(int id)
         {
             return this._context.Find<Order>(id);
         }
@@ -46,7 +46,7 @@ namespace QuickResponse.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(string id)
+        public bool DeleteById(int id)
         {
             throw new NotImplementedException();
         }

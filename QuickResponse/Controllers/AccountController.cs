@@ -74,7 +74,7 @@ namespace QuickResponse.Controllers
         public IActionResult LogOut() => RedirectToAction("Login");
 
         [HttpPost]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             if (_uow.UserRepository.DeleteById(id))
             {

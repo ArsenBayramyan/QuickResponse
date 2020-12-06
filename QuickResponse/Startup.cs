@@ -31,15 +31,20 @@ namespace QuickResponse
                 .AddEntityFrameworkStores<AppIdentityDBContext>().AddDefaultTokenProviders();
             services.AddTransient<IRepository<User>, UserRepository>();
             services.AddTransient<IRepository<Post>, PostRepository>();
+            services.AddTransient<IRepository<Order>, OrderRepository>();
+            services.AddTransient<IRepository<Product>, ProductRepository>();
+            services.AddTransient<IRepository<ProductType>, ProductTypeRepository>();
             services.AddTransient<IUnitOfWOrkRepositroy,UnitOfWorkRepository>();
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStatusCodePages();
+            app.UseAuthentication();
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseMvc(routes =>

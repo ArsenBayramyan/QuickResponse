@@ -3,8 +3,8 @@ using QuickResponse.Data.Models;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
 using System;
-using System.Net;
-using System.Net.Mail;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuickResponse.BLL
 {
@@ -16,42 +16,25 @@ namespace QuickResponse.BLL
         {
             var order = this.Mapper.Map<OrderCreateModel, Order>(orderCreate);
             //order.Status="";
-            SendEmail(order);
-            return this.UOW.OrderRepository.Save(order);
-        }
-
-        public void SendEmail(Order order)
-        {
             var userFrom = UOW.UserRepository.GetByID(order.UserFrom);
             var userTo = UOW.UserRepository.GetByID(order.UserTo);
             var product = UOW.ProductRepository.GetByID(order.ProductId);
-            var senderEmail = new MailAddress("order@mail.ru", "I want this product");
-            var receiverEmail = new MailAddress($"{userTo.Email}", "Answer of Order");
-            var password = "orderPassword";
-            var subject = "Order";
-            var message = $"Full Name: - {userFrom.FirstName} {userFrom.LastName}" + Environment.NewLine +
+            var message=  $"Full Name: - {userFrom.FirstName} {userFrom.LastName}" + Environment.NewLine +
                           $"Phone: - {userFrom.PhoneNumber}" + Environment.NewLine +
                           $"Օrder description: - I want {product.ProductType.ProductTypeName} {order.ProuctCount} {product.ProductType.Dimensionality}․" +
-                                                 $"Please confirm"+
+                                                 $"Please confirm" + Environment.NewLine +
                           $"Post Link: -";
-            var smtp = new SmtpClient
-            {
-
-                Host = "smtp.mail.ru",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(senderEmail.Address, password)
-            };
-            using (var mess = new MailMessage(senderEmail, receiverEmail)
-            {
-                Subject = subject,
-                Body = message
-            })
-            {
-                smtp.Send(mess);
-            }
+            BaseBL.SendEmailMessage(userTo.Email, message);
+            return this.UOW.OrderRepository.Save(order);
         }
+
+        public IEnumerable<Order> OrderList => UOW.OrderRepository.List();
+
+        public IEnumerable<Order> UserOrderList(int userId)
+        {
+            var userOrderList = this.OrderList.Where(o => o.UserFrom == userId);
+            return userOrderList;
+        }
+       
     }
 }

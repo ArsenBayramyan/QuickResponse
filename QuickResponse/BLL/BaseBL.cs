@@ -3,6 +3,8 @@ using QuickResponse.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace QuickResponse.BLL
@@ -15,6 +17,32 @@ namespace QuickResponse.BLL
         {
             this.UOW = unitOfWorkRepository;
             this.Mapper = mapper;
+        }
+
+        protected static void SendEmailMessage(string userToEmail,string message)
+        {
+            var senderEmail = new MailAddress("order@mail.ru", "I want this product");
+            var receiverEmail = new MailAddress($"{userToEmail}", "Answer of Order");
+            var password = "orderPassword";
+            var subject = "Order";
+            var smtp = new SmtpClient
+            {
+
+                Host = "smtp.mail.ru",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderEmail.Address, password)
+            };
+            using (var mess = new MailMessage(senderEmail, receiverEmail)
+            {
+                Subject = subject,
+                Body = message
+            })
+            {
+                smtp.Send(mess);
+            }
         }
 
     }

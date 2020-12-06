@@ -17,30 +17,30 @@ namespace QuickResponse.BLL
         public bool Registration(UserCreateModel userCreate)
         {
             var user = this.Mapper.Map<UserCreateModel,User>(userCreate);
-            return this.UnitOfWorkRepository.UserRepository.Save(user);
+            return this.UOW.UserRepository.Save(user);
         } 
 
         public bool Login(UserLoginModel userLogin)
         {
             var user = this.Mapper.Map<UserLoginModel, User>(userLogin);
-            var FindUser = this.UnitOfWorkRepository.UserRepository.GetByID(user.Id);
+            var FindUser = this.UOW.UserRepository.GetByID(user.Id);
             bool success=false;
             if (FindUser != null && FindUser.IsDeleted == false)
             {
-                UnitOfWorkRepository.SignInManager.SignOutAsync();
+                UOW.SignInManager.SignOutAsync();
                 var result =
-                     UnitOfWorkRepository.SignInManager.PasswordSignInAsync(FindUser, user.PasswordHash, true, false).Result;
+                     UOW.SignInManager.PasswordSignInAsync(FindUser, user.PasswordHash, true, false).Result;
                 success=result.Succeeded;
             }
             return success;
         }
 
-        public IEnumerable<User> UsersList() => UnitOfWorkRepository.UserRepository.List();
-        
+        public IEnumerable<User> UsersList() => UOW.UserRepository.List();
+
 
         /*public bool DeleteAccount(string id)
           {
-              return this.UnitOfWorkRepository.UserRepository.DeleteById(id);
+              return this.UOW.UserRepository.DeleteById(id);
           }
         */
     }

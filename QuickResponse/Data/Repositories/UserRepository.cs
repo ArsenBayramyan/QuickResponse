@@ -24,14 +24,14 @@ namespace QuickResponse.Data.Repositories
 
         public bool DeleteById(int id)
         {
-            var user = this._userManager.FindByIdAsync(id).Result;
+            var user = this._userManager.FindByIdAsync(id.ToString()).Result;
             user.IsDeleted = true;
             return Update(user); 
         }
 
         public User GetByID(int id)
         {
-            var user = this._userManager.FindByIdAsync(id).Result;
+            var user = this._userManager.FindByIdAsync(id.ToString()).Result;
             return user;
         }
 
@@ -52,5 +52,6 @@ namespace QuickResponse.Data.Repositories
         {
             return this._userManager.UpdateAsync(entity).Result.Succeeded;
         }
+
     }
 }

@@ -26,7 +26,8 @@ namespace QuickResponse.Controllers
             if (validator.Validate(postAdd).IsValid)
             {
                 var postBL = new PostBL(_uow, _mapper);
-                if (postBL.AddPost(postAdd))
+                var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User.Identity.Name).Result;
+                if (postBL.AddPost(postAdd,currentUser))
                 {
                     return RedirectToAction("");
                 }

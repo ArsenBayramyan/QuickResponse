@@ -25,7 +25,7 @@ namespace QuickResponse.Controllers
         => View(new PostsList
         {
             Posts =   _uow.PostRepository.List()
-                      .OrderBy(p => p.PostID)
+                      .OrderBy(p => p.PostId)
                       .Skip((page - 1) * PageSize)
                       .Take(PageSize),
             PagingInfo = new PagingInfo
