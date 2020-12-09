@@ -4,7 +4,7 @@ using System;
 namespace QuickResponse.Models
 {
 
-    public class User:IdentityUser
+    public class User:IdentityUser<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

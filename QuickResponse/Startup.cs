@@ -27,7 +27,7 @@ namespace QuickResponse
             var responsesConString = Configuration["Data:QuickResponseIdentity:ConnectionString"];
             services.AddDbContext<AppIdentityDBContext>(options =>
                options.UseSqlServer(responsesConString));
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<AppIdentityDBContext>().AddDefaultTokenProviders();
             services.AddTransient<IRepository<User>, UserRepository>();
             services.AddTransient<IRepository<Post>, PostRepository>();
@@ -53,8 +53,6 @@ namespace QuickResponse
                    name: "default",
                    template: "{controller=Home}/{action=PostsList}/{id?}");
             });
-
-
         }
     }
 }

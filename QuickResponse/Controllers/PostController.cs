@@ -32,7 +32,7 @@ namespace QuickResponse.Controllers
                     return RedirectToAction("");
                 }
             }
-            return RedirectToAction("AddPost");
+            return RedirectToAction("");
         }
 
         [HttpGet]
@@ -52,9 +52,9 @@ namespace QuickResponse.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int postid)
         {
-            if (_uow.PostRepository.DeleteById(id))
+            if (_uow.PostRepository.DeleteById(postid))
             {
                 return RedirectToAction("");
             }

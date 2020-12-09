@@ -22,5 +22,6 @@ namespace QuickResponse
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
