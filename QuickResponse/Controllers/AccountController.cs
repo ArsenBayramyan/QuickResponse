@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using QuickResponse.BLL;
 using QuickResponse.Core.Interfaces;
-using QuickResponse.Data.Contexts;
-using QuickResponse.Data.Models;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
 using QuickResponse.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickResponse.Controllers
 {
@@ -56,6 +49,7 @@ namespace QuickResponse.Controllers
         public ViewResult Login() => View();
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Login(UserLoginModel userLoginModel)
         {
             var validator = new UserLoginValidator();

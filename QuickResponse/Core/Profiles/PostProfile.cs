@@ -16,12 +16,11 @@ namespace QuickResponse.Core.Profiles
         public PostProfile()
         {
             var t = new PostCreateModel();
-            this.CreateMap<PostCreateModel,Post>()
-                .ForMember(p => p.PostName, src => src.MapFrom(i =>i.PostName))
+            this.CreateMap<PostCreateModel, Post>()
+                .ForMember(p => p.PostName, src => src.MapFrom(i => i.PostName))
                 .ForMember(p => p.PostType, src => src.MapFrom(i => i.PostType))
-                .ForMember(p=>p.Price,src => src.MapFrom(i=>i.Price))
-                .ForMember(p=>p.PostDate,src=>src.MapFrom(i=>i.PostDate))
-                .ForMember(p=>p.Product.ProductType,src=>src.MapFrom(i=>i.ProductType));
+                .ForMember(p => p.Price, src => src.MapFrom(i => i.Price))
+                .ForMember(p => p.PostDate, src => src.MapFrom(i => i.PostDate));
         }
     }
 }

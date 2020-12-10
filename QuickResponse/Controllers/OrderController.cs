@@ -23,6 +23,10 @@ namespace QuickResponse.Controllers
             this._mapper = mapper;
         }
 
+        [HttpGet]
+        public ViewResult AddOrder()=> View();
+
+
         [HttpPost]
         public IActionResult AddOrder(OrderCreateModel orderCreate)
         {

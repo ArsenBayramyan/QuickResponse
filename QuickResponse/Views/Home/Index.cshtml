@@ -1,0 +1,14 @@
+﻿@model HomeViewModel
+
+@foreach (var p in Model.Posts)
+{
+    <div>
+        <h3>@p.PostName</h3>
+        <h4> @p.PostType</h4>
+        <h4> @p.Product.ProductType.ProductTypeName</h4>
+        <h4> @p.Product.Count</h4>
+        @p.Body
+
+    </div>
+}
+<div page-model="@Model.PagingInfo" page-action="PostsList"></div>

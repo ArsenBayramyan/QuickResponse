@@ -1,0 +1,16 @@
+﻿@model OrderCreateModel
+
+@{
+    Layout = "_Layout";
+}
+<div class="text-danger" asp-validation-summary="All"></div>
+<form asp-action="AddOrder" asp-controller="Order" method="post">
+    <div class="form-group">
+        <label asp-for="ProductCount"></label>
+        <div><span asp-validation-for="ProductCount" class="text-danger"></span></div>
+        <input asp-for="ProductCount" class="form-control" />
+    </div>
+    <div>
+        <button class="btn btn-success" type="submit">Order</button>
+    </div>
+</form>
