@@ -10,27 +10,32 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.BLL
 {
-    public class AccountBL:BaseBL
+    public class AccountBL : BaseBL
     {
         public AccountBL(UnitOfWorkRepository unitOfWorkRepository, IMapper mapper) : base(unitOfWorkRepository, mapper) { }
 
         public bool Registration(UserCreateModel userCreate)
         {
-            var user = this.Mapper.Map<UserCreateModel,User>(userCreate);
-            return this.UOW.UserRepository.Save(user);
-        } 
+            var user = this.Mapper.Map<UserCreateModel, User>(userCreate);
+            user.RegistrationDate = DateTime.Now;
+            if (this.UOW.UserRepository.GetByID(user.Id) is null)
+            {
+                return this.UOW.UserRepository.Save(user);
+            }
+            return false;
+        }
 
         public bool Login(UserLoginModel userLogin)
         {
             var user = this.Mapper.Map<UserLoginModel, User>(userLogin);
-            var FindUser = this.UOW.UserRepository.GetByID(user.Id);
-            bool success=false;
-            if (FindUser != null && FindUser.IsDeleted == false)
+            var findUser = this.UOW.UserRepository.GetByEmail(user.Email);
+            bool success = false;
+            if (findUser != null && findUser.IsDeleted == false)
             {
                 UOW.SignInManager.SignOutAsync();
                 var result =
-                     UOW.SignInManager.PasswordSignInAsync(FindUser, user.PasswordHash, true, false).Result;
-                success=result.Succeeded;
+                     UOW.SignInManager.PasswordSignInAsync(findUser, user.PasswordHash, true, false).Result;
+                success = result.Succeeded;
             }
             return success;
         }

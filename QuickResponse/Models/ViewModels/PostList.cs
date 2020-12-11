@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Models.ViewModels
 {
-    public class PostsList
+    public class PostList
     {
         public IEnumerable<Data.Models.Post> Posts { get; set; }
         public PagingInfo PagingInfo { get; set; }

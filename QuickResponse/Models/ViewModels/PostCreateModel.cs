@@ -13,6 +13,9 @@ namespace QuickResponse.Models.ViewModels
         public ProductType ProductType { get; set; }
 
         [Required]
+        public int Count { get; set; }
+
+        [Required]
         public string PostType { get; set; }
 
         [Required]

@@ -7,9 +7,9 @@ namespace QuickResponse.Models
 {
     public class Product
     {
-        public string ProductId { get; set; }
-        public string ProductTypeId { get; set; }
-        public string Count { get; set; }
+        public int ProductId { get; set; }
+        public int ProductTypeId { get; set; }
+        public int Count { get; set; }
         public bool IsDeleted { get; set; }
         public ProductType ProductType { get; set; }
     }

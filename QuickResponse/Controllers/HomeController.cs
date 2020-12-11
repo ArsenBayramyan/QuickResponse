@@ -21,8 +21,8 @@ namespace QuickResponse.Controllers
             this._uow = (UnitOfWorkRepository)unitOfWOrkRepositroy;
             this._mapper = mapper;
         }
-        public ViewResult PostsList(int page = 1)
-        => View(new PostsList
+        public ViewResult PostList(int page = 1)
+        => View(new PostList
         {
             Posts =   _uow.PostRepository.List()
                       .OrderBy(p => p.PostId)

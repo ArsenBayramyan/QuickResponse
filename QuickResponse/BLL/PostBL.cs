@@ -18,11 +18,15 @@ namespace QuickResponse.BLL
             
             if (postCreate.ProductType.ProductTypeId == 0)
             {
+                
                 var productType = this.Mapper.Map<QuickResponse.Models.ProductType, ProductType>(postCreate.ProductType);
-                this.UOW.ProductTypeRepository.Save(productType);
+                var product = new Product { ProductTypeId = productType.ProductTypeId, Count = postCreate.Count };
                 postCreate.ProductType.ProductTypeId = productType.ProductTypeId;
+                postCreate.Product.ProductId = product.ProductId;
+                this.UOW.ProductRepository.Save(product);
             }
             var post = this.Mapper.Map<PostCreateModel, Data.Models.Post>(postCreate);
+            post.ProductId = postCreate.Product.ProductId;
             if (post.PostType == "Vajarvum e ")
             {
                 var postList = this.UOW.PostRepository.List().Where(p => p.PostType != "vajarvum e" && p.UserId!=post.UserId);
@@ -31,12 +35,12 @@ namespace QuickResponse.BLL
                     foreach (var p in postList)
                     {
                         var message = $"{post.PostName} postum popoxutyun e katarvel\n" +
-                                 $"Full Name: - {currentUser.FirstName} {currentUser.LastName}\n" +
-                                 $"Phone: - {currentUser.PhoneNumber}\n" +
-                                 $"Post Name: - {postCreate.PostName}\n" +
-                                 $"Price: - {postCreate.Price}\n" +
-                                 $"Post description: - I am selling {postCreate.Product.ProductType.ProductTypeName} {postCreate.Product.Count} {postCreate.ProductType.Dimensionality}․\n" +
-                                 $"Post Link: - ";
+                                      $"Full Name: - {currentUser.FirstName} {currentUser.LastName}\n" +
+                                      $"Phone: - {currentUser.PhoneNumber}\n" +
+                                      $"Post Name: - {postCreate.PostName}\n" +
+                                      $"Price: - {postCreate.Price}\n" +
+                                      $"Post description: - I am selling {postCreate.Product.ProductType.ProductTypeName} {postCreate.Product.Count} {postCreate.ProductType.Dimensionality}․\n" +
+                                      $"Post Link: - ";
                         var userTo = UOW.UserRepository.GetByID(p.UserId);
                         BaseBL.SendEmailMessage(userTo.Email, message);
                     }
@@ -58,17 +62,17 @@ namespace QuickResponse.BLL
             return this.UOW.PostRepository.Save(post);
         }
 
-        public IEnumerable<Post> UserPostList(int id) => this.PostsList.Where(p => p.UserId == id);
+        public IEnumerable<Post> UserPostList(int id) => this.PostList.Where(p => p.UserId == id);
 
         public IEnumerable<Post> PostListFilter(int postId)
         {
             var post = this.UOW.PostRepository.GetByID(postId);
-            var filterPost = this.PostsList.Where(p => p.PostType != post.PostType && p.UserId != post.UserId &&
+            var filterPost = this.PostList.Where(p => p.PostType != post.PostType && p.UserId != post.UserId &&
                                                   p.Product.ProductType == post.Product.ProductType);
             return filterPost;
         }
 
-        public IEnumerable<Post> PostsList => UOW.PostRepository.List();
+        public IEnumerable<Post> PostList => UOW.PostRepository.List();
 
         public bool DeletePost(int id)
         {

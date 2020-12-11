@@ -35,6 +35,12 @@ namespace QuickResponse.Data.Repositories
             return user;
         }
 
+        public User GetByEmail(string email)
+        {
+            var user = this._userManager.FindByEmailAsync(email).Result;
+            return user;
+        }
+
         public IEnumerable<User> List()
         {
             var users = this._userManager.Users;

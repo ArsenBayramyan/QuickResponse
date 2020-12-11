@@ -51,7 +51,7 @@ namespace QuickResponse
             {
                 routes.MapRoute(
                    name: "default",
-                   template: "{controller=Home}/{action=PostsList}/{id?}");
+                   template: "{controller=Home}/{action=PostList}/{id?}");
             });
         }
     }

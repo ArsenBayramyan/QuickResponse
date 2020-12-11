@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Core.Profiles
 {
-    public class UserProfile:Profile
+    public class ProductProfile:Profile
     {
-        public const string ViewModel = "UserProfile";
+        public const string ViewModel = "PostProfile";
 
         public override string ProfileName => ViewModel;
-        public UserProfile()
+        public ProductProfile()
         {
-            var t = new UserCreateModel();
-            this.CreateMap<OrderCreateModel, User>();
+            var t = new ProductTypeCreateModel();
+            this.CreateMap<ProductTypeCreateModel, ProductType>();
         }
     }
 }

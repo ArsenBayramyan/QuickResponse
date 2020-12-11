@@ -200,7 +200,7 @@ namespace QuickResponse.Migrations
                     ProductId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductTypeId = table.Column<int>(nullable: false),
-                    Count = table.Column<string>(nullable: true),
+                    Count = table.Column<int>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

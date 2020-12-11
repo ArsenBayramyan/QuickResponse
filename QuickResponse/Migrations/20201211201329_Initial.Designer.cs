@@ -10,7 +10,7 @@ using QuickResponse.Data.Contexts;
 namespace QuickResponse.Migrations
 {
     [DbContext(typeof(AppIdentityDBContext))]
-    [Migration("20201209192107_Initial")]
+    [Migration("20201211201329_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -222,8 +222,8 @@ namespace QuickResponse.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Count")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
