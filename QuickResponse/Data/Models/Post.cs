@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using QuickResponse.Core.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuickResponse.Data.Models
 {
@@ -10,7 +9,7 @@ namespace QuickResponse.Data.Models
         [Key]
         public int PostId { get; set; }
         public string PostName { get; set; }
-        public string PostType { get; set; }
+        public PostType PostType { get; set; }
         public decimal Price { get; set; }
         public string Body { get; set; }
         public DateTime? PostDate { get; set; }

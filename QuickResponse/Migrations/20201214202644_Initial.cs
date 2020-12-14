@@ -65,7 +65,8 @@ namespace QuickResponse.Migrations
                     UserFrom = table.Column<int>(nullable: false),
                     UserTo = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
-                    ProuctCount = table.Column<int>(nullable: false)
+                    ProuctCount = table.Column<int>(nullable: false),
+                    Status = table.Column<byte>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -221,7 +222,7 @@ namespace QuickResponse.Migrations
                     PostId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PostName = table.Column<string>(nullable: true),
-                    PostType = table.Column<string>(nullable: true),
+                    PostType = table.Column<byte>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     Body = table.Column<string>(nullable: true),
                     PostDate = table.Column<DateTime>(nullable: true),

@@ -1,5 +1,7 @@
-﻿using QuickResponse.Data.Models;
+﻿using QuickResponse.Core.Enums;
+using QuickResponse.Data.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace QuickResponse.Models.ViewModels
@@ -10,13 +12,13 @@ namespace QuickResponse.Models.ViewModels
         public string PostName { get; set; }
 
         [Required]
-        public ProductType ProductType { get; set; }
+        public int ProductTypeId { get; set; }
 
         [Required]
         public int Count { get; set; }
 
         [Required]
-        public string PostType { get; set; }
+        public PostType PostType { get; set; }
 
         [Required]
         public decimal Price { get; set; }
@@ -25,7 +27,8 @@ namespace QuickResponse.Models.ViewModels
         public string Body { get; set; }
 
         public DateTime? PostDate { get; set; }
-        public Product Product;
+        public Product Product { get; set; }
+        public IEnumerable<Data.Models.ProductType> ProductTypes { get; set; }
 
     }
 }

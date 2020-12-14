@@ -13,6 +13,6 @@ namespace QuickResponse.Data.Models
         public int UserTo { get; set; }
         public int ProductId { get; set; }
         public int ProuctCount { get; set; }
-        public OrderStatus Status;
+        public OrderStatus Status { get; set; }
     }
 }

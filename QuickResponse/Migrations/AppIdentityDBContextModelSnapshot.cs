@@ -162,6 +162,9 @@ namespace QuickResponse.Migrations
                     b.Property<int>("ProuctCount")
                         .HasColumnType("int");
 
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
                     b.Property<int>("UserFrom")
                         .HasColumnType("int");
 
@@ -192,8 +195,8 @@ namespace QuickResponse.Migrations
                     b.Property<string>("PostName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte>("PostType")
+                        .HasColumnType("tinyint");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");

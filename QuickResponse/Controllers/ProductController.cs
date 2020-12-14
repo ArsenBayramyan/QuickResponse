@@ -22,15 +22,20 @@ namespace QuickResponse.Controllers
             this._mapper = mapper;
         }
 
+        [HttpGet]
+        public IActionResult CreateProduct() => View();
+
         [HttpPost]
-        public void AddProduct(ProductTypeCreateModel productTypeCreate )
+        public IActionResult CreateProduct(ProductTypeCreateModel productTypeCreate )
         {
             var validator = new ProductCreateValidator();
             if (validator.Validate(productTypeCreate).IsValid)
             {
                 var productType = this._mapper.Map<ProductTypeCreateModel, ProductType>(productTypeCreate);
                 this._uow.ProductTypeRepository.Save(productType);
+                return RedirectToAction("CreatePost", "Post");
             }
+            return RedirectToAction("CreateProduct");
         }
     }
 }

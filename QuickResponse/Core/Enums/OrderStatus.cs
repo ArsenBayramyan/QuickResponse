@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Core.Enums
 {
-    public enum OrderStatus
+    public enum OrderStatus:byte
     {
+        AwaitingApproval=1,
+        Approved,
+        Canceled,
+        Completed
     }
 }

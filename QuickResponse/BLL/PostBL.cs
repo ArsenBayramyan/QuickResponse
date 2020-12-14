@@ -4,7 +4,7 @@ using QuickResponse.Models.ViewModels;
 using QuickResponse.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
-
+using QuickResponse.Core.Enums;
 
 
 namespace QuickResponse.BLL
@@ -13,33 +13,35 @@ namespace QuickResponse.BLL
     {
         public PostBL(UnitOfWorkRepository unitOfWorkRepository, IMapper mapper) : base(unitOfWorkRepository, mapper) { }
 
-        public bool AddPost(PostCreateModel postCreate, User currentUser)
+        public bool AddPost(PostCreateModel postCreate,User currentUser)
         {
-            
-            if (postCreate.ProductType.ProductTypeId == 0)
+            var product = this.UOW.ProductRepository.List().Where(p => p.ProductTypeId == postCreate.ProductTypeId).FirstOrDefault();
+            if (product is null)
             {
-                
-                var productType = this.Mapper.Map<QuickResponse.Models.ProductType, ProductType>(postCreate.ProductType);
-                var product = new Product { ProductTypeId = productType.ProductTypeId, Count = postCreate.Count };
-                postCreate.ProductType.ProductTypeId = productType.ProductTypeId;
-                postCreate.Product.ProductId = product.ProductId;
+                product = new Product
+                {
+                    ProductTypeId = postCreate.ProductTypeId,
+                    Count = postCreate.Count
+                };
                 this.UOW.ProductRepository.Save(product);
             }
             var post = this.Mapper.Map<PostCreateModel, Data.Models.Post>(postCreate);
-            post.ProductId = postCreate.Product.ProductId;
-            if (post.PostType == "Vajarvum e ")
+            post.Product = product;
+            post.ProductId = product.ProductId;
+            post.UserId = currentUser.Id;
+            if (post.PostType == PostType.ForSale)
             {
-                var postList = this.UOW.PostRepository.List().Where(p => p.PostType != "vajarvum e" && p.UserId!=post.UserId);
+                var postList = this.UOW.PostRepository.List().Where(p => p.PostType !=PostType.ForSale  && p.UserId!=post.UserId);
                 if (post.PostId!=0)
                 {
                     foreach (var p in postList)
                     {
                         var message = $"{post.PostName} postum popoxutyun e katarvel\n" +
-                                      $"Full Name: - {currentUser.FirstName} {currentUser.LastName}\n" +
-                                      $"Phone: - {currentUser.PhoneNumber}\n" +
+                                      $"Full Name: - Ars\n" +
+                                      $"Phone: - 094940708\n" +
                                       $"Post Name: - {postCreate.PostName}\n" +
                                       $"Price: - {postCreate.Price}\n" +
-                                      $"Post description: - I am selling {postCreate.Product.ProductType.ProductTypeName} {postCreate.Product.Count} {postCreate.ProductType.Dimensionality}․\n" +
+                                      $"Post description: - I am selling {postCreate.Product.ProductType.ProductTypeName} {postCreate.Product.Count} " +
                                       $"Post Link: - ";
                         var userTo = UOW.UserRepository.GetByID(p.UserId);
                         BaseBL.SendEmailMessage(userTo.Email, message);
@@ -52,8 +54,7 @@ namespace QuickResponse.BLL
                                   $"Phone: - {currentUser.PhoneNumber}\n" +
                                   $"Post Name: - {postCreate.PostName}\n" +
                                   $"Price: - {postCreate.Price}\n" +
-                                  $"Post description: - I am selling {postCreate.Product.ProductType.ProductTypeName} {postCreate.Product.Count} {postCreate.ProductType.Dimensionality}․\n" +
-                                  $"Post Link: - ";
+                                  $"Post description: - I am selling {postCreate.Body} {postCreate.Count}";
                     var user = this.UOW.UserRepository.GetByID(p.UserId);
                     BaseBL.SendEmailMessage(user.Email, message);
                 }

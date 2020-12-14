@@ -5,6 +5,7 @@ using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
 using QuickResponse.Validation;
+using System;
 
 namespace QuickResponse.Controllers
 {
@@ -19,17 +20,21 @@ namespace QuickResponse.Controllers
             this._mapper = mapper;
         }
 
+        [HttpGet]
+        public IActionResult CreatePost() => View(new PostCreateModel { ProductTypes=_uow.ProductTypeRepository.List()});
+
         [HttpPost]
-        public IActionResult AddPost(PostCreateModel postAdd)
+        public IActionResult CreatePost(PostCreateModel postAdd)
         {
+            postAdd.PostDate = DateTime.Now;
             var validator = new PostCreateValidator();
             if (validator.Validate(postAdd).IsValid)
             {
                 var postBL = new PostBL(_uow, _mapper);
-                var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User.Identity.Name).Result;
+                Data.Models.User? currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
                 if (postBL.AddPost(postAdd,currentUser))
                 {
-                    return RedirectToAction("");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return RedirectToAction("");

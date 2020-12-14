@@ -58,7 +58,7 @@ namespace QuickResponse.Controllers
                 var accountBL = new AccountBL(_uow, _mapper);
                 if (accountBL.Login(userLoginModel))
                 {
-                    return RedirectToAction("PostList", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             ModelState.AddModelError(nameof(userLoginModel.Email), "Invalid user or password");

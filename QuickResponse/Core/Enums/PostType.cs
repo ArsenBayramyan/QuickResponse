@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Core.Enums
 {
-    public enum PostType
+    public enum PostType:byte
     {
+        LookingFor=1,
+        ForSale
     }
 }

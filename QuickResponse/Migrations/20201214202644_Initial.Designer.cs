@@ -10,7 +10,7 @@ using QuickResponse.Data.Contexts;
 namespace QuickResponse.Migrations
 {
     [DbContext(typeof(AppIdentityDBContext))]
-    [Migration("20201211201329_Initial")]
+    [Migration("20201214202644_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,6 +164,9 @@ namespace QuickResponse.Migrations
                     b.Property<int>("ProuctCount")
                         .HasColumnType("int");
 
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
                     b.Property<int>("UserFrom")
                         .HasColumnType("int");
 
@@ -194,8 +197,8 @@ namespace QuickResponse.Migrations
                     b.Property<string>("PostName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte>("PostType")
+                        .HasColumnType("tinyint");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
