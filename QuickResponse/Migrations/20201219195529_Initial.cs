@@ -64,6 +64,7 @@ namespace QuickResponse.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserFrom = table.Column<int>(nullable: false),
                     UserTo = table.Column<int>(nullable: false),
+                    PostTo = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
                     ProuctCount = table.Column<int>(nullable: false),
                     Status = table.Column<byte>(nullable: false)

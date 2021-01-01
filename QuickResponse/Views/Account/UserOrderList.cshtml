@@ -1,0 +1,34 @@
+﻿@model UserOrderList
+
+<table class="table-bordered table-condensed table-striped">
+    <tr>
+        <th>User to full name</th>
+        <th>Product name</th>
+        <th>Count</th>
+        <th>Price</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var order in Model.Orders)
+    {
+        
+        
+            <tr class="well">
+                <td>
+                    @Model.Users.Where(u => u.Id == Model.Orders.Where(o => o.OrderId == order.OrderId).FirstOrDefault().UserTo).FirstOrDefault().FirstName
+                    @Model.Users.Where(u => u.Id == Model.Orders.Where(o => o.OrderId == order.OrderId).FirstOrDefault().UserTo).FirstOrDefault().LastName
+                </td>
+                <td>@Model.ProductTypes.Where(t=>t.ProductTypeId==Model.ProductTypes.Where(t=>t.ProductTypeId==Model.Products.Where(p=>p.ProductId==order.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
+                <td>
+                    @order.ProuctCount
+                    @Model.ProductTypes.Where(t => t.ProductTypeId == Model.ProductTypes.Where(t => t.ProductTypeId == Model.Products.Where(p => p.ProductId == order.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality
+                </td>
+                <td>@Model.Posts.Where(p=>p.PostId==order.PostTo).FirstOrDefault().Price</td>
+                <td>@order.Status </td>
+               
+            </tr>
+
+    }
+</table>
+<div>
+    <a href="/Account/AccountPage" >Back to home</a>
+</div>

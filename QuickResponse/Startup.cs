@@ -34,7 +34,10 @@ namespace QuickResponse
             services.AddTransient<IRepository<Order>, OrderRepository>();
             services.AddTransient<IRepository<Product>, ProductRepository>();
             services.AddTransient<IRepository<ProductType>, ProductTypeRepository>();
-            services.AddTransient<IUnitOfWOrkRepositroy,UnitOfWorkRepository>();
+            services.AddTransient<IUnitOfWOrkRepositroy, UnitOfWorkRepository>();
+            services.AddSingleton<IUser, User>();
+            services.AddSingleton<IProduct, Product>();
+            services.AddSingleton<IPost, Post>();
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddAuthentication();
@@ -53,6 +56,7 @@ namespace QuickResponse
                    name: "default",
                    template: "{controller=Home}/{action=Index}/{id?}");
             });
+            
         }
     }
 }

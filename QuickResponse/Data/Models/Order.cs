@@ -11,6 +11,7 @@ namespace QuickResponse.Data.Models
         public int OrderId { get; set; }
         public int UserFrom { get; set; }
         public int UserTo { get; set; }
+        public int PostTo { get; set; }
         public int ProductId { get; set; }
         public int ProuctCount { get; set; }
         public OrderStatus Status { get; set; }

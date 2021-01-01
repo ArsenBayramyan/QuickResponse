@@ -1,0 +1,32 @@
+﻿@model IEnumerable<QuickResponse.Data.Models.Post>
+
+<table class="table-bordered table-condensed table-striped">
+    <tr>
+        <th>Post Name</th>
+        <th>Post Type</th>
+        <th>Price</th>
+        @*<th>Product</th>
+            <th>Count</th>*@
+        <th>Body</th>
+    </tr>
+    @foreach (var p in Model)
+    {
+        <tr class="well">
+            <td>@p.PostName</td>
+            <td>@p.PostType</td>
+            <td>@p.Price</td>
+            @*<td>@p.ProductId p.Product.ProductType.ProductTypeName</td>
+                <td>@p.Count</td>*@
+            <td>@p.Body</td>
+            <td>
+                <a class="btn btn-primary" asp-action="CreateOrder" asp-controller="Order" asp-route-id="@p.PostId">Order</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="PostView" asp-controller="Post" asp-route-id="@p.PostId">View </a>
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    <a href="/Account/UserPostList" >Back to posts</a>
+</div>

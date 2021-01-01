@@ -1,10 +1,10 @@
-﻿@model OrderCreateModel
+﻿ @model OrderCreateModel
 
 @{
     Layout = "_Layout";
 }
 <div class="text-danger" asp-validation-summary="All"></div>
-<form asp-action="AddOrder" asp-controller="Order" method="post">
+<form asp-action="CreateOrder" asp-controller="Order" method="post">
     <div class="form-group">
         <label asp-for="ProductCount"></label>
         <div><span asp-validation-for="ProductCount" class="text-danger"></span></div>

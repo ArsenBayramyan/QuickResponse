@@ -1,0 +1,23 @@
+﻿@model PostViewModel
+
+
+<div>
+    <h3>@Model.Post.PostName</h3>
+    <h6> @Model.Post.PostType</h6>
+
+    <h5>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h5>
+
+    <h5> @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h5>
+    <h5>@Model.Post.Price $</h5>
+    @Model.Post.Body
+
+</div>
+<div>
+    <a href="#" onclick="goBack()">Back to filter</a>
+</div>
+<script>
+    function goBack()
+      {
+      window.history.back()
+      }
+</script>

@@ -5,6 +5,8 @@ using QuickResponse.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using QuickResponse.Core.Enums;
 
 namespace QuickResponse.BLL
 {
@@ -15,15 +17,19 @@ namespace QuickResponse.BLL
         public bool AddOrder(OrderCreateModel orderCreate)
         {
             var order = this.Mapper.Map<OrderCreateModel, Order>(orderCreate);
-            //order.Status="";
-            var userFrom = UOW.UserRepository.GetByID(order.UserFrom);
-            var userTo = UOW.UserRepository.GetByID(order.UserTo);
-            var product = UOW.ProductRepository.GetByID(order.ProductId);
+            order.PostTo = orderCreate.PostId;
+            var postTo = this.UOW.PostRepository.List().Where(p => p.PostId == orderCreate.PostId).FirstOrDefault();
+            var userFrom = this.UOW.UserRepository.List().Where(u => u.Id == order.UserFrom).FirstOrDefault();
+            var userTo = this.UOW.UserRepository.List().Where(u => u.Id == order.UserTo).FirstOrDefault();
+            var product = this.UOW.ProductRepository.List().Where(p => p.ProductId == order.ProductId).FirstOrDefault();
+            var productType = this.UOW.ProductTypeRepository.List().Where(t => t.ProductTypeId == product.ProductTypeId).FirstOrDefault();
+            order.Status=OrderStatus.AwaitingApproval;
             var message=  $"Full Name: - {userFrom.FirstName} {userFrom.LastName}" + Environment.NewLine +
                           $"Phone: - {userFrom.PhoneNumber}" + Environment.NewLine +
-                          $"Օrder description: - I want {product.ProductType.ProductTypeName} {order.ProuctCount} {product.ProductType.Dimensionality}․" +
+                          $"Օrder description: - I want {productType.ProductTypeName} {order.ProuctCount} {productType.Dimensionality}․" +
                                                  $"Please confirm" + Environment.NewLine +
-                          $"Post Link: -";
+                          $"{postTo.Body}"+Environment.NewLine+
+                          $"Post Link: - https://localhost:44372/Post/PostView/{orderCreate.PostId}";
             BaseBL.SendEmailMessage(userTo.Email, message);
             return this.UOW.OrderRepository.Save(order);
         }

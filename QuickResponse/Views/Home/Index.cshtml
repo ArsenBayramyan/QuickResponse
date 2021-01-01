@@ -1,18 +1,21 @@
 ﻿@model QuickResponse.Models.ViewModels.Index
-
-@foreach (var p in Model.Posts)
-{
-    <div>
-        <h3>@p.PostName</h3>
-        <h5> @p.PostType</h5>
-        
-        @*<h4> @p.Product.ProductType.ProductTypeName</h4>
-        <h4> @p.Product.Count</h4>*@
-        @p.Body
-
+    <div class="col-sm-2">
+        <div class="form-group">
+            <a href="/Account/Login">Sign In</a>
+            @*<input asp-action="Login" asp-controller="Account" type="button" value="SignIn" class="btn btn-default btn-header-login">*@
+        </div>
     </div>
-}
-<form asp-action="CreatePost" asp-controller="Post" method="get">
-    <button class="btn btn-success" type="submit">Add Post</button>
-</form>
-<div page-model="@Model.PagingInfo" page-action="Index"></div>
+
+    @foreach (var p in Model.Posts)
+    {
+        <div>
+            <h3>@p.PostName</h3>
+            <h5> @p.PostType</h5>
+
+            @*<h4> @p.Product.ProductType.ProductTypeName</h4>
+                <h4> @p.Product.Count</h4>*@
+            @p.Body
+
+        </div>
+    }
+    <div page-model="@Model.PagingInfo" page-action="Index"></div>

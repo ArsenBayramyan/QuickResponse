@@ -1,0 +1,34 @@
+﻿@model PostViewModel
+
+<table class="table-bordered table-condensed table-striped">
+    <tr>
+        <th>Post Name</th>
+        <th>Post Type</th>
+        <th>Price</th>
+        <th>Product Name</th>
+        <th>Count</th>
+    </tr>
+    @foreach (var post in Model.Posts)
+    {
+        if (post.IsDeleted==false)
+        {
+            <tr class="well">
+                <td>@post.PostName</td>
+                <td>@post.PostType</td>
+                <td>@post.Price $</td>
+                <td>@Model.ProductTypes.Where(t=>t.ProductTypeId==@Model.Products.Where(p=>p.ProductId==post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
+                <td>@Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="PostListFilter" asp-controller="Post" asp-route-id="@post.PostId">Filter</a>
+                    <a class="btn btn-danger" asp-action="PostDelete" asp-controller="Post" asp-route-id="@post.PostId">Delete</a>
+                </td>
+            </tr>
+        }
+
+    }
+</table>
+<div>
+    <a href="/Account/AccountPage">Back to home</a>
+</div>
+
+

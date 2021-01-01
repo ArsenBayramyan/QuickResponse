@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using QuickResponse.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace QuickResponse.Data.Models
 {
-    public class User:IdentityUser<int>
+    public class User:IdentityUser<int>,IUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

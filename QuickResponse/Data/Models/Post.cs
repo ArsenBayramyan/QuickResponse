@@ -1,10 +1,11 @@
 ﻿using QuickResponse.Core.Enums;
+using QuickResponse.Core.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace QuickResponse.Data.Models
 {
-    public class Post
+    public class Post:IPost
     {
         [Key]
         public int PostId { get; set; }

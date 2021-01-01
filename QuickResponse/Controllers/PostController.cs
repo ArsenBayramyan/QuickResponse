@@ -6,14 +6,16 @@ using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
 using QuickResponse.Validation;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuickResponse.Controllers
 {
-    public class PostController:Controller
+    public class PostController : Controller
     {
         private UnitOfWorkRepository _uow;
         private IMapper _mapper;
-        
+
         public PostController(IUnitOfWOrkRepositroy unitOfWOrkRepositroy, IMapper mapper)
         {
             this._uow = (UnitOfWorkRepository)unitOfWOrkRepositroy;
@@ -21,7 +23,7 @@ namespace QuickResponse.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreatePost() => View(new PostCreateModel { ProductTypes=_uow.ProductTypeRepository.List()});
+        public IActionResult CreatePost() => View(new PostCreateModel { ProductTypes = _uow.ProductTypeRepository.List() });
 
         [HttpPost]
         public IActionResult CreatePost(PostCreateModel postAdd)
@@ -32,36 +34,40 @@ namespace QuickResponse.Controllers
             {
                 var postBL = new PostBL(_uow, _mapper);
                 Data.Models.User? currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
-                if (postBL.AddPost(postAdd,currentUser))
+                if (postBL.AddPost(postAdd, currentUser))
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AccountPage", "Account");
                 }
             }
             return RedirectToAction("");
         }
 
         [HttpGet]
-        public IActionResult UserPostList(int userId)
+        public IActionResult PostListFilter(int id)
         {
             var postBL = new PostBL(_uow, _mapper);
-            postBL.UserPostList(userId);
-            return View();
+            IEnumerable<Data.Models.Post> postFilter = postBL.PostListFilter(id);
+            return View(postFilter);
         }
 
         [HttpGet]
-        public IActionResult PostListFilter(int postId)
+        public IActionResult PostView(int id)
         {
-            var postBL = new PostBL(_uow, _mapper);
-            postBL.PostListFilter(postId);
-            return View();
+            return View(new PostViewModel
+            {
+                Post = this._uow.PostRepository.List().Where(p => p.PostId == id).FirstOrDefault(),
+                Users = this._uow.UserRepository.List(),
+                Products = this._uow.ProductRepository.List(),
+                ProductTypes = this._uow.ProductTypeRepository.List()
+            });
         }
 
-        [HttpPost]
-        public ActionResult Delete(int postid)
+        
+        public IActionResult PostDelete(int id)
         {
-            if (_uow.PostRepository.DeleteById(postid))
+            if (_uow.PostRepository.DeleteById(id))
             {
-                return RedirectToAction("");
+                return RedirectToAction("UserPostList");
             }
             return null;
         }

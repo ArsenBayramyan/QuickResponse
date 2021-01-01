@@ -21,14 +21,14 @@ namespace QuickResponse.Data.Repositories
         {
             this._context.Find<Post>(entity).IsDeleted = true;
             this._context.SaveChanges();
-            return false;
+            return true;
         }
 
         public bool DeleteById(int id)
         {
             GetByID(id).IsDeleted = true;
             this._context.SaveChanges();
-            return false;
+            return true;
         }
 
         public Post GetByID(int id)
