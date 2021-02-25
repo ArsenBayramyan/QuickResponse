@@ -49,6 +49,7 @@ namespace QuickResponse.Data.Repositories
             }
             else
             {
+                entity.IsDeleted = false;
                 _context.Posts.Add(entity);
                 _context.SaveChanges();
                 return true;

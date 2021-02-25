@@ -18,19 +18,21 @@ namespace QuickResponse.Controllers
             this._mapper = mapper;
         }
         public ViewResult Index(int page = 1)
-        => base.View(new Index
         {
-            Posts = _uow.PostRepository.List()
+            var index = new IndexViewModel()
+            {
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = _uow.PostRepository.List().Count()
+                },
+                Posts = _uow.PostRepository.List()
                       .OrderBy(p => p.PostId)
                       .Skip((page - 1) * PageSize)
-                      .Take(PageSize),
-            PagingInfo = new PagingInfo
-            {
-                CurrentPage = page,
-                ItemsPerPage = PageSize,
-                TotalItems = _uow.PostRepository.List().Count()
-            }
-        });
-
+                      .Take(PageSize)
+            };
+            return View(index);
+        }
     }
 }

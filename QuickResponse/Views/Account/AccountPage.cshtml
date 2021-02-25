@@ -72,7 +72,7 @@
     function userPost() {
         window.$.ajax({
             type: "Get",
-            url: "/Account/UserPostList",
+            url: "/Post/UserPosts",
             success: function (data) {
                 $('#myPosts').html(data);
             },
@@ -85,7 +85,7 @@
     function userOrder() {
         window.$.ajax({
             type: "Get",
-            url: "/Account/UserOrderList",
+            url: "/Order/UserOrders",
             success: function (data) {
                 $('#myOrders').html(data);
             },

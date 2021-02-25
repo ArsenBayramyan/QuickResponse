@@ -53,6 +53,11 @@ namespace QuickResponse
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name:"pagination",
+                    template:"Posts/Page{page}",
+                    defaults:new { Controller="Home",Action="Index"});
+
+                routes.MapRoute(
                    name: "default",
                    template: "{controller=Home}/{action=Index}/{id?}");
             });

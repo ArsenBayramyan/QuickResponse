@@ -89,43 +89,9 @@ namespace QuickResponse.Controllers
             return null; 
         }
 
-        [HttpGet]
-        public IActionResult UserPostList()
-        {
-            var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
-            var postBL = new PostBL(_uow, _mapper);
-            IEnumerable<Data.Models.Post> posts = postBL.UserPostList(currentUser.Id);
+       
 
-            IEnumerable<Data.Models.User> users = this._uow.UserRepository.List();
-            IEnumerable<Data.Models.Product> products = this._uow.ProductRepository.List();
-            IEnumerable<Data.Models.ProductType> productTypes = this._uow.ProductTypeRepository.List();
-
-            return View(new PostViewModel
-            {
-                Posts = posts,
-                Users = users,
-                Products = products,
-                ProductTypes = productTypes
-            });
-        }
-
-        [HttpGet]
-        public IActionResult UserOrderList()
-        {
-            IEnumerable<Data.Models.Post> posts = this._uow.PostRepository.List();
-            IEnumerable<Data.Models.User> users = this._uow.UserRepository.List();
-            IEnumerable<Data.Models.Product> products = this._uow.ProductRepository.List();
-            IEnumerable<Data.Models.ProductType> productTypes = this._uow.ProductTypeRepository.List();
-            IEnumerable<Data.Models.Order> orders = this._uow.OrderRepository.List();
-            return View(new UserOrderList
-            {
-                Posts = posts,
-                Users = users,
-                Products = products,
-                ProductTypes = productTypes,
-                Orders = orders
-            });
-        }
+       
     }
 }
 

@@ -19,7 +19,7 @@
                 </td>
                 <td>@Model.ProductTypes.Where(t=>t.ProductTypeId==Model.ProductTypes.Where(t=>t.ProductTypeId==Model.Products.Where(p=>p.ProductId==order.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
                 <td>
-                    @order.ProuctCount
+                    @order.ProductCount
                     @Model.ProductTypes.Where(t => t.ProductTypeId == Model.ProductTypes.Where(t => t.ProductTypeId == Model.Products.Where(p => p.ProductId == order.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality
                 </td>
                 <td>@Model.Posts.Where(p=>p.PostId==order.PostTo).FirstOrDefault().Price</td>

@@ -7,10 +7,10 @@ namespace QuickResponse.Models.ViewModels
 {
     public class PostViewModel
     {
-        public Data.Models.Post Post { get; set; }
-        public IEnumerable<Data.Models.Post> Posts { get; set; }
-        public IEnumerable<Data.Models.User> Users { get; set; }
-        public IEnumerable<Data.Models.Product> Products { get; set; }
-        public IEnumerable<Data.Models.ProductType> ProductTypes { get; set; }
+        public Post Post { get; set; }
+        public IEnumerable<Post> Posts { get; set; }
+        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<ProductType> ProductTypes { get; set; }
     }
 }

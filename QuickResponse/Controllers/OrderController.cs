@@ -2,14 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using QuickResponse.BLL;
 using QuickResponse.Core.Interfaces;
-using QuickResponse.Data.Models;
+using QuickResponse.Models;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
 using QuickResponse.Validation;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickResponse.Controllers
 {
@@ -63,19 +61,22 @@ namespace QuickResponse.Controllers
         [HttpGet]
         public IActionResult UserOrders()
         {
-            IEnumerable<Data.Models.Post> posts = this._uow.PostRepository.List();
-            IEnumerable<Data.Models.User> users = this._uow.UserRepository.List();
-            IEnumerable<Data.Models.Product> products = this._uow.ProductRepository.List();
-            IEnumerable<Data.Models.ProductType> productTypes = this._uow.ProductTypeRepository.List();
-            IEnumerable<Data.Models.Order> orders = this._uow.OrderRepository.List();
+            IEnumerable<Data.Models.Post> postsDAL = this._uow.PostRepository.List();
+            IEnumerable<Data.Models.User> usersDAL = this._uow.UserRepository.List();
+            IEnumerable<Data.Models.Product> productsDAL = this._uow.ProductRepository.List();
+            IEnumerable<Data.Models.ProductType> productTypesDAL = this._uow.ProductTypeRepository.List();
+            IEnumerable<Data.Models.Order> ordersDAL = this._uow.OrderRepository.List();
+            var lists= Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
+
             return View(new UserOrderList
             {
-                Posts = posts,
-                Users = users,
-                Products = products,
-                ProductTypes = productTypes,
-                Orders = orders
-            });
+                Posts = lists.postsPL,
+                Users = lists.usersPL,
+                Products = lists.productsPL,
+                ProductTypes = lists.productTypesPL,
+                Orders = lists.ordersPL
+            }); 
         }
+
     }
 }

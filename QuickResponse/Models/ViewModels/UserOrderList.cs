@@ -7,11 +7,11 @@ namespace QuickResponse.Models.ViewModels
 {
     public class UserOrderList
     {
-        public Data.Models.Order Order { get; set; }
-        public IEnumerable<Data.Models.Post> Posts { get; set; }
-        public IEnumerable<Data.Models.User> Users { get; set; }
-        public IEnumerable<Data.Models.Product> Products { get; set; }
-        public IEnumerable<Data.Models.ProductType> ProductTypes { get; set; }
-        public IEnumerable<Data.Models.Order> Orders { get; set; }
+        public Order Order { get; set; }
+        public IEnumerable<Post> Posts { get; set; }
+        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<ProductType> ProductTypes { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace QuickResponse.Models.ViewModels
 {
-    public class Index
+    public class IndexViewModel
     {
         public IEnumerable<Data.Models.Post> Posts { get; set; }
         public PagingInfo PagingInfo { get; set; }

@@ -1,4 +1,4 @@
-﻿@model PostCreateModel
+﻿ @model PostCreateModel
 @{
     ViewBag.Title = "PostCreate";
     Layout = "_Layout";
@@ -66,13 +66,13 @@
     }
 
     function add() {
+        console.log("hey")
         let postName = $('#postName').val();
         let productTypeId = $('#productTypeId').val();
         let postType = $('#postType').val();
         let count = $('#count').val();
         let price = $('#price').val();
         let body = $('#body').val();
-
         $.ajax({
             url: "/Post/CreatePost",
             type: "POST",
