@@ -8,6 +8,7 @@ namespace QuickResponse.Models.ViewModels
 {
     public class PostCreateModel
     {
+        public int PostId { get; set; }
         [Required]
         public string PostName { get; set; }
 

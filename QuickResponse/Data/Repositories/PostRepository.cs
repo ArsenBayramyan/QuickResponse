@@ -43,7 +43,7 @@ namespace QuickResponse.Data.Repositories
 
         public bool Save(Post entity)
         {
-            if (entity.Body==null)
+            if (entity.Body == null)
             {
                 return false;
             }
@@ -54,6 +54,7 @@ namespace QuickResponse.Data.Repositories
                 _context.SaveChanges();
                 return true;
             }
+            
         }
 
         public bool Update(Post entity)

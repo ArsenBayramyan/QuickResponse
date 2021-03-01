@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using QuickResponse.Core.Enums;
+using QuickResponse.Core;
 
 namespace QuickResponse.BLL
 {
@@ -30,7 +31,7 @@ namespace QuickResponse.BLL
                                                  $"Please confirm" + Environment.NewLine +
                           $"{postTo.Body}"+Environment.NewLine+
                           $"Post Link: - https://localhost:44372/Post/PostView/{orderCreate.PostId}";
-            BaseBL.SendEmailMessage(userTo.Email, message);
+            EmailSender.SendEmailMessage(userTo.Email, message);
             return this.UOW.OrderRepository.Save(order);
         }
 

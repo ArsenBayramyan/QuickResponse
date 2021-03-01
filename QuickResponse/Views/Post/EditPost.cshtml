@@ -1,0 +1,50 @@
+﻿@model PostCreateModel
+@{
+    ViewBag.Title = "PostEdit";
+    Layout = "_Layout";
+}
+
+<div class="text-danger" asp-validation-summary="All"></div>
+<form method="post">
+    <div class="form-group">
+        <input asp-for="PostId" style="display:none" value="@Model.PostId" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PostName"></label>
+        <div><span asp-validation-for="PostName" class="text-danger"></span></div>
+        <input asp-for="PostName" class="form-control" id="postName" />
+    </div>
+    <div class="form-group">
+            @*<label asp-for="PostType">Post type</label>*@
+            <input asp-for="PostType" style="display:none" value="@Model.PostType" class="form-control"/>
+            @*<select class="form-control" id="PostType" name="PostType">
+                <option>Choose your option</option>
+                <option value="LookingFor">Looking for</option>
+                <option value="ForSale">For sale</option>
+            </select>*@
+        </div>
+    <div class="form-group">
+        <label asp-for="Count"></label>
+        <div><span asp-validation-for="Count" class="text-danger"></span></div>
+        <input asp-for="Count" class="form-control" id="count" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <div><span asp-validation-for="Price" class="text-danger"></span></div>
+        <input asp-for="Price" class="form-control" id="price" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Body"></label>
+        <div><span asp-validation-for="Body" class="text-danger"></span></div>
+        <input asp-for="Body" class="form-control" id="body" />
+    </div>
+    <div class="form-group">
+            <input asp-for="ProductTypeId" style="display:none" value="@Model.ProductTypeId" class="form-control" />
+        </div>
+    <div>
+        <button class="btn btn-success" type="submit" asp-action="CreatePost" asp-controller="Post">Edit</button>
+    </div>
+    <div>
+        <a href="/Account/AccountPage">Back to home</a>
+    </div>
+</form>

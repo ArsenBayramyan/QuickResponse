@@ -19,7 +19,8 @@
                 <td>@Model.ProductTypes.Where(t=>t.ProductTypeId==@Model.Products.Where(p=>p.ProductId==post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
                 <td>@Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality </td>
                 <td>
-                    <a class="btn btn-primary" asp-action="PostListFilter" asp-controller="Post" asp-route-id="@post.PostId">Filter</a>
+                    <a class="btn btn-success" asp-action="PostListFilter" asp-controller="Post" asp-route-id="@post.PostId">Filter</a>
+                    <a class="btn btn-primary" asp-action="EditPost" asp-controller="Post" asp-route-id="@post.PostId">Edit</a>
                     <a class="btn btn-danger" asp-action="PostDelete" asp-controller="Post" asp-route-id="@post.PostId">Delete</a>
                 </td>
             </tr>

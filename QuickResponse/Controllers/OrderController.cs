@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using QuickResponse.BLL;
 using QuickResponse.Core.Interfaces;
-using QuickResponse.Models;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
 using QuickResponse.Validation;

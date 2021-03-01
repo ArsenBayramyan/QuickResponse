@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuickResponse.BLL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
+using QuickResponse.Models;
 using QuickResponse.Models.ViewModels;
 using QuickResponse.Validation;
 using System.Collections.Generic;
@@ -67,14 +68,25 @@ namespace QuickResponse.Controllers
         }
 
         [HttpGet]
-        public IActionResult AccountPage() => View(new AccountPage
+        public IActionResult AccountPage()
         {
-            Orders = _uow.OrderRepository.List(),
-            Posts = _uow.PostRepository.List(),
-            Products = _uow.ProductRepository.List(),
-            ProductTypes = _uow.ProductTypeRepository.List(),
-            CurrentUser = _uow.UserManager.FindByNameAsync(HttpContext.User.Identity.Name).Result
-        });
+            var currentUserDAL = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
+            var currentUserPL = this._mapper.Map<Data.Models.User, User>(currentUserDAL);
+            var postsDAL = this._uow.PostRepository.List();
+            var usersDAL = this._uow.UserRepository.List();
+            var productsDAL = this._uow.ProductRepository.List();
+            var productTypesDAL = this._uow.ProductTypeRepository.List();
+            var ordersDAL = this._uow.OrderRepository.List();
+            var lists = Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
+            return View(new AccountPage
+            {
+                Orders =lists.ordersPL,
+                Posts = lists.postsPL,
+                Products=lists.productsPL,
+                ProductTypes = lists.productTypesPL,
+                CurrentUser = currentUserPL
+            });
+        }
 
         [HttpGet]
         public IActionResult LogOut() => RedirectToAction("Login");

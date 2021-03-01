@@ -17,6 +17,7 @@ namespace QuickResponse.Core.Profiles
         {
             var t = new PostCreateModel();
             this.CreateMap<PostCreateModel, Post>()
+                .ForMember(p => p.PostId, src => src.MapFrom(i => i.PostId))
                 .ForMember(p => p.PostName, src => src.MapFrom(i => i.PostName))
                 .ForMember(p => p.PostType, src => src.MapFrom(i => i.PostType))
                 .ForMember(p => p.Price, src => src.MapFrom(i => i.Price))

@@ -26,18 +26,42 @@ namespace QuickResponse.Controllers
         [HttpGet]
         public IActionResult CreatePost() => View(new PostCreateModel { ProductTypes = _uow.ProductTypeRepository.List() });
 
+
+        [HttpGet]
+        public IActionResult EditPost(int Id)
+        {
+            var post = this._uow.PostRepository.GetByID(Id);
+            var product = this._uow.ProductRepository.GetByID(post.ProductId);
+            //var productType = this._uow.ProductTypeRepository.GetByID(product.ProductTypeId);
+            var p1 = new PostCreateModel { 
+                PostId = post.PostId,
+                PostDate=post.PostDate,
+                PostName=post.PostName,
+                Price=post.Price,
+                Body=post.Body,
+                Count=product.Count,
+                PostType=post.PostType,
+                ProductTypeId=product.ProductTypeId,
+            };
+            return View(p1);
+        }
+
         [HttpPost]
         public IActionResult CreatePost(PostCreateModel postAdd)
         {
-            postAdd.PostDate = DateTime.Now;
+            if (postAdd.PostId==0)
+            {
+                postAdd.PostDate = DateTime.Now;
+            }
             var validator = new PostCreateValidator();
             if (validator.Validate(postAdd).IsValid)
             {
                 var postBL = new PostBL(_uow, _mapper);
-                Data.Models.User? currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
+                var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
                 if (postBL.AddPost(postAdd, currentUser))
                 {
-                    return RedirectToAction("AccountPage", "Account");
+
+                    return RedirectToAction("AccountPage","Account");
                 }
             }
             return RedirectToAction("");

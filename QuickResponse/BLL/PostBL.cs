@@ -5,7 +5,8 @@ using QuickResponse.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 using QuickResponse.Core.Enums;
-
+using QuickResponse.Core;
+using System;
 
 namespace QuickResponse.BLL
 {
@@ -44,7 +45,7 @@ namespace QuickResponse.BLL
                                       $"Post description: - I am selling {postCreate.Product.ProductType.ProductTypeName} {postCreate.Product.Count} " +
                                       $"Post Link: - https://localhost:44372/Post/PostView/{post.PostId}";
                         var userTo = UOW.UserRepository.GetByID(p.UserId);
-                        BaseBL.SendEmailMessage(userTo.Email, message);
+                        EmailSender.SendEmailMessage(userTo.Email, message);
                     }
                     return this.UOW.PostRepository.Update(post);
                 }
@@ -57,9 +58,10 @@ namespace QuickResponse.BLL
                               $"Post description: - I am selling {postCreate.Body} {postCreate.Count}\n" +
                               $"Post Link: - https://localhost:44372/Post/PostView/{post.PostId}"; ;
                     var user = this.UOW.UserRepository.GetByID(p.UserId);
-                    BaseBL.SendEmailMessage(user.Email, message);
+                    EmailSender.SendEmailMessage(user.Email, message);
                 }
             }
+            //post.PostDate= DateTime.Now;
             return this.UOW.PostRepository.Save(post);
         }
 

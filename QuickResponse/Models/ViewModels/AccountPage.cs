@@ -7,13 +7,13 @@ namespace QuickResponse.Models.ViewModels
 {
     public class AccountPage
     {
-        public IEnumerable<Data.Models.User> Users { get; set; }
-        public IEnumerable<Data.Models.Post> Posts { get; set; }
-        public IEnumerable<Data.Models.Order> Orders { get; set; }
-        public IEnumerable<Data.Models.Product> Products { get; set; }
-        public IEnumerable<Data.Models.ProductType> ProductTypes { get; set; }
-        public Data.Models.User CurrentUser { get; set; }
-        public Data.Models.User ToUser { get; set; }
+        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<Post> Posts { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<ProductType> ProductTypes { get; set; }
+        public User CurrentUser { get; set; }
+        public User ToUser { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
 }
