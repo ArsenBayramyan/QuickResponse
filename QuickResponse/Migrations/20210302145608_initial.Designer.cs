@@ -10,8 +10,8 @@ using QuickResponse.Data.Contexts;
 namespace QuickResponse.Migrations
 {
     [DbContext(typeof(AppIdentityDBContext))]
-    [Migration("20201219195529_Initial")]
-    partial class Initial
+    [Migration("20210302145608_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

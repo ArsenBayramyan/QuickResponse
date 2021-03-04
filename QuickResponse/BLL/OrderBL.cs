@@ -27,7 +27,7 @@ namespace QuickResponse.BLL
             order.Status=OrderStatus.AwaitingApproval;
             var message=  $"Full Name: - {userFrom.FirstName} {userFrom.LastName}" + Environment.NewLine +
                           $"Phone: - {userFrom.PhoneNumber}" + Environment.NewLine +
-                          $"Օrder description: - I want {productType.ProductTypeName} {order.ProuctCount} {productType.Dimensionality}․" +
+                          $"Օrder description: - I want {productType.ProductTypeName} {order.ProductCount} {productType.Dimensionality}․" +
                                                  $"Please confirm" + Environment.NewLine +
                           $"{postTo.Body}"+Environment.NewLine+
                           $"Post Link: - https://localhost:44372/Post/PostView/{orderCreate.PostId}";

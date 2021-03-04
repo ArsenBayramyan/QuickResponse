@@ -5,10 +5,10 @@
     <h3>@Model.Post.PostName</h3>
     <h6> @Model.Post.PostType</h6>
 
-    <h5>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h5>
+    <h6>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h6>
 
-    <h5> @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h5>
-    <h5>@Model.Post.Price $</h5>
+    <h6> @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h6>
+    <h6>@Model.Post.Price $</h6>
     @Model.Post.Body
 
 </div>

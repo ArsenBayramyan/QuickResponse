@@ -51,18 +51,28 @@
 
 @foreach (var post in Model.Posts)
 {
-    <div>
-        <h3>@post.PostName</h3>
-        <h6> @post.PostType</h6>
+    @if (Model.CurrentUser.Id != post.UserId)
+    {
+        <div>
+            <h3>@post.PostName</h3>
+            <h6> @post.PostType</h6>
 
-        <h4>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h4>
+            <h4>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h4>
 
-        <h4> @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h4>
-        <h5>@post.Price $</h5>
-        @post.Body
+            <h4> @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h4>
+            <h5>@post.Price $</h5>
+            @post.Body
 
-    </div>
+        </div>
+        <div>
+            <a asp-action="CreateOrder" asp-controller="Order" asp-route-id="@post.PostId" class="btn btn-warning">Order</a>
+        </div>
+    }
+
 }
+<br />
+<br />
+<br />
 <form asp-action="CreatePost" asp-controller="Post" method="get">
     <button class="btn btn-success" onclick="userPost()" type="submit">Add Post</button>
 </form>

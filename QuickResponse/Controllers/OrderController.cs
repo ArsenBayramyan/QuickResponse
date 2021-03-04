@@ -45,6 +45,11 @@ namespace QuickResponse.Controllers
             orderCreate.ProductId = _product.ProductId;
             orderCreate.UserTo = _userTo.Id;
             orderCreate.UserFrom= _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result.Id;
+            var product = _uow.ProductRepository.List().Where(p => p.ProductId == _product.ProductId).FirstOrDefault();
+            if (orderCreate.ProductCount>product.Count)
+            {
+                orderCreate.ProductCount = product.Count;
+            }
             var validator = new OrderCreateValidator();
             if (validator.Validate(orderCreate).IsValid)
             {
@@ -60,11 +65,11 @@ namespace QuickResponse.Controllers
         [HttpGet]
         public IActionResult UserOrders()
         {
-            IEnumerable<Data.Models.Post> postsDAL = this._uow.PostRepository.List();
-            IEnumerable<Data.Models.User> usersDAL = this._uow.UserRepository.List();
-            IEnumerable<Data.Models.Product> productsDAL = this._uow.ProductRepository.List();
-            IEnumerable<Data.Models.ProductType> productTypesDAL = this._uow.ProductTypeRepository.List();
-            IEnumerable<Data.Models.Order> ordersDAL = this._uow.OrderRepository.List();
+            var postsDAL = this._uow.PostRepository.List();
+            var usersDAL = this._uow.UserRepository.List();
+            var productsDAL = this._uow.ProductRepository.List();
+            var productTypesDAL = this._uow.ProductTypeRepository.List();
+            var ordersDAL = this._uow.OrderRepository.List();
             var lists= Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
 
             return View(new UserOrderList
@@ -75,6 +80,24 @@ namespace QuickResponse.Controllers
                 ProductTypes = lists.productTypesPL,
                 Orders = lists.ordersPL
             }); 
+        }
+        [HttpGet]
+        public IActionResult Ordered()
+        {
+            var postsDAL = this._uow.PostRepository.List();
+            var usersDAL = this._uow.UserRepository.List();
+            var productsDAL = this._uow.ProductRepository.List();
+            var productTypesDAL = this._uow.ProductTypeRepository.List();
+            var ordersDAL = this._uow.OrderRepository.List();
+            var lists = Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
+            return View(new UserOrderList
+            {
+                Posts = lists.postsPL,
+                Users = lists.usersPL,
+                Products = lists.productsPL,
+                ProductTypes = lists.productTypesPL,
+                Orders = lists.ordersPL
+            });
         }
 
     }

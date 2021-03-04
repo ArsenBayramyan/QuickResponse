@@ -37,12 +37,13 @@ namespace QuickResponse.BLL
                 {
                     foreach (var p in postList)
                     {
+                        var productType = this.UOW.ProductTypeRepository.List().Where(t => t.ProductTypeId == post.Product.ProductTypeId).FirstOrDefault();
                         var message = $"{post.PostName} postum popoxutyun e katarvel\n" +
                                       $"Full Name: - Ars\n" +
                                       $"Phone: - 094940708\n" +
                                       $"Post Name: - {postCreate.PostName}\n" +
                                       $"Price: - {postCreate.Price}\n" +
-                                      $"Post description: - I am selling {postCreate.Product.ProductType.ProductTypeName} {postCreate.Product.Count} " +
+                                      $"Post description: - I am selling {productType.ProductTypeName} {post.Product.Count}\n" +
                                       $"Post Link: - https://localhost:44372/Post/PostView/{post.PostId}";
                         var userTo = UOW.UserRepository.GetByID(p.UserId);
                         EmailSender.SendEmailMessage(userTo.Email, message);
@@ -61,7 +62,10 @@ namespace QuickResponse.BLL
                     EmailSender.SendEmailMessage(user.Email, message);
                 }
             }
-            //post.PostDate= DateTime.Now;
+            else if(post.PostId != 0)
+            {
+                return this.UOW.PostRepository.Update(post);
+            }
             return this.UOW.PostRepository.Save(post);
         }
 

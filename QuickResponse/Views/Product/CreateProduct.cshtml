@@ -4,7 +4,7 @@
     <div class="text-danger" asp-validation-summary="All"></div>
     <form asp-action="CreateProduct" asp-controller="Product" method="post">
         <div class="form-group">
-            <label asp-for="ProductTypeName"></label>
+            <label asp-for="ProductTypeName">Product type name</label>
             <div><span asp-validation-for="ProductTypeName" class="text-danger"></span></div>
             <input asp-for="ProductTypeName" class="form-control" />
         </div>

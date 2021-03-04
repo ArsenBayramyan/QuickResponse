@@ -59,7 +59,12 @@ namespace QuickResponse.Data.Repositories
 
         public bool Update(Post entity)
         {
-            this._context.Update(entity);
+            var post = this._context.Posts.Find(entity.PostId);
+            this._context.Products.Find(post.ProductId).Count = entity.Product.Count;
+            post.PostName = entity.PostName;
+            post.Price = entity.Price;
+            post.Body = entity.Body;
+            this._context.SaveChanges();
             return true;
         }
     }

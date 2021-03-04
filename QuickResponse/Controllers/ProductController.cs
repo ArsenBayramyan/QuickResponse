@@ -33,6 +33,7 @@ namespace QuickResponse.Controllers
             {
                 var productType = this._mapper.Map<ProductTypeCreateModel, ProductType>(productTypeCreate);
                 this._uow.ProductTypeRepository.Save(productType);
+                
                 return RedirectToAction("CreatePost", "Post");
             }
             return RedirectToAction("CreateProduct");

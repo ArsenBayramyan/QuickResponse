@@ -20,7 +20,7 @@ namespace QuickResponse.Core.Profiles
                 .ForMember(o => o.UserFrom,src=>src.MapFrom(i=>i.UserFrom))
                 .ForMember(o => o.UserTo, src => src.MapFrom(i => i.UserTo))
                 .ForMember(o => o.ProductId, src => src.MapFrom(i => i.ProductId))
-                .ForMember(o => o.ProuctCount, src => src.MapFrom(i => i.ProductCount));
+                .ForMember(o => o.ProductCount, src => src.MapFrom(i => i.ProductCount));
         }
     }
 }

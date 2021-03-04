@@ -49,10 +49,7 @@ namespace QuickResponse.Controllers
         [HttpPost]
         public IActionResult CreatePost(PostCreateModel postAdd)
         {
-            if (postAdd.PostId==0)
-            {
-                postAdd.PostDate = DateTime.Now;
-            }
+            postAdd.PostDate = DateTime.Now;
             var validator = new PostCreateValidator();
             if (validator.Validate(postAdd).IsValid)
             {
