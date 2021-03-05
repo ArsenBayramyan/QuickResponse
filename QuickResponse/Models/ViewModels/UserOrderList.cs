@@ -13,5 +13,7 @@ namespace QuickResponse.Models.ViewModels
         public IEnumerable<Product> Products { get; set; }
         public IEnumerable<ProductType> ProductTypes { get; set; }
         public IEnumerable<Order> Orders { get; set; }
+        public User CurrentUser { get; set; }
+        public int Chechk { get; set; }
     }
 }

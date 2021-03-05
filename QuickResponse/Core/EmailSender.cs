@@ -17,7 +17,6 @@ namespace QuickResponse.Core
             var subject = "Order";
             var smtp = new SmtpClient
             {
-
                 Host = "smtp.mail.ru",
                 Port = 587,
                 EnableSsl = true,

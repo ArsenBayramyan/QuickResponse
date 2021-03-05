@@ -6,7 +6,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <div id="logOut">
-    <button class="btn-btn bg-danger" onclick="logOut()">Log out</button>
+    <a asp-action="LogOut" asp-controller="Account"  class="btn-btn bg-danger" >Log out</a>
 </div>
 <body>
     <div class="container main-secction">
@@ -46,6 +46,10 @@
 <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center" id="myOrders">
     <button onclick="userOrder()" class="btn btn-success btn-block follow">My Orders</button>
 </div>
+<div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center" id="ordered">
+    <button onclick="ordered(1)" class="btn btn-success btn-block follow">Ordered</button>
+</div>
+
 
 
 
@@ -98,6 +102,19 @@
             url: "/Order/UserOrders",
             success: function (data) {
                 $('#myOrders').html(data);
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    }
+
+    function ordered(chechk) {
+        window.$.ajax({
+            type: "Get",
+            url: `/Order/UserOrders/?chechk=${chechk}`,
+            success: function (data) {
+                $('#ordered').html(data);
             },
             failure: function (errMsg) {
                 alert(errMsg);

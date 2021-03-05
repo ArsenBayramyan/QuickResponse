@@ -11,22 +11,24 @@
     @foreach (var order in Model.Orders)
     {
 
+        @if (Model.CurrentUser.Id != order.UserFrom)
+        {
 
-        <tr class="well">
-            <td>
-                @Model.Users.Where(u => u.Id == Model.Orders.Where(o => o.OrderId == order.OrderId).FirstOrDefault().UserFrom).FirstOrDefault().FirstName
-                @Model.Users.Where(u => u.Id == Model.Orders.Where(o => o.OrderId == order.OrderId).FirstOrDefault().UserFrom).FirstOrDefault().LastName
-            </td>
-            <td>@Model.ProductTypes.Where(t => t.ProductTypeId == Model.ProductTypes.Where(t => t.ProductTypeId == Model.Products.Where(p => p.ProductId == order.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
-            <td>
-                @order.ProductCount
-                @Model.ProductTypes.Where(t => t.ProductTypeId == Model.ProductTypes.Where(t => t.ProductTypeId == Model.Products.Where(p => p.ProductId == order.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality
-            </td>
-            <td>@Model.Posts.Where(p => p.PostId == order.PostTo).FirstOrDefault().Price</td>
-            <td>@order.Status </td>
+            <tr class="well">
+                <td>
+                    @Model.Users.Where(u => u.Id == Model.Orders.Where(o => o.OrderId == order.OrderId).FirstOrDefault().UserFrom).FirstOrDefault().FirstName
+                    @Model.Users.Where(u => u.Id == Model.Orders.Where(o => o.OrderId == order.OrderId).FirstOrDefault().UserFrom).FirstOrDefault().LastName
+                </td>
+                <td>@Model.ProductTypes.Where(t => t.ProductTypeId == Model.ProductTypes.Where(t => t.ProductTypeId == Model.Products.Where(p => p.ProductId == order.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
+                <td>
+                    @order.ProductCount
+                    @Model.ProductTypes.Where(t => t.ProductTypeId == Model.ProductTypes.Where(t => t.ProductTypeId == Model.Products.Where(p => p.ProductId == order.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality
+                </td>
+                <td>@Model.Posts.Where(p => p.PostId == order.PostTo).FirstOrDefault().Price</td>
+                <td>@order.Status </td>
 
-        </tr>
-
+            </tr>
+        }
     }
 </table>
 <div>

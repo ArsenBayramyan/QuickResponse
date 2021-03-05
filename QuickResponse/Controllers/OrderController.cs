@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuickResponse.BLL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
+using QuickResponse.Models;
 using QuickResponse.Models.ViewModels;
 using QuickResponse.Validation;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ namespace QuickResponse.Controllers
         }
         
         [HttpGet]
-        public IActionResult UserOrders()
+        public IActionResult UserOrders(int chechk)
         {
             var postsDAL = this._uow.PostRepository.List();
             var usersDAL = this._uow.UserRepository.List();
@@ -71,14 +72,17 @@ namespace QuickResponse.Controllers
             var productTypesDAL = this._uow.ProductTypeRepository.List();
             var ordersDAL = this._uow.OrderRepository.List();
             var lists= Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
-
+            var currentUserDAL = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
+            var currentUserPL = this._mapper.Map<Data.Models.User, User>(currentUserDAL);
             return View(new UserOrderList
             {
                 Posts = lists.postsPL,
                 Users = lists.usersPL,
                 Products = lists.productsPL,
                 ProductTypes = lists.productTypesPL,
-                Orders = lists.ordersPL
+                Orders = lists.ordersPL,
+                CurrentUser=currentUserPL,
+                Chechk=chechk
             }); 
         }
         [HttpGet]
@@ -90,13 +94,16 @@ namespace QuickResponse.Controllers
             var productTypesDAL = this._uow.ProductTypeRepository.List();
             var ordersDAL = this._uow.OrderRepository.List();
             var lists = Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
+            var currentUserDAL = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
+            var currentUserPL = this._mapper.Map<Data.Models.User, User>(currentUserDAL);
             return View(new UserOrderList
             {
                 Posts = lists.postsPL,
                 Users = lists.usersPL,
                 Products = lists.productsPL,
                 ProductTypes = lists.productTypesPL,
-                Orders = lists.ordersPL
+                Orders = lists.ordersPL,
+                CurrentUser = currentUserPL
             });
         }
 
