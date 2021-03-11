@@ -20,7 +20,7 @@
                 <td>@Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality </td>
                 <td>
                     <a class="btn btn-success" asp-action="PostListFilter" asp-controller="Post" asp-route-id="@post.PostId">Filter</a>
-                    <a class="btn btn-primary" asp-action="EditPost" asp-controller="Post" asp-route-id="@post.PostId">Edit</a>
+                    <a class="btn btn-primary" asp-action="EditPost" asp-controller="Post" asp-route-id="@post.PostId" >Edit</a>
                     <a class="btn btn-danger" asp-action="PostDelete" asp-controller="Post" asp-route-id="@post.PostId">Delete</a>
                 </td>
             </tr>
@@ -32,4 +32,32 @@
     <a href="/Account/AccountPage">Back to home</a>
 </div>
 
+@*<script>
+    function filter(id) {
+        console.log(id);
+        window.$.ajax({
+            type: "Get",
+            url: `/Post/PostListFilter/?id=${id}`,
+            success: function (data) {
+                $('#filter').html(data);
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    }
 
+    function edit(id) {
+        window.$.ajax({
+            type: "Get",
+            url: `/Post/EditPost/?Id=${id}`,
+            success: function (data) {
+                $('#edit').html(data);
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    }
+
+</script>*@

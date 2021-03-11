@@ -29,6 +29,7 @@ namespace QuickResponse.Data.Repositories
 
         public bool Save(Order entity)
         {
+            entity.IsDeleted = false;
             this._context.Orders.Add(entity);
             this._context.SaveChanges();
             return true;
@@ -36,14 +37,22 @@ namespace QuickResponse.Data.Repositories
 
         public bool Update(Order entity)
         {
-            
-            this._context.Update(entity);
+            var order = this._context.Orders.Find(entity.OrderId);
+            order.Status = entity.Status;
+            order.ProductCount = entity.ProductCount;
+            //if (order.Status == Core.Enums.OrderStatus.Canceled)
+            //{
+            //    this.Delete(order);
+            //}
+            this._context.SaveChanges();
             return true;
         }
 
         public bool Delete(Order entity)
         {
-            throw new NotImplementedException();
+            this._context.Find<Order>(entity).IsDeleted = true;
+            this._context.SaveChanges();
+            return true;
         }
 
         public bool DeleteById(int id)

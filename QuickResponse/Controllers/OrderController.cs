@@ -38,7 +38,6 @@ namespace QuickResponse.Controllers
             return View();
         }
 
-
         [HttpPost]
         public IActionResult CreateOrder(OrderCreateModel orderCreate)
         {
@@ -85,6 +84,7 @@ namespace QuickResponse.Controllers
                 Chechk=chechk
             }); 
         }
+
         [HttpGet]
         public IActionResult Ordered()
         {
@@ -105,6 +105,22 @@ namespace QuickResponse.Controllers
                 Orders = lists.ordersPL,
                 CurrentUser = currentUserPL
             });
+        }
+
+        [HttpPost]
+        public IActionResult AcceptOrder(int id)
+        {
+            var orderBL = new OrderBL(_uow, _mapper);
+            orderBL.AcceptOrder(id);
+            return RedirectToAction("AccountPage", "Account");
+        }
+
+        [HttpGet]
+        public IActionResult CancelOrder(int id)
+        {
+            var orderBL = new OrderBL(_uow, _mapper);
+            orderBL.CancelOrder(id);
+            return RedirectToAction("AccountPage", "Account");
         }
 
     }

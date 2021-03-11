@@ -122,5 +122,7 @@ namespace QuickResponse.Controllers
                 ProductTypes = lists.productTypesPL
             });
         }
+
+       
     }
 }
