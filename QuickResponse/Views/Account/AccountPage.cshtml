@@ -5,14 +5,17 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<div id="logOut">
-    <a asp-action="LogOut" asp-controller="Account"  class="btn-btn bg-danger" >Log out</a>
+<div class="form-group">
+    <a class="btn btn-dark pull-l" href="/Account/LoginOut">Log Out</a>
 </div>
+<br />
+<br />
 <body>
+    <br />
     <div class="container main-secction">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 image-section">
-                <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg">
+                @*<img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg">*@
             </div>
             <div class="row user-left-part">
                 <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
@@ -50,7 +53,8 @@
     <button onclick="ordered(1)" class="btn btn-success btn-block follow">Ordered</button>
 </div>
 
-
+<br />
+<br />
 
 
 @foreach (var post in Model.Posts)
@@ -80,7 +84,6 @@
 <form asp-action="CreatePost" asp-controller="Post" method="get">
     <button class="btn btn-success" onclick="userPost()" type="submit">Add Post</button>
 </form>
-<div page-model="@Model.PagingInfo" page-action="AccountPage"></div>
 
 <script>
     function userPost() {

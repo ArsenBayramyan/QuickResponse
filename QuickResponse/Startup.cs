@@ -9,6 +9,7 @@ using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Contexts;
 using QuickResponse.Data.Models;
 using QuickResponse.Data.Repositories;
+using ReflectionIT.Mvc.Paging;
 
 namespace QuickResponse
 {
@@ -41,6 +42,7 @@ namespace QuickResponse
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddAuthentication();
+            //services.AddPaging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

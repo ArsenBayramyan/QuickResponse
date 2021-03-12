@@ -1,18 +1,43 @@
-﻿@model QuickResponse.Models.ViewModels.IndexViewModel
-    <div class="col-sm-2">
-        <div class="form-group">
-            <a href="/Account/Login">Sign In</a>
-            @*<input asp-action="Login" asp-controller="Account" type="button" value="SignIn" class="btn btn-default btn-header-login">*@
-        </div>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<QuickResponse.Data.Models.Post>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *,ReflectionIT.Mvc.Paging
+
+
+<div class="col-sm-2">
+    <div class="form-group">
+        <a class="btn btn-primary" href="/Account/Login">Sign In</a>
     </div>
+</div>
+<br />
 
-    @foreach (var p in Model.Posts)
-    {
-        <div>
-            <h3>@p.PostName</h3>
-            <h5> @p.PostType</h5>
-            @p.Body
+@foreach (var p in Model)
+{
+    <div>
+        <h3>@p.PostName</h3>
+        <h5> @p.PostType</h5>
+        @p.Body
+    </div>
+    <br />
+}
+<br />
+<br />
 
-        </div>
+<nav aria-label="Post Paging">
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+</nav>
+
+
+<style>
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 6px 14px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border: 1px solid #ddd;
+        margin: 0 4px;
     }
-    <div page-model="@Model.PagingInfo" page-action="Index"></div>
+
+       
+</style>
+@*<div page-model="@Model.PagingInfo" page-action="Index"></div>*@

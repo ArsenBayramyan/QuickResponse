@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickResponse", "QuickResponse\QuickResponse.csproj", "{395E3EC0-77E3-43A0-95DB-4FDFA24852DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickResponse", "QuickResponse\QuickResponse.csproj", "{395E3EC0-77E3-43A0-95DB-4FDFA24852DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using QuickResponse.Core.Interfaces;
+using QuickResponse.Data.Contexts;
 using QuickResponse.Data.Repositories;
+using QuickResponse.Models;
 using QuickResponse.Models.ViewModels;
+using ReflectionIT.Mvc.Paging;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuickResponse.Controllers
 {
@@ -11,28 +16,16 @@ namespace QuickResponse.Controllers
     {
         private UnitOfWorkRepository _uow;
         private IMapper _mapper;
-        public int PageSize = 4;
         public HomeController(IUnitOfWOrkRepositroy unitOfWOrkRepositroy, IMapper mapper)
         {
             this._uow = (UnitOfWorkRepository)unitOfWOrkRepositroy;
             this._mapper = mapper;
         }
-        public ViewResult Index(int page = 1)
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var index = new IndexViewModel()
-            {
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItemsPerPage = PageSize,
-                    TotalItems = _uow.PostRepository.List().Count()
-                },
-                Posts = _uow.PostRepository.List()
-                      .OrderBy(p => p.PostId)
-                      .Skip((page - 1) * PageSize)
-                      .Take(PageSize)
-            };
-            return View(index);
+            var posts = _uow.PostRepository.List().AsQueryable().OrderByDescending(p=>p.PostId);
+            var model = await PagingList.CreateAsync(posts,2,page);
+            return View(model);
         }
     }
 }

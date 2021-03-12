@@ -1,0 +1,18 @@
+﻿@*@using PagedList.Core.Mvc;
+@model PagedList.Core.IPagedList
+@{
+    // ASFront.ModelsView.ClientShearchViewModel item = TempData["cl"] as ASFront.ModelsView.ClientShearchViewModel;
+}
+
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)-րդ էջը @Model.PageCount -ից,
+ Ընդհանուր քանակ @Model.TotalItemCount
+@if (ViewBag.IsAdmin == false)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Table", new { page, NameStr = item.NameStr, PhoneStr = item.PhoneStr, PassOrSocNumtStr = item.PassOrSocNumtStr, Region = item.Region, City = item.City, Street = item.Street }))
+
+}
+else
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+}*@

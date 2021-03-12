@@ -11,6 +11,5 @@ namespace QuickResponse.Models.ViewModels
         public List<Post> Posts { get; set; }
         public User CurrentUser { get; set; }
         public User ToUser { get; set; }
-        public PagingInfo PagingInfo { get; set; }
     }
 }
