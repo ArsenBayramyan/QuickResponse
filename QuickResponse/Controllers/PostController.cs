@@ -77,6 +77,8 @@ namespace QuickResponse.Controllers
         {
             var postDAL = this._uow.PostRepository.List().Where(p => p.PostId == id).FirstOrDefault();
             var postPL = this._mapper.Map<Data.Models.Post, Post>(postDAL);
+            var userDAL = this._uow.UserRepository.List().FirstOrDefault(u => u.Id == postPL.UserId);
+            var userPL = this._mapper.Map<Data.Models.User, User>(userDAL);
             var usersDAL = this._uow.UserRepository.List();
             var postsDAL = this._uow.PostRepository.List();
             var ordersDAL = this._uow.OrderRepository.List();
@@ -86,6 +88,7 @@ namespace QuickResponse.Controllers
             return View(new PostViewModel
             {
                 Post = postPL,
+                User=userPL,
                 Users = lists.usersPL,
                 Products = lists.productsPL,
                 ProductTypes = lists.productTypesPL

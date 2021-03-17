@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QuickResponse.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,8 +66,9 @@ namespace QuickResponse.Migrations
                     UserTo = table.Column<int>(nullable: false),
                     PostTo = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
-                    ProuctCount = table.Column<int>(nullable: false),
-                    Status = table.Column<byte>(nullable: false)
+                    ProductCount = table.Column<int>(nullable: false),
+                    Status = table.Column<byte>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

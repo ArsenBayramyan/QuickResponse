@@ -15,7 +15,7 @@ namespace QuickResponse.Models
         public int UserTo { get; set; }
         public int ProductId { get; set; }
         public int ProductCount { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
         public OrderStatus Status;
     }
 }
