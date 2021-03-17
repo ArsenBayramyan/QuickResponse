@@ -2,14 +2,14 @@
 
 
 <div>
-    <h3>Post name      -  @Model.Post.PostName</h3>
-    <h6>Post type      -  @Model.Post.PostType</h6>
-    <h6>User name      -  @Model.User.FirstName @Model.User.LastName</h6>
-    <h6>User phone     -  @Model.User.PhoneNumber</h6>
-    <h6>Product type   -  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h6>
-    <h6>Dimensionality -  @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h6>
-    <h6>Price          -  @Model.Post.Price $</h6>
-    <h6>Body           -  @Model.Post.Body</h6>   
+    <h3>Փոստի անուն    -  @Model.Post.PostName</h3>
+    <h6>Փոստի տիպը     -  @Model.Post.PostType</h6>
+    <h6>Օգտատերի անուն      -  @Model.User.FirstName @Model.User.LastName</h6>
+    <h6>Օգտատերի հեռախոսահամար     -  @Model.User.PhoneNumber</h6>
+    <h6>Պռոդուկտի տիպը   -  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h6>
+    <h6>Քանակը -  @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h6>
+    <h6>Գինը          -  @Model.Post.Price $</h6>
+    <h6>Փոստի նկարագրությունը           -  @Model.Post.Body</h6>   
 
 </div>
 <div>

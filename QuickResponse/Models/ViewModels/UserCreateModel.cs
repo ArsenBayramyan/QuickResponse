@@ -8,6 +8,7 @@ namespace QuickResponse.Models.ViewModels
 {
     public class UserCreateModel
     {
+        public int UserID { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]

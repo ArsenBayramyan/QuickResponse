@@ -56,7 +56,17 @@ namespace QuickResponse.Data.Repositories
 
         public bool Update(User entity)
         {
-            return this._userManager.UpdateAsync(entity).Result.Succeeded;
+            var user = this.GetByID(entity.Id);
+            user.FirstName = entity.FirstName;
+            user.LastName = entity.LastName;
+            user.PhoneNumber = entity.PhoneNumber;
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(entity, entity.PasswordHash);
+            user.City = entity.City;
+            user.Address = entity.Address;
+            user.Email = entity.Email;
+            user.BirthDate = entity.BirthDate;
+            user.Gender = entity.Gender;
+            return this._userManager.UpdateAsync(user).Result.Succeeded;
         }
 
     }

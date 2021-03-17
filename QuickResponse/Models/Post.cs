@@ -14,7 +14,7 @@ namespace QuickResponse.Models
         public string PostType { get; set; }
         public decimal Price { get; set; }
         public string Body { get; set; }
-        public DateTime? PostDate { get; set; }
+        public DateTime PostDate { get; set; }
         public bool? IsDeleted { get; set; }
         public int UserId { get; set; }
         public int ProductId { get; set; }

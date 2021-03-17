@@ -24,6 +24,16 @@ namespace QuickResponse.BLL
             }
             return false;
         }
+         
+        public bool EditProfile(UserCreateModel userEdit)
+        {
+            var user = this.Mapper.Map<UserCreateModel, User>(userEdit);
+            if (this.UOW.UserRepository.GetByID(user.Id) is null)
+            {
+                return false;
+            }
+            return this.UOW.UserRepository.Update(user);
+        }
 
         public bool Login(UserLoginModel userLogin)
         {

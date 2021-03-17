@@ -2,10 +2,11 @@
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Contexts;
 using QuickResponse.Data.Models;
+using System;
 
 namespace QuickResponse.Data.Repositories
 {
-    public class UnitOfWorkRepository : IUnitOfWOrkRepositroy
+    public class UnitOfWorkRepository : IUnitOfWOrkRepositroy/*,IDisposable*/
     {
         private UserRepository _userRepository;
         private PostRepository _postRepository;
@@ -41,6 +42,24 @@ namespace QuickResponse.Data.Repositories
 
         public UserManager<User> UserManager => _userManager;
 
+        //private bool disposed = false;
 
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!this.disposed)
+        //    {
+        //        if (disposing)
+        //        {
+                    
+        //        }
+        //    }
+        //    this.disposed = true;
+        //}
+
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
     }
 }
