@@ -19,26 +19,30 @@
             <tbody>
                 @foreach (var post in Model.Posts)
                 {
-                    <tr>
-                        <td>@post.PostName </td>
-                        <td>@post.PostType</td>
-                        <td>@post.Price.ToString("P")</td>
-                        <td>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
-                        <td class="center">@post.PostDate.ToString("MM/dd/yyyy")</td>
-                        <td>@Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality </td>
-                        <td class="menu-action rounded-btn">
-                            <a class="btn menu-icon vd_bg-green" asp-action="PostListFilter" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="view">
-                                <i class="fa fa-eye"></i>
-                            </a>
-                            <a class="btn menu-icon vd_bg-yellow" asp-action="EditPost" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="edit">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                            <a class="btn menu-icon vd_bg-red" asp-action="PostDelete" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="delete">
-                                <i class="fa fa-times"></i>
-                            </a>
+                    @if (post.IsDeleted==false)
+                    {
+                        <tr>
+                            <td>@post.PostName </td>
+                            <td>@post.PostType</td>
+                            <td>@post.Price.ToString("P")</td>
+                            <td>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
+                            <td class="center">@post.PostDate.ToString("MM/dd/yyyy")</td>
+                            <td>@Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality </td>
+                            <td class="menu-action rounded-btn">
+                                <a class="btn menu-icon vd_bg-green" asp-action="PostListFilter" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="view">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn menu-icon vd_bg-yellow" asp-action="EditPost" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="edit">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a class="btn menu-icon vd_bg-red" asp-action="PostDelete" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="delete">
+                                    <i class="fa fa-times"></i>
+                                </a>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    }
+
                 }
             </tbody>
         </table>
