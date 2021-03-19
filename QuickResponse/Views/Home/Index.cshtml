@@ -12,12 +12,16 @@
 
 @foreach (var p in Model)
 {
-    <div>
-        <h3>@p.PostName</h3>
-        <h5> @p.PostType</h5>
-        @p.Body
-    </div>
-    <br />
+    @if (p.IsDeleted==false)
+    {
+        <div>
+            <h3>@p.PostName</h3>
+            <h5> @p.PostType</h5>
+            @p.Body
+        </div>
+        <br />
+    }
+
 }
 <br />
 <br />
@@ -37,7 +41,5 @@
         border: 1px solid #ddd;
         margin: 0 4px;
     }
-
-       
 </style>
 @*<div page-model="@Model.PagingInfo" page-action="Index"></div>*@
