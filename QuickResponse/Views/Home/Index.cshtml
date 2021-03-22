@@ -3,32 +3,118 @@
 @addTagHelper *,ReflectionIT.Mvc.Paging
 
 
-<div class="col-sm-2">
-    <div class="form-group">
-        <a class="btn btn-primary" href="/Account/Login">Sign In</a>
-    </div>
-</div>
-<br />
+<head>
 
-@foreach (var p in Model)
-{
-    @if (p.IsDeleted==false)
-    {
-        <div>
-            <h3>@p.PostName</h3>
-            <h5> @p.PostType</h5>
-            @p.Body
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Clean Blog - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <a class="btn btn-primary" href="/Account/Login">Sign In</a>
+                </div>
+            </div>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Home/Contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <br />
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead">
+        <div class="bg-image"
+             style="background-image: url('https://images.unsplash.com/photo-1512236258305-32fb110fdb01?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80'); height: 100vh">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="site-heading">
+                            <h1>Quick Response</h1>
+                            <span class="subheading">Հանրային ծառայությունների արագ արձագանքման հարթակ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    @foreach (var post in Model)
+    {
+        @if (post.IsDeleted == false)
+        {
+            <!-- Main Content -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="post-preview">
+                            <a href="/Post/PostView/@post.PostId">
+                                <h2 class="post-title">
+                                    @post.PostName
+                                </h2>
+                                <h3 class="post-subtitle">
+                                    @post.Body
+                                </h3>
+                            </a>
+                            <p class="post-meta">
+                                @post.PostDate.ToString("dddd,dd MMMM yyy")
+                            </p>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        }
     }
+    <br />
+    <br />
+    <nav aria-label="Post Paging">
+        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+    </nav>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-}
-<br />
-<br />
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+    <link rel="stylesheet" href="~/css/clean-blog.css" />
+    <link rel="stylesheet" href="~/css/clean-blog.min.css" />
 
-<nav aria-label="Post Paging">
-    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
-</nav>
+</body>
+
 
 
 <style>
@@ -42,4 +128,3 @@
         margin: 0 4px;
     }
 </style>
-@*<div page-model="@Model.PagingInfo" page-action="Index"></div>*@

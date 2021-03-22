@@ -26,6 +26,23 @@ namespace QuickResponse.Controllers
         [HttpGet]
         public IActionResult CreatePost() => View(new PostCreateModel { ProductTypes = _uow.ProductTypeRepository.List() });
 
+        [HttpPost]
+        public IActionResult CreatePost(PostCreateModel postAdd)
+        {
+            postAdd.PostDate = DateTime.Now;
+            var validator = new PostCreateValidator();
+            if (validator.Validate(postAdd).IsValid)
+            {
+                var postBL = new PostBL(_uow, _mapper);
+                var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
+                if (postBL.AddPost(postAdd, currentUser))
+                {
+
+                    return RedirectToAction("AccountPage", "Account");
+                }
+            }
+            return RedirectToAction("");
+        }
 
         [HttpGet]
         public IActionResult EditPost(int Id)
@@ -44,24 +61,6 @@ namespace QuickResponse.Controllers
                 ProductTypeId=product.ProductTypeId,
             };
             return View(p1);
-        }
-
-        [HttpPost]
-        public IActionResult CreatePost(PostCreateModel postAdd)
-        {
-            postAdd.PostDate = DateTime.Now;
-            var validator = new PostCreateValidator();
-            if (validator.Validate(postAdd).IsValid)
-            {
-                var postBL = new PostBL(_uow, _mapper);
-                var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
-                if (postBL.AddPost(postAdd, currentUser))
-                {
-
-                    return RedirectToAction("AccountPage","Account");
-                }
-            }
-            return RedirectToAction("");
         }
 
         [HttpGet]

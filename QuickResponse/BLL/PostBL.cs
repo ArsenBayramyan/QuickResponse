@@ -46,7 +46,7 @@ namespace QuickResponse.BLL
                                       $"Post description: - I am selling {productType.ProductTypeName} {post.Product.Count}\n" +
                                       $"Post Link: - https://localhost:44372/Post/PostView/{post.PostId}";
                         var userTo = UOW.UserRepository.GetByID(p.UserId);
-                        EmailSender.SendEmailMessage(userTo.Email, message);
+                        EmailSender.SendEmailMessage(userTo.Email, message,"Post updated");
                     }
                     return this.UOW.PostRepository.Update(post);
                 }
@@ -59,7 +59,7 @@ namespace QuickResponse.BLL
                               $"Post description: - I am selling {postCreate.Body} {postCreate.Count}\n" +
                               $"Post Link: - https://localhost:44372/Post/PostView/{post.PostId}"; ;
                     var user = this.UOW.UserRepository.GetByID(p.UserId);
-                    EmailSender.SendEmailMessage(user.Email, message);
+                    EmailSender.SendEmailMessage(user.Email, message,"New post");
                 }
             }
             else if(post.PostId != 0)

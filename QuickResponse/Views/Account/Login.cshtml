@@ -3,25 +3,7 @@
     ViewBag.Title = "Log In";
     Layout = "_Layout";
 }
-@*<div class="text-danger" asp-validation-summary="All"></div>
-    <form asp-action="Login" asp-controller="Account" method="post">
-        <div class="form-group">
-            <label asp-for="Email"></label>
-            <div><span asp-validation-for="Email" class="text-danger"></span></div>
-            <input asp-for="Email" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Password"></label>
-            <div><span asp-validation-for="Password" class="text-danger"></span></div>
-            <input asp-for="Password" class="form-control" />
-        </div>
-        <div>
-            <button class="btn btn-success" type="submit">Log In</button>
-        </div>
-        <div class="d-flex justify-content-center links">
-            Don't have an account?<a href="/Account/Registration">Sign Up</a>
-        </div>
-    </form>*@
+
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -72,9 +54,17 @@
             </div>
             <br />
             <div class="text-center" style="color:whitesmoke">
-                <h3 >Don't have account?</h3><a class="text-center" style="color:chartreuse;font-size: 18px" href="/Account/Registration">Sign Up</a>
+                <h3>Don't have account?</h3><a class="text-center" style="color:chartreuse;font-size: 18px" href="/Account/Registration">Sign Up</a>
 
             </div>
+            <div class="text-center" >
+                <a href="#" onclick="goBack()" style="color:whitesmoke"><h3 class="bi bi-arrow-return-left">Back to home page</h3></a>
+            </div>
+            <script>
+                function goBack() {
+                    window.history.back()
+                }
+            </script>
 
             <!--footer-->
             <div class="footer text-center">
@@ -149,6 +139,6 @@
 
     .footer p {
         font-size: 18px;
-        color:whitesmoke;
+        color:white;
     }
 </style>
