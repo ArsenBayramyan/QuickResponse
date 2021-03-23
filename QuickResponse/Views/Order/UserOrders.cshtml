@@ -1,9 +1,7 @@
 ﻿@model UserOrderList
 
-
 <div id="projects-tab" class="tab-pane active">
     <div class="pd-20">
-        
         <table class="table table-striped table-hover">
             @foreach (var order in Model.Orders)
             {
@@ -204,9 +202,6 @@
 </style>
 
 
-<div>
-    <a href="/Account/AccountPage">Back to home</a>
-</div>
 
 <script>
     function accept(id) {
