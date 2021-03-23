@@ -15,9 +15,19 @@
                         <!-- BEGIN profile-header-content -->
                         <div class="profile-header-content">
                             <!-- BEGIN profile-header-img -->
-                            <div class="profile-header-img">
-                                <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" alt="">
-                            </div>
+                            @if (Model.CurrentUser.Gender == "Male")
+                            {
+                                <div class="profile-header-img">
+                                    <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" alt="">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="profile-header-img">
+                                    <img src="https://1cms-img.imgix.net/Momo.jpg?auto=compress" alt="">
+                                </div>
+                            }
+
                             <!-- END profile-header-img -->
                             <!-- BEGIN profile-header-info -->
                             <div class="profile-header-info">
@@ -36,9 +46,9 @@
                         <!-- BEGIN profile-header-tab -->
                         <br />
                         <ul class="profile-header-tab nav nav-tabs">
-                            <li class="nav-item" id="about"><a  onclick="aboutUser(@Model.CurrentUser.Id)"class="table-profile" data-toggle="tab">About</a></li>
+                            <li class="nav-item" id="about"><a onclick="aboutUser(@Model.CurrentUser.Id)" class="table-profile" data-toggle="tab">About</a></li>
                             <li class="nav-item" id="myPosts"><a onclick="userPost()" class="nav-link" data-toggle="tab">My Posts</a></li>
-                            <li class="nav-item" id="myOrders"><a  class="nav-link" onclick="userOrder()" data-toggle="tab">My Orders</a></li>
+                            <li class="nav-item" id="myOrders"><a class="nav-link" onclick="userOrder()" data-toggle="tab">My Orders</a></li>
                             <li class="nav-item" id="ordered"><a class="nav-link" onclick="ordered(1)" data-toggle="tab">Ordered</a></li>
                         </ul>
                         <!-- END profile-header-tab -->
@@ -46,14 +56,14 @@
                 </div>
                 <!-- end profile -->
                 <!-- begin profile-content -->
-               
+
                 <div class="profile-content">
                     <!-- begin tab-content -->
                     <div class="tab-content p-0">
                         <!-- begin #profile-post tab -->
                         @foreach (var post in Model.Posts)
                         {
-                            @if (Model.CurrentUser.Id != post.UserId)
+                            @if (Model.CurrentUser.Id != post.UserId && post.IsDeleted==false)
                             {
                                 <div class="tab-pane fade active show" id="profile-post">
                                     <!-- begin timeline -->
@@ -73,7 +83,14 @@
                                             <!-- begin timeline-body -->
                                             <div class="timeline-body">
                                                 <div class="timeline-header">
-                                                    <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+                                                    @if (Model.Users.ToList().FirstOrDefault(u => u.Id == post.UserId).Gender == "Male")
+                                                    {
+                                                        <span class="userimage"><img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" alt=""></span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="userimage"><img src="https://1cms-img.imgix.net/Momo.jpg?auto=compress" alt=""></span>
+                                                    }
                                                     <span class="username"><a asp-action="UserView" asp-controller="Account" asp-route-id="@post.UserId">@Model.Users.ToList().FirstOrDefault(u => u.Id == post.UserId).FirstName @Model.Users.ToList().FirstOrDefault(u => u.Id == post.UserId).LastName </a> <small></small></span>
                                                 </div>
                                                 <div class="timeline-content">

@@ -112,7 +112,7 @@ namespace QuickResponse.Controllers
         {
             var orderBL = new OrderBL(_uow, _mapper);
             orderBL.AcceptOrder(id);
-            return RedirectToAction("AccountPage", "Account");
+            return RedirectToAction("AccountPage","Account");
         }
 
         [HttpGet]

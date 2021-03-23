@@ -49,7 +49,7 @@ namespace QuickResponse.Controllers
         {
             var post = this._uow.PostRepository.GetByID(Id);
             var product = this._uow.ProductRepository.GetByID(post.ProductId);
-            //var productType = this._uow.ProductTypeRepository.GetByID(product.ProductTypeId);
+            var productTypes = this._uow.ProductTypeRepository.List().Where(p => p.ProductTypeId == product.ProductTypeId).ToList();
             var p1 = new PostCreateModel { 
                 PostId = post.PostId,
                 PostDate=post.PostDate,
@@ -59,6 +59,7 @@ namespace QuickResponse.Controllers
                 Count=product.Count,
                 PostType=post.PostType,
                 ProductTypeId=product.ProductTypeId,
+                ProductTypes=productTypes
             };
             return View(p1);
         }

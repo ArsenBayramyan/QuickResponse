@@ -4,47 +4,88 @@
     Layout = "_Layout";
 }
 
-<div class="text-danger" asp-validation-summary="All"></div>
-<form method="post">
-    <div class="form-group">
-        <input asp-for="PostId" style="display:none" value="@Model.PostId" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="PostName"></label>
-        <div><span asp-validation-for="PostName" class="text-danger"></span></div>
-        <input asp-for="PostName" class="form-control" id="postName" />
-    </div>
-    <div class="form-group">
-            @*<label asp-for="PostType">Post type</label>*@
-            <input asp-for="PostType" style="display:none" value="@Model.PostType" class="form-control"/>
-            @*<select class="form-control" id="PostType" name="PostType">
-                <option>Choose your option</option>
-                <option value="LookingFor">Looking for</option>
-                <option value="ForSale">For sale</option>
-            </select>*@
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"></div>
         </div>
-    <div class="form-group">
-        <label asp-for="Count"></label>
-        <div><span asp-validation-for="Count" class="text-danger"></span></div>
-        <input asp-for="Count" class="form-control" id="count" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Price"></label>
-        <div><span asp-validation-for="Price" class="text-danger"></span></div>
-        <input asp-for="Price" class="form-control" id="price" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Body"></label>
-        <div><span asp-validation-for="Body" class="text-danger"></span></div>
-        <input asp-for="Body" class="form-control" id="body" />
-    </div>
-    <div class="form-group">
-            <input asp-for="ProductTypeId" style="display:none" value="@Model.ProductTypeId" class="form-control" />
+        <div class="col-md-5 border-right">
+            <form asp-action="EditPost" asp-controller="Post" method="post">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Edit Post</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="PostId" style="display:none" value="@Model.PostId" class="form-control" />
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Post name</label><input type="text" asp-for="PostName" class="form-control"></div>
+                        <div class="col-md-12"><label class="labels">Post type</label><input type="text" value="@Model.PostType" disabled class="form-control" di></div>
+                        <div class="col-md-12"><label class="labels">Post type</label><input type="text" value="@Model.ProductTypes.FirstOrDefault(p=>p.ProductTypeId==Model.ProductTypeId).ProductTypeName" disabled class="form-control" di></div>
+
+                        <div class="col-md-12"><label class="labels">Count</label><input type="text" asp-for="Count" class="form-control" placeholder="count"></div>
+                        <div class="col-md-12"><label class="labels">Price</label><input type="text" asp-for="Price" class="form-control" placeholder="price"></div>
+                        <div class="col-md-12"><label class="labels">Description</label><textarea asp-for="Body" class="form-control" placeholder="description"></textarea> </div>
+                    </div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Post</button></div>
+                    <div class="text-center">
+                        @Html.ActionLink("To back", "AccountPage")
+                    </div>
+                </div>
+            </form>
+
         </div>
-    <div>
-        <button class="btn btn-success" type="submit" asp-action="CreatePost" asp-controller="Post">Edit</button>
     </div>
-    <div>
-        <a href="/Account/AccountPage">Back to home</a>
-    </div>
-</form>
+</div>
+
+<style>
+    body {
+        background-image: url('https://www.bootdey.com/img/Content/bg1.jpg');
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8
+    }
+
+    .profile-button {
+        background: rgb(99, 39, 120);
+        box-shadow: none;
+        border: none
+    }
+
+        .profile-button:hover {
+            background: #682773
+        }
+
+        .profile-button:focus {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer
+    }
+
+    .labels {
+        font-size: 11px
+    }
+
+    .add-experience:hover {
+        background: #682773;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
+</style>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

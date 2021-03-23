@@ -25,7 +25,7 @@ namespace QuickResponse.Controllers
         public async Task<IActionResult> Index(int page = 1)
         {
             var posts = _uow.PostRepository.List().AsQueryable().OrderByDescending(p=>p.PostId);
-            var model = await PagingList.CreateAsync(posts,2,page);
+            var model = await PagingList.CreateAsync(posts,4,page);
             return View(model);
         }
         public IActionResult Contact() => View();
@@ -52,5 +52,7 @@ namespace QuickResponse.Controllers
                 return View(contactViewModel);
             }
         }
+
+        public IActionResult About() => View();
     }
 }

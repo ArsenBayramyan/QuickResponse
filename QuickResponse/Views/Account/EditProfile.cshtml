@@ -4,77 +4,6 @@
     ViewData["Title"] = "EditProfile";
 }
 
-
-@*<h4>UserCreateModel</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="EditProfile" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <input asp-for="UserID" style="display:none" value="@Model.UserID" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LastName" class="control-label"></label>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="BirthDate" class="control-label"></label>
-                    <input asp-for="BirthDate" class="form-control" />
-                    <span asp-validation-for="BirthDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Gender" class="control-label"></label>
-                    <input asp-for="Gender" class="form-control" />
-                    <span asp-validation-for="Gender" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="City" class="control-label"></label>
-                    <input asp-for="City" class="form-control" />
-                    <span asp-validation-for="City" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Phone" class="control-label"></label>
-                    <input asp-for="Phone" class="form-control" />
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ConfirmPassword" class="control-label"></label>
-                    <input asp-for="ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
@@ -94,12 +23,6 @@
                         <div class="col-md-6"><label class="labels">Surname</label><input type="text" asp-for="LastName" class="form-control" placeholder="surname"></div>
                     </div>
                     <div class="row mt-3">
-                        @*<div class="col-md-12">
-                            <select class="form-control" name="@Model.Gender">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>*@
                         <div class="col-md-12"><label class="labels">Gender</label><input type="text" value="@Model.Gender" disabled class="form-control"></div>
                         <div class="col-md-12"><label class="labels">Phone number</label><input type="text" asp-for="Phone" class="form-control" placeholder="enter phone number"></div>
                         <div class="col-md-12"><label class="labels">City</label><input type="text" asp-for="City" class="form-control" placeholder="city"></div>
@@ -123,7 +46,7 @@
 
 <style>
     body {
-        background: rgb(99, 39, 120)
+        background-image: url('https://www.bootdey.com/img/Content/bg1.jpg');
     }
 
     .form-control:focus {
@@ -138,7 +61,7 @@
     }
 
         .profile-button:hover {
-            background: #682773
+            background:#682773
         }
 
         .profile-button:focus {
@@ -161,7 +84,7 @@
     }
 
     .add-experience:hover {
-        background: #BA68C8;
+        background: #682773;
         color: #fff;
         cursor: pointer;
         border: solid 1px #BA68C8
