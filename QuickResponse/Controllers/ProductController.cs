@@ -32,9 +32,14 @@ namespace QuickResponse.Controllers
             if (validator.Validate(productTypeCreate).IsValid)
             {
                 var productType = this._mapper.Map<ProductTypeCreateModel, ProductType>(productTypeCreate);
-                this._uow.ProductTypeRepository.Save(productType);
-                
-                return RedirectToAction("CreatePost", "Post");
+                if (this._uow.ProductTypeRepository.Save(productType))
+                {
+                    return RedirectToAction("CreatePost", "Post");
+                }
+                else
+                {
+                   return RedirectToAction("CreateProduct");
+                }
             }
             return RedirectToAction("CreateProduct");
         }

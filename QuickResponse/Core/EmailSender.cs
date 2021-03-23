@@ -13,7 +13,7 @@ namespace QuickResponse.Core
         {
             var senderEmail = new MailAddress("arsen1997b@mail.ru", subject);
             var receiverEmail = new MailAddress($"arsen.bayramyan1997@gmail.com", subject);
-            var password = "*****";
+            var password = "******";
             var smtp = new SmtpClient
             {
                 Host = "smtp.mail.ru",

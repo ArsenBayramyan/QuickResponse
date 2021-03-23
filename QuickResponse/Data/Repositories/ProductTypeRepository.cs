@@ -42,9 +42,14 @@ namespace QuickResponse.Data.Repositories
 
         public bool Save(ProductType entity)
         {
-            this._context.ProductTypes.Add(entity);
-            this._context.SaveChanges();
-            return true;
+            var productType = this.List().FirstOrDefault(p => p.ProductTypeName == entity.ProductTypeName);
+            if (productType is null)
+            {
+                this._context.ProductTypes.Add(entity);
+                this._context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public bool Update(ProductType entity)
