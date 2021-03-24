@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuickResponse.Core.Enums;
 using QuickResponse.Core;
 
-namespace QuickResponse.BLL
+namespace QuickResponse.BLL.BL
 {
     public class OrderBL:BaseBL
     {

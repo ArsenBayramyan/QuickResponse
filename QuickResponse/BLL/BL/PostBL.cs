@@ -1,25 +1,26 @@
 ﻿using AutoMapper;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models.ViewModels;
-using QuickResponse.Data.Models;
+using QuickResponse.BLL.Models;
 using System.Collections.Generic;
 using System.Linq;
 using QuickResponse.Core.Enums;
 using QuickResponse.Core;
 using System;
 
-namespace QuickResponse.BLL
+namespace QuickResponse.BLL.BL
 {
     public class PostBL : BaseBL
     {
         public PostBL(UnitOfWorkRepository unitOfWorkRepository, IMapper mapper) : base(unitOfWorkRepository, mapper) { }
 
-        public bool AddPost(PostCreateModel postCreate, User currentUser)
+        public bool AddPost(PostCreateModel postCreate, string currentUserName)
         {
             var product = this.UOW.ProductRepository.List().Where(p => p.ProductTypeId == postCreate.ProductTypeId).FirstOrDefault();
+            var currentUser = this.UOW.UserManager.FindByNameAsync(currentUserName).Result;
             if (product is null)
             {
-                product = new Product
+                product = new Data.Models.Product
                 {
                     ProductTypeId = postCreate.ProductTypeId,
                     Count = postCreate.Count
@@ -69,18 +70,18 @@ namespace QuickResponse.BLL
             return this.UOW.PostRepository.Save(post);
         }
 
-        public IEnumerable<Post> UserPostList(int id) => this.PostList.Where(p => p.UserId == id);
+        public IEnumerable<Data.Models.Post> UserPostList(int id) => this.PostList.Where(p => p.UserId == id);
 
-        public IEnumerable<Post> PostListFilter(int postId)
+        public IEnumerable<Data.Models.Post> PostListFilter(int postId)
         {
             var post = this.UOW.PostRepository.GetByID(postId);
             var product = this.UOW.ProductRepository.List().Where(p => p.ProductId == post.ProductId).FirstOrDefault();
-            var filterPost = this.PostList.Where(p => p.PostType != post.PostType && p.UserId != post.UserId &&
+            var filterPost = this.PostList.FirstOrDefault(p => p.PostType != post.PostType && p.UserId != post.UserId &&
                                                   p.Product.ProductTypeId == product.ProductTypeId);
-            return filterPost;
+            yield return filterPost;
         }
 
-        public IEnumerable<Post> PostList => UOW.PostRepository.List();
+        public IEnumerable<Data.Models.Post> PostList => UOW.PostRepository.List();
 
         public bool DeletePost(int id)
         {

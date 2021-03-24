@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace QuickResponse.BLL
+namespace QuickResponse.BLL.BL
 {
     public class AccountBL : BaseBL
     {

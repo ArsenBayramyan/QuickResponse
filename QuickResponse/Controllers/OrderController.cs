@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using QuickResponse.BLL;
+using QuickResponse.BLL.BL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models;

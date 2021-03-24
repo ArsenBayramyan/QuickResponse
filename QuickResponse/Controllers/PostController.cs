@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using QuickResponse.BLL;
+using QuickResponse.BLL.BL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models;
@@ -34,8 +34,8 @@ namespace QuickResponse.Controllers
             if (validator.Validate(postAdd).IsValid)
             {
                 var postBL = new PostBL(_uow, _mapper);
-                var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
-                if (postBL.AddPost(postAdd, currentUser))
+                var currentUserName = HttpContext.User?.Identity?.Name;
+                if (postBL.AddPost(postAdd, currentUserName))
                 {
 
                     return RedirectToAction("AccountPage", "Account");
@@ -68,7 +68,7 @@ namespace QuickResponse.Controllers
         public IActionResult PostListFilter(int id)
         {
             var postBL = new PostBL(_uow, _mapper);
-            IEnumerable<Data.Models.Post> postFilter = postBL.PostListFilter(id);
+            var postFilter = postBL.PostListFilter(id);
             return View(postFilter);
         }
 
