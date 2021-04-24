@@ -7,11 +7,11 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Post Name</th>
-                    <th>Post Type</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Post Date</th>
+                    <th>Հայտարարության անունը</th>
+                    <th>Տիպը</th>
+                    <th>Գինը</th>
+                    <th>Նկարագրությունը</th>
+                    <th>Տեղադրման ամսաթիվը</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,15 +21,24 @@
                     {
                         <tr>
                             <td>@post.PostName </td>
-                            <td>@post.PostType</td>
+                            @if (post.PostType==QuickResponse.Core.Enums.PostType.ForSale)
+                            {
+                                <td>Վաճառում եմ</td>
+                            }
+                            else
+                            {
+                                <td>Փնտրում եմ</td>
+                            }
                             <td>@post.Price.ToString("N0")$</td>
                             <td>@post.Body</td>
                             <td class="center">@post.PostDate.ToString("MM/dd/yyyy")</td>
-                            <td>
-                                <a class="btn btn-primary" asp-action="CreateOrder" asp-controller="Order" asp-route-id="@post.PostId">Order</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-danger" asp-action="PostView" asp-controller="Post" asp-route-id="@post.PostId">View </a>
+                            <td class="menu-action rounded-btn">
+                                <a class="btn menu-icon vd_bg-blue" asp-action="CreateOrder" asp-controller="Order" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="view">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </a>
+                                <a class="btn menu-icon vd_bg-yellow" asp-action="PostView" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="view">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
                             </td>
                         </tr>
                     }
@@ -37,10 +46,6 @@
                 }
             </tbody>
         </table>
-
-        <div>
-            <a href="/Account/AccountPage">Back to account page</a>
-        </div>
     </div>
 </div>
 <style>
@@ -154,6 +159,10 @@
 
     .vd_bg-green {
         background-color: #008000 !important;
+    }
+
+    .vd_bg-blue {
+        background-color:blueviolet !important;
     }
 
     .vd_bg-red {

@@ -9,12 +9,12 @@
                 {
                     <thead>
                         <tr>
-                            <th>User to full name</th>
-                            <th>Phone number</th>
-                            <th>Product name</th>
-                            <th>Count</th>
-                            <th>Price</th>
-                            <th>Status</th>
+                            <th>Հայտարարություն տեղադրողը</th>
+                            <th>Հեռախոսահամարը</th>
+                            <th>Ապրանքը</th>
+                            <th>Քանակը</th>
+                            <th>Գինը</th>
+                            <th>Կարգավիճակը</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,12 +38,12 @@
                 {
                     <thead>
                         <tr>
-                            <th>User from full name</th>
-                            <th>Phone number</th>
-                            <th>Product name</th>
-                            <th>Count</th>
-                            <th>Price</th>
-                            <th>Status</th>
+                            <th>Պատվիրողը</th>
+                            <th>Հեռախոսահամարը</th>
+                            <th>Ապրանքը</th>
+                            <th>Քանակը</th>
+                            <th>Գինը</th>
+                            <th>Կարգավիճակը</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,11 +60,13 @@
                             </td>
                             <td>@Model.Posts.Where(p => p.PostId == order.PostTo).FirstOrDefault().Price</td>
                             <td>@order.Status </td>
-                            <td>
-                                <a class="btn btn-success" onclick="accept(@order.OrderId)">Accept</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-danger" asp-action="CancelOrder" asp-controller="Order" asp-route-id="@order.OrderId">Cancel</a>
+                            <td class="menu-action rounded-btn">
+                                <a class="btn menu-icon vd_bg-green" onclick="accept(@order.OrderId)" data-placement="top" data-toggle="tooltip" data-original-title="view">
+                                    <i class="fa fa-check-circle" style="color:antiquewhite" aria-hidden="true"></i>
+                                </a>
+                                <a class="btn menu-icon vd_bg-yellow" asp-action="CancelOrder" asp-controller="Order" asp-route-id="@order.OrderId" data-placement="top" data-toggle="tooltip" data-original-title="edit">
+                                    <i class="fa fa-minus-circle" style="color:antiquewhite"  aria-hidden="true"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>
@@ -191,7 +193,17 @@
         box-sizing: border-box;
         display: block;
     }
+    .vd_bg-yellow {
+        background-color: #f89c2c !important;
+    }
 
+    .vd_bg-green {
+        background-color: #008000 !important;
+    }
+
+    .vd_bg-blue {
+        background-color: !important;
+    }
     .fa-eye:before {
         content: "\f06e";
     }

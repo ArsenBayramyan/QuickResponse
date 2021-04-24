@@ -1,47 +1,7 @@
 ﻿@model PostCreateModel
 @{
-    ViewBag.Title = "PostCreate";
-    Layout = "_Layout";
+    ViewBag.Title = "Ավելացնել";
 }
-
-@*<script>
-        //function create() {
-        //    window.$.ajax({
-        //        type: "Get",
-        //        url: "/Product/CreateProduct",
-        //        success: function (data) {
-        //            $('#create').html(data);
-        //        },
-        //        failure: function (errMsg) {
-        //            alert(errMsg);
-        //        }
-        //    });
-        //}
-
-        //function add() {
-        //    let postName = $('#postName').val();
-        //    let productTypeId = $('#productTypeId').val();
-        //    let postType = $('#postType').val();
-        //    let count = $('#count').val();
-        //    let price = $('#price').val();
-        //    let body = $('#body').val();
-        //    $.ajax({
-        //        url: "/Post/CreatePost",
-        //        type: "POST",
-        //        dataType: 'json',
-        //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        //        data: {
-        //            PostName: postName,
-        //            ProductTypeId: productTypeId,
-        //            PostType: postType,
-        //            Count: count,
-        //            Price: price,
-        //            Body: body,
-        //        }
-        //    });
-
-        //}
-    </script>*@
 
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
@@ -52,23 +12,23 @@
             <form asp-action="CreatePost" asp-controller="Post" method="post">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Create Post</h4>
+                        <h4 class="text-right">Ավելացնել հայտարարություն</h4>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Post name</label><input type="text" asp-for="PostName" class="form-control"></div>
+                        <div class="col-md-12"><label asp-for="PostName" class="labels" ></label><input type="text" asp-for="PostName" class="form-control"></div>
                         <div class="col-md-12">
-                            <label class="labels">Post type</label>
+                            <label class="labels" asp-for="PostType"></label>
                             <select class="form-control" id="PostType" name="PostType">
-                                <option>Choose your option</option>
-                                <option value="LookingFor">Looking for</option>
-                                <option value="ForSale">For sale</option>
+                                <option>---- Ընտրել ----</option>
+                                <option value="LookingFor">Փնտրում եմ</option>
+                                <option value="ForSale">Վաճառում եմ</option>
                             </select>
                         </div>
-                        <div class="col-md-12"><label class="labels">Count</label><input type="text" asp-for="Count" class="form-control"></div>
-                        <div class="col-md-12"><label class="labels">Price</label><input type="text" asp-for="Price" class="form-control" placeholder="price"></div>
-                        <div class="col-md-12"><label class="labels">Description</label><textarea asp-for="Body" class="form-control" placeholder="description"></textarea> </div>
+                        <div class="col-md-12"><label class="labels" asp-for="Count"></label><input type="text" asp-for="Count" class="form-control"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="Price"></label><input type="text" asp-for="Price" class="form-control" placeholder="գինը"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="Body"></label><textarea asp-for="Body" class="form-control" placeholder="նկարագրություն"></textarea> </div>
                         <div class="col-md-12">
-                            <label class="labels">Product type</label>
+                            <label class="labels" asp-for="ProductTypeId"></label>
                             <select class="form-control" id="ProductTypeId" name="ProductTypeId">
                                 @foreach (var type in Model.ProductTypes)
                                 {
@@ -76,13 +36,13 @@
                                 }
                             </select>
                             <div class="mb-2" id="create">
-                                <button asp-action="CreateProduct" asp-controller="Product" class="btn btn-success mb-2">+</button>
+                                <button asp-action="CreateProduct" asp-controller="Product" style="margin-top:5px" class="btn btn-success mb-2">+</button>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Post</button></div>
+                    <div class="mt-5 text-center"><button class="btn btn-outline-primary profile-button" type="submit">Ավելացնել</button></div>
                     <div class="text-center">
-                        @Html.ActionLink("To back", "AccountPage","Account")
+                        @Html.ActionLink("<-- Դեպի հետ", "AccountPage","Account")
                     </div>
                 </div>
             </form>
@@ -128,7 +88,7 @@
     }
 
     .labels {
-        font-size: 11px
+        font-size: 16px
     }
 
     .add-experience:hover {

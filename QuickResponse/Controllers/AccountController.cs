@@ -105,8 +105,8 @@ namespace QuickResponse.Controllers
         public IActionResult UserView(int id)
         {
             var userDAL = _uow.UserRepository.GetByID(id);
-            var userPL = _mapper.Map<Data.Models.User, User>(userDAL);
-            return View(userPL);
+            var userViewModel = _mapper.Map<Data.Models.User, UserCreateModel>(userDAL);
+            return View(userViewModel);
         }
        
         [HttpGet]

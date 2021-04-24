@@ -11,9 +11,9 @@ namespace QuickResponse.Core
     {
         public static void SendEmailMessage(string userToEmail, string message,string subject)
         {
-            var senderEmail = new MailAddress("arsen1997b@mail.ru", subject);
-            var receiverEmail = new MailAddress($"arsen.bayramyan1997@gmail.com", subject);
-            var password = "******";
+            var senderEmail = new MailAddress("arsen1997b@mail.ru", "QuickResponseSoft");
+            var receiverEmail = new MailAddress($"{userToEmail}", subject);
+            var password = "19970421Ab;";
             var smtp = new SmtpClient
             {
                 Host = "smtp.mail.ru",

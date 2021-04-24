@@ -1,64 +1,141 @@
-﻿@model QuickResponse.Models.User
+﻿@model UserCreateModel
 
 @{
     ViewData["Title"] = "Օգտատերի տվյալները";
 }
 
-<h1>Օգտատերի տվյալները</h1>
+@*<h1>Օգտատերի տվյալները</h1>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RegistrationDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RegistrationDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.City)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RegistrationDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="AccountPage">Back to Preview page</a>
+    </div>*@
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png"><span class="font-weight-bold">@Model.FirstName @Model.LastName</span><span class="text-black-50">@Model.Email</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Օգտատիրոջ տվյալներ</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels" asp-for="FirstName"></label> <input readonly type="text" asp-for="FirstName" class="form-control"></div>
+                        <div class="col-md-6"><label class="labels" asp-for="LastName"></label><input readonly type="text" asp-for="LastName" class="form-control"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels" asp-for="Gender"></label><input readonly type="text" value="@Model.Gender" disabled class="form-control"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="Phone"></label><input readonly type="text" asp-for="Phone" class="form-control"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="City"></label><input readonly type="text" asp-for="City" class="form-control"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="Address"></label><input readonly type="text" asp-for="Address" class="form-control"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="Email"></label><input readonly type="text" asp-for="Email" class="form-control"></div>
+                    </div>
+                    <div class="text-center" style="margin-top:20px">
+                        @Html.ActionLink("<-- Դեպի հետ", "AccountPage")
+                    </div>
+                </div>
+
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="AccountPage">Back to Preview page</a>
-</div>
+
+<style>
+    body {
+        background-image: url('https://www.bootdey.com/img/Content/bg1.jpg');
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8
+    }
+
+    .profile-button {
+        background: rgb(99, 39, 120);
+        box-shadow: none;
+        border: none
+    }
+
+        .profile-button:hover {
+            background: #682773
+        }
+
+        .profile-button:focus {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer
+    }
+
+    .labels {
+        font-size: 16px
+    }
+
+    .add-experience:hover {
+        background: #682773;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
+</style>

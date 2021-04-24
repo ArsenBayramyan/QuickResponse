@@ -2,9 +2,9 @@
 
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+<div>
+    <div class="row" style="margin: 0">
+        <div class="col-md-12 p-0">
             <div id="content" class="content content-full-width">
                 <!-- begin profile -->
                 <div class="profile">
@@ -13,7 +13,7 @@
                         <div class="profile-header-cover"></div>
                         <!-- END profile-header-cover -->
                         <!-- BEGIN profile-header-content -->
-                        <div class="profile-header-content">
+                        <div class="profile-header-content container">
                             <!-- BEGIN profile-header-img -->
                             @if (Model.CurrentUser.Gender == "Male")
                             {
@@ -33,11 +33,11 @@
                             <div class="profile-header-info">
                                 <h4 class="m-t-10 m-b-5">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
                                 <p></p>
-                                <a asp-action="EditProfile" asp-route-id="@Model.CurrentUser.Id" class="btn btn-sm btn-info mb-2">Edit Profile</a>
+                                <a asp-action="EditProfile" asp-route-id="@Model.CurrentUser.Id" class="btn btn-sm btn-info mb-2">Խմբագրել</a>
                             </div>
 
                             <div class="form-group">
-                                <a class="btn btn-outline-danger pull-l float-right" href="/Account/LogOut">Log Out</a>
+                                <a class="btn btn-outline-danger pull-l float-right" href="/Account/LogOut">Ելք</a>
                             </div>
 
                             <!-- END profile-header-info -->
@@ -47,9 +47,9 @@
                         <br />
                         <ul class="profile-header-tab nav nav-tabs">
                             @*<li class="nav-item" id="about"><a onclick="aboutUser(@Model.CurrentUser.Id)" class="table-profile" data-toggle="tab">About</a></li>*@
-                            <li class="nav-item" id="myPosts"><a onclick="userPost()" class="table-profile" data-toggle="tab">My Posts</a></li>
-                            <li class="nav-item" id="myOrders"><a class="table-profile" onclick="userOrder()" data-toggle="tab">My Orders</a></li>
-                            <li class="nav-item" id="ordered"><a class="table-profile" onclick="ordered(1)" data-toggle="tab">Ordered</a></li>
+                            <li class="nav-item" id="myPosts"><a onclick="userPost()" class="table-profile" data-toggle="tab">Իմ հայտարարությունները</a></li>
+                            <li class="nav-item" id="myOrders"><a class="table-profile" onclick="userOrder()" data-toggle="tab">Իմ պատվիրածները</a></li>
+                            <li class="nav-item" id="ordered"><a class="table-profile" onclick="ordered(1)" data-toggle="tab">Պատվերներ</a></li>
                         </ul>
                         <!-- END profile-header-tab -->
                     </div>
@@ -109,7 +109,7 @@
                                                         </div>
                                                         <br />
                                                         <div>
-                                                            <a asp-action="CreateOrder" asp-controller="Order" asp-route-id="@post.PostId" class="btn btn-warning">Order</a>
+                                                            <a asp-action="CreateOrder" asp-controller="Order" asp-route-id="@post.PostId" class="btn btn-warning">Պատվիրել</a>
                                                         </div>
                                                     </p>
                                                 </div>

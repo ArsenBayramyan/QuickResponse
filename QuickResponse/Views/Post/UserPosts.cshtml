@@ -7,12 +7,12 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Post Name</th>
-                        <th>Post Type</th>
-                        <th>Price</th>
-                        <th>Product Name</th>
-                        <th>Post Date</th>
-                        <th>Count</th>
+                        <th>Հայտարարության անունը</th>
+                        <th>Տիպը</th>
+                        <th>Գինը</th>
+                        <th>Ապրանքը</th>
+                        <th>Տեղադրման ամսաթիվը</th>
+                        <th>Քանակը</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,36 +20,59 @@
                     {
                         @if (post.IsDeleted == false)
                         {
-                            <tr>
-                                <td>@post.PostName </td>
-                                <td>@post.PostType</td>
-                                <td>@post.Price.ToString("N0")$</td>
-                                <td>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
-                                <td class="center">@post.PostDate.ToString("MM/dd/yyyy")</td>
-                                <td>@Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality </td>
-                                <td class="menu-action rounded-btn">
-                                    <a class="btn menu-icon vd_bg-green" asp-action="PostListFilter" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="view">
-                                        <i class="fa fa-filter" aria-hidden="true"></i>
-                                    </a>
-                                    <a class="btn menu-icon vd_bg-yellow" asp-action="EditPost" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="edit">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a class="btn menu-icon vd_bg-red" asp-action="PostDelete" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="delete">
-                                        <i class="fa fa-times"></i>
-                                    </a>
+                    <tr>
+                        <td>@post.PostName </td>
+                        @if (post.PostType == "ForSale")
+                        {
+                            <td>Վաճառում եմ</td>
+                        }
+                        else
+                        {
+                            <td>Փնտրում եմ</td>
+                        }
+                        <td>@post.Price.ToString("N0")$</td>
+                        <td>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
+                        <td class="center">@post.PostDate.ToString("MM/dd/yyyy")</td>
+                        <td>@Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality </td>
+                        <td class="menu-action rounded-btn">
+                            <a class="btn menu-icon vd_bg-green" onclick="postFilter(@post.PostId)" data-placement="top" data-toggle="tooltip" data-original-title="view">
+                                <i class="fa fa-filter" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn menu-icon vd_bg-yellow" asp-action="EditPost" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a class="btn menu-icon vd_bg-red" asp-action="PostDelete" asp-controller="Post" asp-route-id="@post.PostId" data-placement="top" data-toggle="tooltip" data-original-title="delete">
+                                <i class="fa fa-times"></i>
+                            </a>
 
-                                </td>
-                            </tr>
+                        </td>
+                    </tr>
                         }
 
                     }
                 </tbody>
             </table>
-            <div class="vd_info tr"> <a class="btn vd_btn btn-xs vd_bg-yellow text-xl-center " asp-action="CreatePost" asp-controller="Post"> <i class="fa fa-plus append-icon"></i> Add Post </a> </div>
+            <div class="vd_info tr"> <a class="btn vd_btn btn-xs vd_bg-yellow text-xl-center " asp-action="CreatePost" asp-controller="Post"> <i class="fa fa-plus append-icon"></i>Ավելացնել</a> </div>
             <div class="">
             </div>
         </div>
     </div>
+    <script>
+        function postFilter(id) {
+            window.$.ajax({
+                type: "Get",
+                url: `/Post/PostListFilter/?id=${id}`,
+                success: function (data) {
+                    $('#panel').html(data);
+                },
+                failure: function (errMsg) {
+                    alert(errMsg);
+                }
+            });
+        }
+    </script>
+    
+    
     <style>
         .btn-xs {
             font-size: 11px;

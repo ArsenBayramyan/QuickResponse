@@ -1,7 +1,6 @@
 ﻿@model PostCreateModel
 @{
-    ViewBag.Title = "PostEdit";
-    Layout = "_Layout";
+    ViewBag.Title = "Խմբագրել";
 }
 
 <div class="container rounded bg-white mt-5 mb-5">
@@ -13,23 +12,32 @@
             <form asp-action="EditPost" asp-controller="Post" method="post">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Edit Post</h4>
+                        <h4 class="text-right">Խմբագրել</h4>
                     </div>
                     <div class="col-md-6">
                         <input asp-for="PostId" style="display:none" value="@Model.PostId" class="form-control" />
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Post name</label><input type="text" asp-for="PostName" class="form-control"></div>
-                        <div class="col-md-12"><label class="labels">Post type</label><input type="text" value="@Model.PostType" disabled class="form-control" di></div>
-                        <div class="col-md-12"><label class="labels">Post type</label><input type="text" value="@Model.ProductTypes.FirstOrDefault(p=>p.ProductTypeId==Model.ProductTypeId).ProductTypeName" disabled class="form-control" di></div>
+                        <div class="col-md-12"><label class="labels" asp-for="PostName"></label><input type="text" asp-for="PostName" class="form-control"></div>
+                        @if (Model.PostType==QuickResponse.Core.Enums.PostType.ForSale)
+                        {
+                            <div class="col-md-12"><label class="labels" asp-for="PostType"></label><input type="text" value="Վաճառում եմ" disabled class="form-control" di></div>
 
-                        <div class="col-md-12"><label class="labels">Count</label><input type="text" asp-for="Count" class="form-control" placeholder="count"></div>
-                        <div class="col-md-12"><label class="labels">Price</label><input type="text" asp-for="Price" class="form-control" placeholder="price"></div>
-                        <div class="col-md-12"><label class="labels">Description</label><textarea asp-for="Body" class="form-control" placeholder="description"></textarea> </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-12"><label class="labels" asp-for="PostType"></label><input type="text" value="Փնտրում եմ" disabled class="form-control" di></div>
+
+                        }
+                        <div class="col-md-12"><label class="labels" asp-for="ProductTypeId"></label><input type="text" value="@Model.ProductTypes.FirstOrDefault(p=>p.ProductTypeId==Model.ProductTypeId).ProductTypeName" disabled class="form-control" di></div>
+
+                        <div class="col-md-12"><label class="labels" asp-for="Count"></label><input type="text" asp-for="Count" class="form-control" placeholder="count"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="Price"></label><input type="text" asp-for="Price" class="form-control" placeholder="price"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="Body"></label><textarea asp-for="Body" class="form-control" placeholder="description"></textarea> </div>
                     </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Post</button></div>
-                    <div class="text-center">
-                        @Html.ActionLink("To back", "AccountPage","Account")
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Պահպանել</button></div>
+                    <div class="text-center" style="margin-top:20px">
+                        @Html.ActionLink("<-- Դեպի անձնական Էջ", "AccountPage","Account")
                     </div>
                 </div>
             </form>
@@ -74,7 +82,7 @@
     }
 
     .labels {
-        font-size: 11px
+        font-size: 16px
     }
 
     .add-experience:hover {

@@ -33,45 +33,34 @@
     <form method="post">
         <!-- Page Content -->
         <div class="container ">
-            <div class="row">
-                <div class="col-md-offset-5 col-md-4 text-center">
-                    <h1 class='text-white'>Unique Login Form</h1>
+            <div class="row d-flex justify-content-center">
+                <div class="text-center" style="min-width: 30%">
+                    <h1 ></h1>
                     <div class="form-login">
                         </br>
-                        <h4>Secure Login</h4>
+                        <h4>Մուտք դեպի համակարգ</h4>
                         </br>
-                        <input type="text" id="userName" asp-for="Email" class="form-control input-sm chat-input" placeholder="username" />
+                        <input type="text" id="userName" asp-for="Email" class="form-control input-sm chat-input" placeholder="Էլ․ հասցե" />
                         </br></br>
-                        <input type="password" id="userPassword" asp-for="Password" class="form-control input-sm chat-input" placeholder="password" />
+                        <input type="password" id="userPassword" asp-for="Password" class="form-control input-sm chat-input" placeholder="գաղտնաբառ" />
                         </br></br>
                         <div class="wrapper">
                             <span class="group-btn">
-                                <button asp-action="Login" type="submit" asp-controller="Account" class="btn btn-danger btn-md ">login <i class="fa fa-sign-in"></i></button>
+                                <button asp-action="Login" type="submit" asp-controller="Account" class="btn btn-danger btn-md ">Մուտք <i class="fa fa-sign-in"></i></button>
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
             <br />
-            <div class="text-center" style="color:cornflowerblue">
-                <h3>Don't have account?</h3><a class="text-center" style="color:chartreuse;font-size: 18px" href="/Account/Registration">Sign Up</a>
+            <div class="text-center" style="color:darkblue">
+                <h3>Չունե՞ք անձնական էջ</h3><a class="text-center" style="color: #245d11;font-size: 18px" href="/Account/Registration">Գրանցվել</a>
 
             </div>
             <div class="text-center">
-                <a href="#" onclick="goBack()" style="color:cornflowerblue"><h3 class="bi bi-arrow-return-left">Back to home page</h3></a>
+                <a href="/Home/Index" style="color:chocolate"><h4 style="border-bottom-width: 0;">Դեպի գլխավոր</h4></a>
             </div>
-            <script>
-                function goBack() {
-                    window.history.back()
-                }
-            </script>
 
-            <!--footer-->
-            <div class="footer text-center">
-                <p>© 2021 Unique Login Form. All rights reserved</p>
-            </div>
-            <!--//footer-->
-        </div>
     </form>
 
 </body>

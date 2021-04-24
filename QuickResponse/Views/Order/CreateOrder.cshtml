@@ -13,14 +13,14 @@
             <form asp-action="CreateOrder" asp-controller="Order" method="post">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Input count</h4>
+                        <h4 class="text-right">Պատվերի պարամետրեր</h4>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Product count</label><input type="text" asp-for="ProductCount" class="form-control"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="ProductCount"></label><input type="text" asp-for="ProductCount" class="form-control"></div>
                     </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Order</button></div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Պատվիրել</button></div>
                     <div class="text-center">
-                        @Html.ActionLink("To back account page", "AccountPage","Account")
+                        @Html.ActionLink("<-- Դեպի անձնական էջ", "AccountPage","Account")
                     </div>
                 </div>
             </form>
@@ -65,7 +65,7 @@
     }
 
     .labels {
-        font-size: 11px
+        font-size: 16px
     }
 
     .add-experience:hover {

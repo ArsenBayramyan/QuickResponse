@@ -21,6 +21,10 @@ namespace QuickResponse.Core.Profiles
                 .ForMember(u => u.PasswordHash, src => src.MapFrom(i => i.Password))
                 .ForMember(u=>u.PhoneNumber,src=>src.MapFrom(i=>i.Phone))
                 .ForMember(u=>u.UserName, src => src.MapFrom(i => i.Email));
+            CreateMap<User, UserCreateModel>()
+                .ForMember(u => u.Password, src => src.MapFrom(i => i.PasswordHash))
+                .ForMember(u => u.Phone, src => src.MapFrom(i => i.PhoneNumber))
+                .ForMember(u => u.Email, src => src.MapFrom(i=>i.UserName));
         }
     }
 }
