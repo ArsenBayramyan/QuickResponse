@@ -9,7 +9,7 @@
     <h6>Product type   -  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h6>
     <h6>Dimensionality -  @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h6>
     <h6>Price          -  @Model.Post.Price $</h6>
-    <h6>Body           -  @Model.Post.Body</h6>   
+    <h6>Body           -  -@Model.Post.Body</h6>   
 
 </div>
 <div>
