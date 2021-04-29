@@ -15,6 +15,7 @@ namespace QuickResponse.Data.Repositories
         private ProductTypeRepository _productTypeRepository;
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
+        private MessageRepository _messageRepository;
         
         public UnitOfWorkRepository(UserManager<User> userManager, AppIdentityDBContext context,
             SignInManager<User> signInManager)
@@ -24,6 +25,7 @@ namespace QuickResponse.Data.Repositories
             this._orderReposiotry = new OrderRepository(context);
             this._productRepository = new ProductRepository(context);
             this._productTypeRepository = new ProductTypeRepository(context);
+            this._messageRepository = new MessageRepository(context);
             this._signInManager = signInManager;
             this._userManager = userManager;
         }
@@ -42,24 +44,7 @@ namespace QuickResponse.Data.Repositories
 
         public UserManager<User> UserManager => _userManager;
 
-        //private bool disposed = false;
+        public MessageRepository MessageRepository => _messageRepository;
 
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {
-                    
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
     }
 }

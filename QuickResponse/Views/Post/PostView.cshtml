@@ -28,7 +28,7 @@
                         <div class="col-md-12"><label class="labels">Ապրանք</label><input readonly type="text" asp-for="@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName" class="form-control"></div>
                         <div class="col-md-12"><label class="labels">Քանակը</label><input readonly asp-for="@Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count" class="form-control"> </div>
                         <div class="col-md-12"><label class="labels">Չափողականության միավորը</label><input readonly type="text" asp-for="@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality" class="form-control" /></div>
-                        <div class="col-md-12"><label class="labels">Գինը</label><input readonly asp-for="@Model.Post.Price $" class="form-control"> </div>
+                        <div class="col-md-12"><label class="labels">Գինը</label><input readonly asp-for="@Model.Post.Price դրամ" class="form-control"> </div>
                         <div class="col-md-12"><label class="labels">Նկարագրությունը</label><textarea readonly asp-for="@Model.Post.Body" class="form-control"></textarea> </div>
                     </div>
                     <div class="text-center" style="margin-top:20px">

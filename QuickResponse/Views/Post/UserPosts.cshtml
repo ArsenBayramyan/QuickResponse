@@ -30,7 +30,7 @@
                         {
                             <td>Փնտրում եմ</td>
                         }
-                        <td>@post.Price.ToString("N0")$</td>
+                        <td>@post.Price.ToString("N0") դրամ</td>
                         <td>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</td>
                         <td class="center">@post.PostDate.ToString("MM/dd/yyyy")</td>
                         <td>@Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().Count @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality </td>

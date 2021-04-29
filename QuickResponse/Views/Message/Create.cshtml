@@ -1,0 +1,39 @@
+﻿@model MessageViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            @if (Model.MessageId == 0)
+            {
+                <p>Ուղարկել հաղորդագրություն</p>
+            }
+            else
+            {
+                <p>Պատասխանել նամակին</p>
+            }
+            <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+            <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+            <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+            <form name="sentMessage" id="contactForm" novalidate asp-action="Create" asp-controller="Message" method="post">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        @if (Model.MessageId == 0)
+                        {
+                            <textarea rows="5" class="form-control" placeholder="Հաղորդագրություն" id="message" asp-for="Body" required data-validation-required-message="Please enter a message."></textarea>
+                        }
+                        else
+                        {
+                            <textarea rows="3" class="form-control" placeholder="Հաղորդագրություն" id="message" asp-for="Body" required data-validation-required-message="Please enter a message."></textarea>
+
+                        }
+                        <div><span asp-validation-for="Body" class="text-danger"></span></div>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <button type="submit" class="btn btn-primary" id="sendMessageButton">ՈՒղարկել</button>
+            </form>
+        </div>
+    </div>
+</div>
