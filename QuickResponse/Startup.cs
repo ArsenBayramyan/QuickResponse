@@ -39,6 +39,7 @@ namespace QuickResponse
             services.AddSingleton<IUser, User>();
             services.AddSingleton<IProduct, Product>();
             services.AddSingleton<IPost, Post>();
+            services.AddSingleton<IMessage, Message>();
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddAuthentication();

@@ -2,10 +2,11 @@
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Contexts;
 using QuickResponse.Data.Models;
+using System;
 
 namespace QuickResponse.Data.Repositories
 {
-    public class UnitOfWorkRepository : IUnitOfWOrkRepositroy
+    public class UnitOfWorkRepository : IUnitOfWOrkRepositroy/*,IDisposable*/
     {
         private UserRepository _userRepository;
         private PostRepository _postRepository;
@@ -14,6 +15,7 @@ namespace QuickResponse.Data.Repositories
         private ProductTypeRepository _productTypeRepository;
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
+        private MessageRepository _messageRepository;
         
         public UnitOfWorkRepository(UserManager<User> userManager, AppIdentityDBContext context,
             SignInManager<User> signInManager)
@@ -23,6 +25,7 @@ namespace QuickResponse.Data.Repositories
             this._orderReposiotry = new OrderRepository(context);
             this._productRepository = new ProductRepository(context);
             this._productTypeRepository = new ProductTypeRepository(context);
+            this._messageRepository = new MessageRepository(context);
             this._signInManager = signInManager;
             this._userManager = userManager;
         }
@@ -41,6 +44,7 @@ namespace QuickResponse.Data.Repositories
 
         public UserManager<User> UserManager => _userManager;
 
+        public MessageRepository MessageRepository => _messageRepository;
 
     }
 }

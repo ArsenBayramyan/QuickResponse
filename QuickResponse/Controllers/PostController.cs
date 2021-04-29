@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using QuickResponse.BLL;
+using QuickResponse.BLL.BL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models;
@@ -26,13 +26,30 @@ namespace QuickResponse.Controllers
         [HttpGet]
         public IActionResult CreatePost() => View(new PostCreateModel { ProductTypes = _uow.ProductTypeRepository.List() });
 
+        [HttpPost]
+        public IActionResult CreatePost(PostCreateModel postAdd)
+        {
+            postAdd.PostDate = DateTime.Now;
+            var validator = new PostCreateValidator();
+            if (validator.Validate(postAdd).IsValid)
+            {
+                var postBL = new PostBL(_uow, _mapper);
+                var currentUserName = HttpContext.User?.Identity?.Name;
+                if (postBL.AddPost(postAdd, currentUserName))
+                {
+
+                    return RedirectToAction("AccountPage", "Account");
+                }
+            }
+            return RedirectToAction("");
+        }
 
         [HttpGet]
         public IActionResult EditPost(int Id)
         {
             var post = this._uow.PostRepository.GetByID(Id);
             var product = this._uow.ProductRepository.GetByID(post.ProductId);
-            //var productType = this._uow.ProductTypeRepository.GetByID(product.ProductTypeId);
+            var productTypes = this._uow.ProductTypeRepository.List().Where(p => p.ProductTypeId == product.ProductTypeId).ToList();
             var p1 = new PostCreateModel { 
                 PostId = post.PostId,
                 PostDate=post.PostDate,
@@ -42,33 +59,16 @@ namespace QuickResponse.Controllers
                 Count=product.Count,
                 PostType=post.PostType,
                 ProductTypeId=product.ProductTypeId,
+                ProductTypes=productTypes
             };
             return View(p1);
-        }
-
-        [HttpPost]
-        public IActionResult CreatePost(PostCreateModel postAdd)
-        {
-            postAdd.PostDate = DateTime.Now;
-            var validator = new PostCreateValidator();
-            if (validator.Validate(postAdd).IsValid)
-            {
-                var postBL = new PostBL(_uow, _mapper);
-                var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
-                if (postBL.AddPost(postAdd, currentUser))
-                {
-
-                    return RedirectToAction("AccountPage","Account");
-                }
-            }
-            return RedirectToAction("");
         }
 
         [HttpGet]
         public IActionResult PostListFilter(int id)
         {
             var postBL = new PostBL(_uow, _mapper);
-            IEnumerable<Data.Models.Post> postFilter = postBL.PostListFilter(id);
+            var postFilter = postBL.PostListFilter(id);
             return View(postFilter);
         }
 

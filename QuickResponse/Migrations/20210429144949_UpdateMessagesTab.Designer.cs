@@ -10,8 +10,8 @@ using QuickResponse.Data.Contexts;
 namespace QuickResponse.Migrations
 {
     [DbContext(typeof(AppIdentityDBContext))]
-    [Migration("20210316174137_Initial")]
-    partial class Initial
+    [Migration("20210429144949_UpdateMessagesTab")]
+    partial class UpdateMessagesTab
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -151,6 +151,36 @@ namespace QuickResponse.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("QuickResponse.Data.Models.Message", b =>
+                {
+                    b.Property<int>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FromUserEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("MessageSentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PostLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToUserEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("QuickResponse.Data.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -197,7 +227,7 @@ namespace QuickResponse.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("PostDate")
+                    b.Property<DateTime>("PostDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PostName")

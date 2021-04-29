@@ -1,11 +1,5 @@
 ﻿using FluentValidation;
-using FluentValidation.Validators;
-using QuickResponse.Data.Models;
 using QuickResponse.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickResponse.Validation
 {

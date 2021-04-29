@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using QuickResponse.BLL;
+using QuickResponse.BLL.BL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models;
@@ -80,6 +80,7 @@ namespace QuickResponse.Controllers
             var lists = Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
             return View(new AccountPage
             {
+                Users=lists.usersPL,
                 Orders =lists.ordersPL,
                 Posts = lists.postsPL,
                 Products=lists.productsPL,
@@ -89,7 +90,7 @@ namespace QuickResponse.Controllers
         }
 
         [HttpGet]
-        public IActionResult LogOut() => RedirectToAction("Login");
+        public IActionResult LogOut() => RedirectToAction("Index","Home");
 
         [HttpPost]
         public ActionResult Delete(int id)
@@ -101,9 +102,46 @@ namespace QuickResponse.Controllers
             return null; 
         }
 
+        public IActionResult UserView(int id)
+        {
+            var userDAL = _uow.UserRepository.GetByID(id);
+            var userViewModel = _mapper.Map<Data.Models.User, UserCreateModel>(userDAL);
+            return View(userViewModel);
+        }
        
+        [HttpGet]
+        public IActionResult EditProfile(int id)
+        {
+            var user = _uow.UserRepository.GetByID(id);
+            return View(new UserCreateModel {
+                 UserID=user.Id,
+                 FirstName=user.FirstName,
+                 LastName=user.LastName,
+                 Phone=user.PhoneNumber,
+                 Password=user.PasswordHash,
+                 ConfirmPassword=user.PasswordHash,
+                 City=user.City,
+                 Address=user.Address,
+                 Email=user.Email,
+                 BirthDate=user.BirthDate,
+                 Gender=user.Gender
+            });
+        }
 
-       
+        [HttpPost]
+        public IActionResult EditProfile(UserCreateModel userEdit)
+        {
+            var validator = new UserCreateValidator();
+            if (validator.Validate(userEdit).IsValid)
+            {
+                var accountBL = new AccountBL(_uow, _mapper);
+                if (accountBL.EditProfile(userEdit))
+                {
+                    return RedirectToAction("AccountPage");
+                }
+            }
+            return View(userEdit);
+        }
     }
 }
 

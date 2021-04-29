@@ -1,22 +1,84 @@
 ﻿@model ProductTypeCreateModel
 
-<div class="addProduct">
-    <div class="text-danger" asp-validation-summary="All"></div>
-    <form asp-action="CreateProduct" asp-controller="Product" method="post">
-        <div class="form-group">
-            <label asp-for="ProductTypeName">Product type name</label>
-            <div><span asp-validation-for="ProductTypeName" class="text-danger"></span></div>
-            <input asp-for="ProductTypeName" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Dimensionality"></label>
-            <div><span asp-validation-for="Dimensionality" class="text-danger"></span></div>
-            <input asp-for="Dimensionality" class="form-control" />
-        </div>
 
-        <div>
-            <button class="btn btn-success" type="submit">Add</button>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"></div>
         </div>
-    </form>
+        <div class="col-md-5 border-right">
+            <form asp-action="CreateProduct" asp-controller="Product" method="post">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Ավելացնել ապրանքը</h4>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels" asp-for="ProductTypeName"></label><input type="text" asp-for="ProductTypeName" class="form-control"></div>
+                        <div class="col-md-12"><label class="labels" asp-for="Dimensionality"></label><input type="text" asp-for="Dimensionality" class="form-control"></div>
+                    </div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Ավելացնել</button></div>
+                    <div class="text-center">
+                        @Html.ActionLink("<-- Դեպի հետ", "CreatePost", "Post")
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>
+
+
+
+<style>
+    body {
+        background-image: url('https://www.bootdey.com/img/Content/bg1.jpg');
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8
+    }
+
+    .profile-button {
+        background: rgb(99, 39, 120);
+        box-shadow: none;
+        border: none
+    }
+
+        .profile-button:hover {
+            background: #682773
+        }
+
+        .profile-button:focus {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer
+    }
+
+    .labels {
+        font-size: 11px
+    }
+
+    .add-experience:hover {
+        background: #682773;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
+</style>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
 

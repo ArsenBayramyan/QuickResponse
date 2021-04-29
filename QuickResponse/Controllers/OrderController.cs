@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using QuickResponse.BLL;
+using QuickResponse.BLL.BL;
 using QuickResponse.Core.Interfaces;
 using QuickResponse.Data.Repositories;
 using QuickResponse.Models;
@@ -112,7 +112,7 @@ namespace QuickResponse.Controllers
         {
             var orderBL = new OrderBL(_uow, _mapper);
             orderBL.AcceptOrder(id);
-            return RedirectToAction("AccountPage", "Account");
+            return RedirectToAction("AccountPage","Account");
         }
 
         [HttpGet]

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuickResponse.Core.Enums;
 using QuickResponse.Core;
 
-namespace QuickResponse.BLL
+namespace QuickResponse.BLL.BL
 {
     public class OrderBL:BaseBL
     {
@@ -31,7 +31,7 @@ namespace QuickResponse.BLL
                                                  $"Please confirm" + Environment.NewLine +
                           $"{postTo.Body}"+Environment.NewLine+
                           $"Post Link: - https://localhost:44372/Post/PostView/{orderCreate.PostId}";
-            EmailSender.SendEmailMessage(userTo.Email, message);
+            EmailSender.SendEmailMessage(userTo.Email, message,"I want this product");
             return this.UOW.OrderRepository.Save(order);
         }
 
@@ -53,7 +53,7 @@ namespace QuickResponse.BLL
                           $"Phone: - {userTo.PhoneNumber}" + Environment.NewLine +
                           $"Description: - {userTo.FirstName} {userTo.LastName} accept your order,wait for the order please.\n"+
                           $"Post Link: - https://localhost:44372/Post/PostView/{order.PostTo}";
-            EmailSender.SendEmailMessage(userFrom.Email, message);
+            EmailSender.SendEmailMessage(userFrom.Email, message,"Order accepted");
             return this.UOW.OrderRepository.Update(order);
         }
 
@@ -67,7 +67,7 @@ namespace QuickResponse.BLL
                           $"Phone: - {userTo.PhoneNumber}" + Environment.NewLine +
                           $"Description: - {userTo.FirstName} {userTo.LastName} canceled your order.\n" +
                           $"Post Link: - https://localhost:44372/Post/PostView/{order.PostTo}";
-            EmailSender.SendEmailMessage(userFrom.Email, message);
+            EmailSender.SendEmailMessage(userFrom.Email, message,"Order canceled");
             return this.UOW.OrderRepository.Update(order);
         }
     }

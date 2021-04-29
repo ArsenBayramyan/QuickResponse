@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace QuickResponse.Core.Profiles
 {
-    public class ProductDALToProductPLProfile:Profile
+    public class PostBLToPostPLProfile:Profile
     {
-        public const string ViewModel = "ProductDALToProductPLProfile";
+        public const string ViewModel = "OrderBLToOrderPLProfile";
 
         public override string ProfileName => ViewModel;
-        public ProductDALToProductPLProfile()
+        public PostBLToPostPLProfile()
         {
-            var p = new Data.Models.Product();
-            this.CreateMap<Data.Models.Product, Product>();
+            this.CreateMap<BLL.Models.Post, Post>();
         }
     }
 }

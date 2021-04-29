@@ -1,0 +1,58 @@
+﻿@model MessageViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <p>Հաղորդագրություններ</p>
+            <div id="projects-tab" class="tab-pane active">
+                <div class="pd-20">
+
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Անուն </th>
+                                <th>Ազգանուն</th>
+                                <th>Հաղորդագրություն</th>
+                                <th>Փոստի լինքը</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var message in Model.Messages)
+                            {
+                                <tr>
+                                    <td>@Model.Users.FirstOrDefault(u => u.Email == message.FromUserEmail).FirstName </td>
+                                    <td>@Model.Users.FirstOrDefault(u => u.Email == message.FromUserEmail).LastName </td>
+                                    <td>@message.Body</td>
+                                    <td><a href="@message.PostLink">@message.PostLink</a></td>
+                                    <td>
+                                        <a class="btn menu-icon vd_bg-green" onclick="sendMessage(@message.MessageId)" style="cursor:pointer">
+                                            <i class="fa fa-envelope ml-lg-3" title="Պատասխանել" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                    <td id="message_@message.MessageId" class="mr-1">
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function sendMessage(id) {
+        window.$.ajax({
+            type: "Get",
+            url: `/Message/Create/?id=${id}&check=${1}`,
+            success: function (data) {
+                $('#message_'+id).html(data);
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    }
+</script>

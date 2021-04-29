@@ -15,6 +15,7 @@ namespace QuickResponse.Data.Contexts
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public class ApplicationContextDbFactory : IDesignTimeDbContextFactory<AppIdentityDBContext>
         {
             AppIdentityDBContext IDesignTimeDbContextFactory<AppIdentityDBContext>.CreateDbContext(string[] args)
