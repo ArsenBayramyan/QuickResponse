@@ -9,11 +9,11 @@ namespace QuickResponse.Core
 {
     public class EmailSender
     {
-        public static void SendEmailMessage(string userToEmail, string message,string subject)
+        public static void SendEmailMessage(string userFromEmail,string subjectFrom,string userToEmail, string message,string subject)
         {
-            var senderEmail = new MailAddress("arsen1997b@mail.ru", "QuickResponseSoft");
+            var senderEmail = new MailAddress(userFromEmail, subjectFrom);
             var receiverEmail = new MailAddress($"{userToEmail}", subject);
-            var password = "19970421Ab;";
+            var password = "!Anyuta124";
             var smtp = new SmtpClient
             {
                 Host = "smtp.mail.ru",

@@ -44,7 +44,7 @@ namespace QuickResponse.Controllers
 
                     $"Answer: - {contactViewModel.Message}";
 
-                Core.EmailSender.SendEmailMessage("arsen1997b@mail.ru", message,$"{contactViewModel.Name} wants to contact me");
+                Core.EmailSender.SendEmailMessage("quick_response_user@mail.ru", "Quick Response User", "quick_response_soft@mail.ru", message,$"{contactViewModel.Name} wants to contact me");
                 return RedirectToAction("Index");
             }
             else

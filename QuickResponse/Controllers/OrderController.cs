@@ -73,6 +73,10 @@ namespace QuickResponse.Controllers
             var lists= Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
             var currentUserDAL = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
             var currentUserPL = this._mapper.Map<Data.Models.User, User>(currentUserDAL);
+            if (currentUserPL.Email== "quick_response_soft@mail.ru")
+            {
+                chechk = -1;
+            }
             return View(new UserOrderList
             {
                 Posts = lists.postsPL,

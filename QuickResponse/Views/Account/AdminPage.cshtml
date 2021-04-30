@@ -52,7 +52,7 @@
                             @*<li class="nav-item" id="about"><a onclick="aboutUser(@Model.CurrentUser.Id)" class="table-profile" data-toggle="tab">About</a></li>*@
                             <li class="nav-item" id="myPosts"><a onclick="userPost()" class="table-profile" data-toggle="tab">Տեղադրված հայտարարությունները</a></li>
                             <li class="nav-item" id="myOrders"><a class="table-profile" onclick="userOrder()" data-toggle="tab">Կատարված պատվերները</a></li>
-                            <li class="nav-item" id="myOrders"><a class="table-profile" onclick="userOrder()" data-toggle="tab">Հաղորդագրություններ</a></li>
+                            <li class="nav-item" ><a class="table-profile" onclick="messages()" data-toggle="tab">Հաղորդագրություններ</a></li>
                         </ul>
                         <!-- END profile-header-tab -->
                     </div>
@@ -136,6 +136,18 @@
 
 
 <script>
+    function messages() {
+        window.$.ajax({
+            type: "Get",
+            url: `/Message/Index/`,
+            success: function (data) {
+                $('#panel').html(data);
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    }
     function aboutUser(id) {
         window.$.ajax({
             type: "Get",

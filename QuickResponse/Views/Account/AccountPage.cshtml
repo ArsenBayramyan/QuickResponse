@@ -30,11 +30,20 @@
 
                             <!-- END profile-header-img -->
                             <!-- BEGIN profile-header-info -->
-                            <div class="profile-header-info">
+                        <div class="profile-header-info">
+                            @if (Model.CurrentUser.Email == "quick_response_soft@mail.ru")
+                            {
+                                <h4 class="m-t-10 m-b-5">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName (Admin)</h4>
+
+                            }
+                            else
+                            {
                                 <h4 class="m-t-10 m-b-5">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
-                                <p></p>
-                                <a asp-action="EditProfile" asp-route-id="@Model.CurrentUser.Id" class="btn btn-sm btn-info mb-2">Խմբագրել</a>
-                            </div>
+
+                            }
+                            <p></p>
+                            <a asp-action="EditProfile" asp-route-id="@Model.CurrentUser.Id" class="btn btn-sm btn-info mb-2">Խմբագրել</a>
+                        </div>
 
                             <div class="form-group">
                                 <a class="btn btn-outline-danger pull-l float-right" href="/Account/LogOut">
@@ -48,13 +57,26 @@
                         <!-- END profile-header-content -->
                         <!-- BEGIN profile-header-tab -->
                         <br />
-                        <ul class="profile-header-tab nav nav-tabs">
-                            @*<li class="nav-item" id="about"><a onclick="aboutUser(@Model.CurrentUser.Id)" class="table-profile" data-toggle="tab">About</a></li>*@
-                            <li class="nav-item" id="myPosts"><a onclick="userPost()" class="table-profile" data-toggle="tab" style="cursor:pointer">Իմ հայտարարությունները</a></li>
-                            <li class="nav-item" id="myOrders"><a class="table-profile" onclick="userOrder()" data-toggle="tab" style="cursor:pointer">Իմ պատվիրածները</a></li>
-                            <li class="nav-item" id="ordered"><a class="table-profile" onclick="userOrder()" data-toggle="tab" style="cursor:pointer">Պատվերներ</a></li>
-                            <li class="nav-item" id="message"><a class="table-profile" onclick="messages()" data-toggle="tab" style="cursor:pointer">Հաղորդագրություններ</a></li>
-                        </ul>
+                        @if (Model.CurrentUser.Email == "quick_response_soft@mail.ru")
+                        {
+                            <ul class="profile-header-tab nav nav-tabs">
+                                @*<li class="nav-item" id="about"><a onclick="aboutUser(@Model.CurrentUser.Id)" class="table-profile" data-toggle="tab">About</a></li>*@
+                                <li class="nav-item" id="myPosts"><a onclick="userPost()" style="cursor:pointer" class="table-profile" data-toggle="tab">Տեղադրված հայտարարությունները</a></li>
+                                <li class="nav-item" id="myOrders"><a class="table-profile" style="cursor:pointer" onclick="userOrder()" data-toggle="tab">Կատարված պատվերները</a></li>
+                                <li class="nav-item"><a class="table-profile" onclick="messages()" style="cursor:pointer" data-toggle="tab">Հաղորդագրություններ</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="profile-header-tab nav nav-tabs">
+                                @*<li class="nav-item" id="about"><a onclick="aboutUser(@Model.CurrentUser.Id)" class="table-profile" data-toggle="tab">About</a></li>*@
+                                <li class="nav-item" id="myPosts"><a onclick="userPost()" class="table-profile" data-toggle="tab" style="cursor:pointer">Իմ հայտարարությունները</a></li>
+                                <li class="nav-item" id="myOrders"><a class="table-profile" onclick="userOrder()" data-toggle="tab" style="cursor:pointer">Իմ պատվիրածները</a></li>
+                                <li class="nav-item" id="ordered"><a class="table-profile" onclick="ordered(1)" data-toggle="tab" style="cursor:pointer">Պատվերներ</a></li>
+                                <li class="nav-item" id="message"><a class="table-profile" onclick="messages()" data-toggle="tab" style="cursor:pointer">Հաղորդագրություններ</a></li>
+                            </ul>
+                        }
+
                         <!-- END profile-header-tab -->
                     </div>
                 </div>
@@ -97,22 +119,28 @@
                                                     }
                                                     <span class="username"><a asp-action="UserView" asp-controller="Account" asp-route-id="@post.UserId">@Model.Users.ToList().FirstOrDefault(u => u.Id == post.UserId).FirstName @Model.Users.ToList().FirstOrDefault(u => u.Id == post.UserId).LastName </a> <small></small></span>
                                                     <a onclick="sendMessage(@post.PostId)" style="cursor:pointer">
-                                                        <i class="fa fa-envelope ml-lg-3"  title="Գրել հաղորդագրություն" aria-hidden="true"></i>
+                                                        <i class="fa fa-envelope ml-lg-3" title="Գրել հաղորդագրություն" aria-hidden="true"></i>
                                                     </a>
+                                                    @if (Model.CurrentUser.Email != "quick_response_soft@mail.ru")
+                                                    {
+                                                        <a onclick="sendMessage(@post.PostId)" style="cursor:pointer">
+                                                            <i class="fa fa-comments ml-lg-2" title="Բողոքարկել" aria-hidden="true"></i>
+                                                        </a>
+                                                    }
+
                                                 </div>
-                                                <div id="message" class="ml-3"></div>
+                                                <div id="messageBox" class="ml-3"></div>
                                                 <div class="timeline-content">
                                                     <p>
-
                                                         <div>
                                                             <h3>@post.PostName</h3>
                                                             @if (post.PostType == "ForSale")
                                                             {
-                                                                <h6>Վաճառում եմ</h6>
+                                                                <h5>Վաճառում եմ</h5>
                                                             }
                                                             else
                                                             {
-                                                                <h6>Փնտրում եմ</h6>
+                                                                <h5>Փնտրում եմ</h5>
                                                             }
 
                                                             <h4>@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h4>
@@ -153,7 +181,7 @@
             type: "Get",
             url: `/Message/Create/?id=${id}`,
             success: function (data) {
-                $('#message').html(data);
+                $('#messageBox').html(data);
             },
             failure: function (errMsg) {
                 alert(errMsg);

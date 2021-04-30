@@ -22,7 +22,7 @@ namespace QuickResponse.Controllers
         private IPost _post;
         private IMessage _message;
 
-        public MessageController(IUnitOfWOrkRepositroy unitOfWOrkRepositroy, IMapper mapper, IUser userTo, IPost post,IMessage message)
+        public MessageController(IUnitOfWOrkRepositroy unitOfWOrkRepositroy, IMapper mapper, IUser userTo, IPost post, IMessage message)
         {
             _uow = (UnitOfWorkRepository)unitOfWOrkRepositroy;
             _mapper = mapper;
@@ -34,23 +34,20 @@ namespace QuickResponse.Controllers
         public ActionResult Index()
         {
             var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
-            if (currentUser.Email != "quick_response.admin@mail.ru")
+            var messages = _uow.MessageRepository.List().Where(m => m.ToUserEmail == currentUser.Email);
+            var messagesViewModels = new List<MessageViewModel>();
+
+            foreach (var ms in messages)
             {
-                var messages = _uow.MessageRepository.List().Where(m => m.ToUserEmail == currentUser.Email);
-                var messagesViewModels = new List<MessageViewModel>();
-                foreach (var ms in messages)
-                {
-                    var message = _mapper.Map<Message, MessageViewModel>(ms);
-                    message.Body = message.Body.DecodingWithMatrix();
-                    messagesViewModels.Add(message);
-                }
-                var users = _uow.UserRepository.List();
-                var usersViewModels = _mapper.Map<IEnumerable<User>, IEnumerable<UserCreateModel>>(users);
-
-                return View(new MessageViewModel { Messages = messagesViewModels, Users = usersViewModels });
+                var message = _mapper.Map<Message, MessageViewModel>(ms);
+                message.Body = message.Body.DecodingWithMatrix();
+                messagesViewModels.Add(message);
             }
+            var users = _uow.UserRepository.List();
+            var usersViewModels = _mapper.Map<IEnumerable<User>, IEnumerable<UserCreateModel>>(users);
 
-            return View();
+            return View(new MessageViewModel { Messages = messagesViewModels, Users = usersViewModels });
+
         }
 
         // GET: MessageController/Create
@@ -65,9 +62,11 @@ namespace QuickResponse.Controllers
                 _post.PostId = id;
                 var post = _uow.PostRepository.GetByID(id);
                 _userTo.Id = post.UserId;
+                check = -1;
+                _message.MessageId = check;
             }
 
-            return View(new MessageViewModel { MessageId=id});
+            return View(new MessageViewModel { MessageId = check });
         }
 
         // POST: MessageController/Create
@@ -77,27 +76,42 @@ namespace QuickResponse.Controllers
         {
             var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
             messageViewModel.FromUserEmail = currentUser.Email;
+            MessageBL messageBL = new MessageBL(_uow, _mapper);
+            Post post = null;
 
-            if (_userTo.Id==0)
+            if (_userTo.Id == 0)
             {
                 var message = _uow.MessageRepository.GetByID(_message.MessageId);
                 messageViewModel.ToUserEmail = message.FromUserEmail;
                 messageViewModel.MessageSentDate = DateTime.Now;
                 messageViewModel.PostLink = message.PostLink;
+                var postId = int.Parse(message.PostLink.Substring(message.PostLink.LastIndexOf("/") + 1));
+                post = _uow.PostRepository.GetByID(postId);
+                if (messageBL.SendMessage(messageViewModel, post))
+                {
+                    return RedirectToAction("Delete", new { id = message.MessageId });
+                }
             }
             else
             {
-                messageViewModel.ToUserEmail = _uow.UserRepository.GetByID(_userTo.Id).Email;
+                if (_message.MessageId == -1)
+                {
+                    messageViewModel.ToUserEmail = "quick_response_soft@mail.ru";
+                }
+                else
+                {
+                    messageViewModel.ToUserEmail = _uow.UserRepository.GetByID(_userTo.Id).Email;
+                }
+
                 messageViewModel.MessageSentDate = DateTime.Now;
-                messageViewModel.PostLink = $"https://localhost:44372/Post/PostView/{_post.PostId}";
-               
-            }
+                post = _uow.PostRepository.GetByID(_post.PostId);
+                messageViewModel.PostLink = $"https://localhost:44372/Post/PostView/{post.PostId}";
 
-            MessageBL messageBL = new MessageBL(_uow, _mapper);
+                if (messageBL.SendMessage(messageViewModel, post))
+                {
+                    return RedirectToAction("AccountPage", "Account");
+                }
 
-            if (messageBL.SendMessage(messageViewModel, _post.PostId))
-            {
-                return RedirectToAction("AccountPage", "Account");
             }
 
             return RedirectToAction("Create");
@@ -106,7 +120,10 @@ namespace QuickResponse.Controllers
 
         public IActionResult Delete(int id)
         {
-            return RedirectToAction();
+            _uow.MessageRepository.DeleteById(id);
+
+            return RedirectToAction("AccountPage", "Account");
+
         }
 
 

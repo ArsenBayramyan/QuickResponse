@@ -50,16 +50,16 @@ namespace QuickResponse.Controllers
             var post = this._uow.PostRepository.GetByID(Id);
             var product = this._uow.ProductRepository.GetByID(post.ProductId);
             var productTypes = this._uow.ProductTypeRepository.List().Where(p => p.ProductTypeId == product.ProductTypeId).ToList();
-            var p1 = new PostCreateModel { 
+            var p1 = new PostCreateModel {
                 PostId = post.PostId,
-                PostDate=post.PostDate,
-                PostName=post.PostName,
-                Price=post.Price,
-                Body=post.Body,
-                Count=product.Count,
-                PostType=post.PostType,
-                ProductTypeId=product.ProductTypeId,
-                ProductTypes=productTypes
+                PostDate = post.PostDate,
+                PostName = post.PostName,
+                Price = post.Price,
+                Body = post.Body,
+                Count = product.Count,
+                PostType = post.PostType,
+                ProductTypeId = product.ProductTypeId,
+                ProductTypes = productTypes
             };
             return View(p1);
         }
@@ -84,18 +84,18 @@ namespace QuickResponse.Controllers
             var ordersDAL = this._uow.OrderRepository.List();
             var productsDAL = this._uow.ProductRepository.List();
             var productTypesDAL = this._uow.ProductTypeRepository.List();
-            var lists= Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
+            var lists = Core.Mapper.MapperModels(postsDAL, usersDAL, productsDAL, ordersDAL, productTypesDAL, _mapper);
             return View(new PostViewModel
             {
                 Post = postPL,
-                User=userPL,
+                User = userPL,
                 Users = lists.usersPL,
                 Products = lists.productsPL,
                 ProductTypes = lists.productTypesPL
             });
         }
 
-        
+
         public IActionResult PostDelete(int id)
         {
             if (_uow.PostRepository.DeleteById(id))
@@ -109,8 +109,17 @@ namespace QuickResponse.Controllers
         public IActionResult UserPosts()
         {
             var currentUser = _uow.UserManager.FindByNameAsync(HttpContext.User?.Identity?.Name).Result;
+            var currentUserPL = _mapper.Map<Data.Models.User, User>(currentUser);
             var postBL = new PostBL(_uow, _mapper);
-            IEnumerable<Data.Models.Post> postsDAL = postBL.UserPostList(currentUser.Id);
+            IEnumerable<Data.Models.Post> postsDAL;
+            if (currentUser.Email == "quick_response_soft@mail.ru")
+            {
+               postsDAL = _uow.PostRepository.List();
+            }
+            else
+            {
+                postsDAL = postBL.UserPostList(currentUser.Id);
+            }
             IEnumerable<Data.Models.User> usersDAL = this._uow.UserRepository.List();
             IEnumerable<Data.Models.Product> productsDAL = this._uow.ProductRepository.List();
             IEnumerable<Data.Models.ProductType> productTypesDAL = this._uow.ProductTypeRepository.List();
@@ -122,7 +131,8 @@ namespace QuickResponse.Controllers
                 Posts = lists.postsPL,
                 Users = lists.usersPL,
                 Products = lists.productsPL,
-                ProductTypes = lists.productTypesPL
+                ProductTypes = lists.productTypesPL,
+                CurrentUser= currentUserPL,
             });
         }
 
