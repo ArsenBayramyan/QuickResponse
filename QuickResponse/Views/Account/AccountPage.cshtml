@@ -118,12 +118,12 @@
                                                         <span class="userimage"><img src="https://1cms-img.imgix.net/Momo.jpg?auto=compress" alt=""></span>
                                                     }
                                                     <span class="username"><a asp-action="UserView" asp-controller="Account" asp-route-id="@post.UserId">@Model.Users.ToList().FirstOrDefault(u => u.Id == post.UserId).FirstName @Model.Users.ToList().FirstOrDefault(u => u.Id == post.UserId).LastName </a> <small></small></span>
-                                                    <a onclick="sendMessage(@post.PostId)" style="cursor:pointer">
+                                                    <a onclick="sendMessage(@post.PostId,0)" style="cursor:pointer">
                                                         <i class="fa fa-envelope ml-lg-3" title="Գրել հաղորդագրություն" aria-hidden="true"></i>
                                                     </a>
                                                     @if (Model.CurrentUser.Email != "quick_response_soft@mail.ru")
                                                     {
-                                                        <a onclick="sendMessage(@post.PostId)" style="cursor:pointer">
+                                                        <a onclick="sendMessage(@post.PostId,-1)" style="cursor:pointer">
                                                             <i class="fa fa-comments ml-lg-2" title="Բողոքարկել" aria-hidden="true"></i>
                                                         </a>
                                                     }
@@ -176,10 +176,10 @@
 
 
 <script>
-    function sendMessage(id) {
+    function sendMessage(id, check) {
         window.$.ajax({
             type: "Get",
-            url: `/Message/Create/?id=${id}`,
+            url: `/Message/Create/?id=${id}&check=${check}`,
             success: function (data) {
                 $('#messageBox').html(data);
             },

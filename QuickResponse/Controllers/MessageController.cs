@@ -57,12 +57,18 @@ namespace QuickResponse.Controllers
             {
                 _message.MessageId = id;
             }
+            else if(check==-1)
+            {
+                _post.PostId = id;
+                var post = _uow.PostRepository.GetByID(id);
+                _userTo.Id = post.UserId;
+                _message.MessageId = check;
+            }
             else
             {
                 _post.PostId = id;
                 var post = _uow.PostRepository.GetByID(id);
                 _userTo.Id = post.UserId;
-                check = -1;
                 _message.MessageId = check;
             }
 
