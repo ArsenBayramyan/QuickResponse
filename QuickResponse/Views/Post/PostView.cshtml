@@ -21,34 +21,23 @@
                         {
                             <div class="col-md-12"><label class="labels">Տիպը</label><input readonly type="text" value="Փնտրում եմ" disabled class="form-control" di></div>
 
-<<<<<<< HEAD
-<div>
-    <h3>Post name      -  @Model.Post.PostName</h3>
-    <h6>Post type      -  @Model.Post.PostType</h6>
-    <h6>User name      -  @Model.User.FirstName @Model.User.LastName</h6>
-    <h6>User phone     -  @Model.User.PhoneNumber</h6>
-    <h6>Product type   -  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName</h6>
-    <h6>Dimensionality -  @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count  @Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality</h6>
-    <h6>Price          -  @Model.Post.Price $</h6>
-    <h6>Body           -  -@Model.Post.Body</h6>   
-=======
                         }
-                        <div class="col-md-12"><label class="labels">Օգտատերի անուն</label><input readonly type="text" value="@Model.User.FirstName @Model.User.LastName" disabled class="form-control" di></div>
->>>>>>> 9b2e587bfcbc4811f2528b71426b56081806d816
+                        <div>
+                            <div class="col-md-12"><label class="labels">Օգտատերի անուն</label><input readonly type="text" value="@Model.User.FirstName @Model.User.LastName" disabled class="form-control" di></div>
 
-                        <div class="col-md-12"><label class="labels">Օգտատերի հեռախոսահամար </label><input readonly type="text" asp-for="@Model.User.PhoneNumber" class="form-control"></div>
-                        <div class="col-md-12"><label class="labels">Ապրանք</label><input readonly type="text" asp-for="@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName" class="form-control"></div>
-                        <div class="col-md-12"><label class="labels">Քանակը</label><input readonly asp-for="@Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count" class="form-control"> </div>
-                        <div class="col-md-12"><label class="labels">Չափողականության միավորը</label><input readonly type="text" asp-for="@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality" class="form-control" /></div>
-                        <div class="col-md-12"><label class="labels">Գինը</label><input readonly asp-for="@Model.Post.Price դրամ" class="form-control"> </div>
-                        <div class="col-md-12"><label class="labels">Նկարագրությունը</label><textarea readonly asp-for="@Model.Post.Body" class="form-control"></textarea> </div>
-                    </div>
-                    <div class="text-center" style="margin-top:20px">
-                        @Html.ActionLink("<-- Դեպի անձնական Էջ", "AccountPage", "Account")
+                            <div class="col-md-12"><label class="labels">Օգտատերի հեռախոսահամար </label><input readonly type="text" asp-for="@Model.User.PhoneNumber" class="form-control"></div>
+                            <div class="col-md-12"><label class="labels">Ապրանք</label><input readonly type="text" asp-for="@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().ProductTypeName" class="form-control"></div>
+                            <div class="col-md-12"><label class="labels">Քանակը</label><input readonly asp-for="@Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().Count" class="form-control"> </div>
+                            <div class="col-md-12"><label class="labels">Չափողականության միավորը</label><input readonly type="text" asp-for="@Model.ProductTypes.Where(t => t.ProductTypeId == @Model.Products.Where(p => p.ProductId == Model.Post.ProductId).FirstOrDefault().ProductTypeId).FirstOrDefault().Dimensionality" class="form-control" /></div>
+                            <div class="col-md-12"><label class="labels">Գինը</label><input readonly asp-for="@Model.Post.Price դրամ" class="form-control"> </div>
+                            <div class="col-md-12"><label class="labels">Նկարագրությունը</label><textarea readonly asp-for="@Model.Post.Body" class="form-control"></textarea> </div>
+                        </div>
+                        <div class="text-center" style="margin-top:20px">
+                            @Html.ActionLink("<-- Դեպի անձնական Էջ", "AccountPage", "Account")
+                        </div>
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
